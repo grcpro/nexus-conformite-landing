@@ -22,6 +22,9 @@ FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
 LINKEDIN_NAME = "Nexus Conformité"
 
+# Public direct checkout for the fixed £149 service
+CQC_REVIEW_CHECKOUT_URL = "https://payhip.com/buy?link=90Um6"
+
 # =========================================================
 # LOGO FINDER
 # =========================================================
@@ -455,8 +458,8 @@ st.markdown(f"""
     policies, SOPs, trackers, and governance records into a clearer review-ready structure.
     </p>
     <div class="cta-row">
-        <a class="btn-primary" href="#request">Request Service Support</a>
-        <a class="btn-secondary" href="#services">View Services</a>
+        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank">Buy £149 Review</a>
+        <a class="btn-secondary" href="#request">Request Custom Support</a>
         <a class="btn-light" href="{PAYHIP_URL}" target="_blank">View Digital Products</a>
     </div>
 </div>
@@ -483,65 +486,83 @@ st.markdown("""
 # SERVICES
 # =========================================================
 st.markdown('<div id="services"></div>', unsafe_allow_html=True)
+
 st.markdown("""
 <div class="section">
-    <h2>Choose the support level that fits your current risk.</h2>
+    <h2>Choose the support route that fits your current risk.</h2>
     <p class="section-intro">
-    The service ladder is simple: start small, understand the evidence gaps, clean up what matters, then maintain it monthly if needed.
+    The £149 review is a fixed public checkout. Larger services are scoped privately because each client’s evidence, documents, and delivery package are different.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
+st.markdown(f"""
 <div class="grid-3">
     <div class="card">
-        <span class="badge-gold">Best first step</span>
+        <span class="badge-gold">Fixed public checkout</span>
         <h3>£149 CQC Evidence File Review</h3>
         <div class="price">£149</div>
-        <p>A focused review of your current evidence structure with gap notes, action points, and a practical next step recommendation.</p>
+        <p>A focused review of your current evidence structure with gap notes, action points, and a practical next-step recommendation.</p>
         <ul>
             <li>Evidence folder structure review</li>
             <li>Gap notes</li>
             <li>Action tracker direction</li>
             <li>Summary of next steps</li>
+            <li>Delivered within 3–5 business days after payment and receipt of required intake documents</li>
         </ul>
-        <a class="btn-dark" href="#request">Request This Service</a>
+        <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank">Buy Now</a>
     </div>
+
     <div class="card">
-        <span class="badge">Structured cleanup</span>
+        <span class="badge">Scoped private Payhip link</span>
         <h3>30-Day CQC Evidence Cleanup Sprint</h3>
-        <div class="price">£750–£1,500</div>
+        <div class="price">From £750</div>
         <p>For providers with scattered or weak evidence files that need structured cleanup and clearer management records.</p>
         <ul>
-            <li>Evidence folder cleanup</li>
-            <li>Policy and SOP organisation</li>
-            <li>Risk, training, audit, incident, and complaints record structure</li>
-            <li>Management review summary</li>
+            <li>Scoped after intake review</li>
+            <li>40% deposit paid through a private Payhip link before work starts</li>
+            <li>Preview or summary shown before final payment</li>
+            <li>Final 60% paid through a private Payhip delivery link</li>
+            <li>Completed files are released only after final payment</li>
         </ul>
-        <a class="btn-dark" href="#request">Request This Service</a>
+        <a class="btn-dark" href="#request">Request Scope Review</a>
     </div>
+
     <div class="card">
-        <span class="badge">Ongoing control</span>
+        <span class="badge">Scoped private Payhip link</span>
         <h3>Monthly Compliance Retainer</h3>
         <div class="price">Scoped</div>
         <p>For providers that want regular evidence tracking, action tracker updates, document support, and monthly management summaries.</p>
         <ul>
-            <li>Monthly evidence tracker update</li>
-            <li>Action tracker review</li>
-            <li>Policy update support</li>
-            <li>Management summary notes</li>
+            <li>Monthly support priced after scope review</li>
+            <li>40% deposit paid through a private Payhip link before work starts</li>
+            <li>Preview or summary shown before final payment where applicable</li>
+            <li>Final 60% paid through a private Payhip delivery link</li>
+            <li>Completed files are released only after final payment</li>
         </ul>
-        <a class="btn-dark" href="#request">Request This Service</a>
+        <a class="btn-dark" href="#request">Request Retainer Scope</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class="notice">
-    <h3>Looking for digital products?</h3>
+    <h3>Payment and delivery method</h3>
     <p>
-    Payhip is available for digital products, templates, and packaged resources.
-    Custom service requests should begin through the Nexus intake form so the support level can be reviewed properly.
+    The £149 CQC Evidence File Review is the only fixed-price public checkout service.
+    It can be purchased directly through Payhip.
+    </p>
+    <p>
+    Custom services, including the 30-Day Cleanup Sprint and Monthly Compliance Retainer,
+    are handled through private Payhip links because each client’s evidence package is different.
+    Once scope is agreed, Nexus creates a private hidden Payhip payment link for the 40% deposit.
+    Work begins after the deposit is paid.
+    </p>
+    <p>
+    When the work is ready, the customer receives a preview or summary of the package.
+    The final 60% balance is then paid through a private Payhip delivery link.
+    Files are released only after final payment through Payhip. The private delivery link is hidden
+    from general customers and may be closed or archived after successful purchase.
     </p>
     <a class="btn-dark" href="{PAYHIP_URL}" target="_blank">View Digital Products on Payhip</a>
 </div>
@@ -574,8 +595,8 @@ st.markdown("""
         <p>Every review should lead to clear next steps, not vague advice.</p>
     </div>
     <div class="card">
-        <h3>Scalable support</h3>
-        <p>Clients can start with the £149 review, move into cleanup, then continue with monthly support.</p>
+        <h3>Secure staged delivery</h3>
+        <p>Custom packages are handled through scoped intake, Payhip deposit links, preview/summary review, and final Payhip delivery links before file release.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -584,6 +605,7 @@ st.markdown("""
 # PROCESS
 # =========================================================
 st.markdown('<div id="process"></div>', unsafe_allow_html=True)
+
 st.markdown("""
 <div class="section">
     <h2>A simple process from first contact to clearer records.</h2>
@@ -594,18 +616,18 @@ st.markdown("""
 <div class="grid-3">
     <div class="step">
         <div class="step-number">1</div>
-        <h3>Send the basics</h3>
-        <p>Share your role, provider type, main concern, urgency, current document condition, and available evidence areas.</p>
+        <h3>Choose the right route</h3>
+        <p>Buy the £149 review directly, or submit the intake form for scoped support such as the 30-Day Sprint or Monthly Retainer.</p>
     </div>
     <div class="step">
         <div class="step-number">2</div>
-        <h3>Upload supporting files</h3>
+        <h3>Submit intake and documents</h3>
         <p>Upload redacted documents such as folder indexes, trackers, policies, audit summaries, risk registers, or training matrices.</p>
     </div>
     <div class="step">
         <div class="step-number">3</div>
-        <h3>Receive the next step</h3>
-        <p>Nexus reviews the request and advises whether the £149 review, cleanup sprint, or monthly support is suitable.</p>
+        <h3>Pay and receive securely</h3>
+        <p>Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview/summary, then final 60% Payhip delivery link before files are released.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -624,6 +646,7 @@ st.markdown("""
         <li>Main concern: scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
         <li>Document condition and available evidence areas</li>
         <li>Redacted supporting documents where possible</li>
+        <li>For paid orders, include the Payhip order email or reference if available</li>
     </ul>
 </div>
 """, unsafe_allow_html=True)
@@ -638,7 +661,9 @@ st.markdown("""
     <h2>Request service support.</h2>
     <p class="section-intro">
     Complete the intake form below so Nexus Conformité can understand your support need,
-    evidence position, urgency, and the documents available for review. Your request is sent to Nexus by email.
+    evidence position, urgency, and the documents available for review. For the £149 review,
+    please complete this after payment. For custom services, Nexus will review your request and
+    issue a private Payhip deposit link where suitable.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -674,6 +699,9 @@ components.html(f"""
 
         <label style="font-weight:700; color:#061A35;">Phone / WhatsApp</label><br>
         <input type="text" name="Phone or WhatsApp" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+
+        <label style="font-weight:700; color:#061A35;">Payhip order email or reference, if already paid</label><br>
+        <input type="text" name="Payhip Order Email or Reference" placeholder="Use this for the £149 review if you have already paid." style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
 
         <h3 style="color:#061A35;">2. Organisation profile</h3>
 
@@ -716,10 +744,10 @@ components.html(f"""
         <label style="font-weight:700; color:#061A35;">Support needed *</label><br>
         <select name="Support Needed" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
             <option value="">Select one</option>
-            <option>£149 CQC Evidence File Review</option>
-            <option>30-Day CQC Evidence Cleanup Sprint</option>
-            <option>Monthly Compliance Retainer</option>
-            <option>Small Business Compliance Readiness</option>
+            <option>£149 CQC Evidence File Review - already paid or ready to start</option>
+            <option>30-Day CQC Evidence Cleanup Sprint - scope review needed</option>
+            <option>Monthly Compliance Retainer - scope review needed</option>
+            <option>Small Business Compliance Readiness - scope review needed</option>
             <option>Not sure yet</option>
         </select>
 
@@ -785,9 +813,9 @@ components.html(f"""
         <label style="font-weight:700; color:#061A35;">Preferred next step</label><br>
         <select name="Preferred Next Step" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
             <option>Please review and advise the best support level</option>
-            <option>I want to start with the £149 review</option>
-            <option>I want a scope review for the 30-Day Sprint</option>
-            <option>I want to discuss monthly support</option>
+            <option>I have paid for the £149 review and want to start</option>
+            <option>I want a private Payhip deposit link for the 30-Day Sprint after scope review</option>
+            <option>I want a private Payhip deposit link for monthly support after scope review</option>
         </select>
 
         <label style="display:block; font-size:14px; line-height:1.5; color:#374151; margin-bottom:18px;">
@@ -800,12 +828,15 @@ components.html(f"""
         </button>
 
         <p style="font-size:14px; color:#6B7280; margin-top:16px; line-height:1.6;">
-            Nexus Conformité will review the request and advise the suitable next step. Payment links or secure delivery instructions are provided after review where applicable.
+            Nexus Conformité will review the request and advise the suitable next step. For scoped services,
+            a private Payhip deposit link may be issued before work begins. When the package is ready,
+            the customer receives a preview or summary, then pays the final 60% through a private Payhip
+            delivery link before files are released.
         </p>
 
     </form>
 </div>
-""", height=2450, scrolling=True)
+""", height=2550, scrolling=True)
 
 # =========================================================
 # FAQS
@@ -827,6 +858,18 @@ with st.expander("Does Nexus replace the provider’s CQC responsibility?"):
 
 with st.expander("Can Nexus support domiciliary care providers?"):
     st.write("Yes. The services are suitable for domiciliary care, home care, supported living, new providers, and small care providers that need clearer evidence structures.")
+
+with st.expander("How does the £149 checkout work?"):
+    st.write("The £149 CQC Evidence File Review is purchased through the public Payhip checkout link. After payment, the customer completes the intake form and uploads redacted documents. Delivery is within 3–5 business days after payment and receipt of the required intake documents.")
+
+with st.expander("How does payment work for the 30-Day Sprint or Monthly Retainer?"):
+    st.write("Custom services are scoped first. Once the scope is agreed, Nexus issues a private Payhip link for the 40% deposit. Work begins after the deposit is paid. The final 60% is paid through a private Payhip delivery link before completed files are released.")
+
+with st.expander("How are final files released for custom services?"):
+    st.write("Nexus may provide a preview or summary of the completed package. The final files are released only after the client pays the remaining balance through the private Payhip delivery link. The private link is hidden from general customers and may be closed or archived after successful purchase.")
+
+with st.expander("How are private Payhip delivery links used?"):
+    st.write("For custom work, Nexus creates a private Payhip product or checkout link for that specific customer. The link is not displayed publicly. The customer pays through that private link, and the completed files are released through Payhip after successful purchase.")
 
 with st.expander("Can I move from the £149 review to the 30-Day Sprint?"):
     st.write("Yes. The £149 review is designed as the first step. If deeper cleanup is needed, the provider can move into the 30-Day Cleanup Sprint or monthly support.")
