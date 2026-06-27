@@ -3,35 +3,26 @@ import os
 import glob
 from urllib.parse import quote
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
 st.set_page_config(
-    page_title="Nexus Conformité | CQC Compliance Support for UK Care Providers",
+    page_title="Nexus Conformité | CQC Evidence & Compliance Support",
     page_icon="◆",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# =========================================================
-# BUSINESS DETAILS
-# =========================================================
 BUSINESS_NAME = "Nexus Conformité"
 EMAIL = "nexusconformite@proton.me"
 FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
 LINKEDIN_NAME = "Nexus Conformité"
 
-# =========================================================
-# LOGO FINDER
-# =========================================================
+
 def find_logo():
     preferred_names = [
+        ".Nexus_Conformite_logo_transparent.png",
         "Nexus_Conformite_logo_transparent.png",
         "Nexus Conformite logo transparent.png",
         "Nexus_Conformité_logo_transparent.png",
-        ".Nexus_Conformite_logo_transparent.png",
-        ". Nexus_Conformite_logo_transparent.png",
         "logo.png",
         "Logo.png",
     ]
@@ -40,35 +31,28 @@ def find_logo():
         if os.path.exists(name):
             return name
 
-    image_files = []
     for pattern in ["*.png", "*.jpg", "*.jpeg", "*.webp", ".*.png", ".*.jpg", ".*.jpeg", ".*.webp"]:
-        image_files.extend(glob.glob(pattern))
-
-    for file in image_files:
-        clean = file.lower().replace(" ", "").replace("_", "").replace("-", "")
-        if "nexus" in clean or "conformite" in clean or "logo" in clean:
-            return file
+        for file in glob.glob(pattern):
+            clean = file.lower().replace(" ", "").replace("_", "").replace("-", "").replace(".", "")
+            if "nexus" in clean or "conformite" in clean or "logo" in clean:
+                return file
 
     return None
 
 
 LOGO_PATH = find_logo()
 
-# =========================================================
-# CSS
-# =========================================================
 st.markdown("""
 <style>
 :root {
-    --navy: #071B3A;
+    --navy: #061A35;
     --navy2: #0B2545;
-    --blue: #12375B;
     --gold: #C8A96A;
     --green: #0F766E;
-    --cream: #FAF8F2;
-    --light: #F5F7FA;
+    --soft: #F6F7FA;
+    --cream: #FAF7F0;
     --white: #FFFFFF;
-    --text: #1F2937;
+    --text: #172033;
     --muted: #6B7280;
     --line: #E5E7EB;
 }
@@ -81,19 +65,21 @@ header {visibility: hidden;}
 [data-testid="stStatusWidget"] {display: none;}
 
 .stApp {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 50%, #FAF8F2 100%);
+    background:
+        radial-gradient(circle at top left, rgba(200,169,106,0.10), transparent 26%),
+        linear-gradient(180deg, #FFFFFF 0%, #F6F7FA 54%, #FAF7F0 100%);
     color: var(--text);
 }
 
 .block-container {
-    padding-top: 1.1rem;
+    max-width: 1160px;
+    padding-top: 1.2rem;
     padding-bottom: 4rem;
-    max-width: 1180px;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     color: var(--navy);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
 }
 
 p, li {
@@ -102,88 +88,96 @@ p, li {
     color: var(--text);
 }
 
-.brand-text h1 {
-    font-size: 30px;
-    margin: 0;
-    color: var(--navy);
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 0 24px 0;
 }
 
-.brand-text p {
-    margin: 4px 0 0 0;
+.brand-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0;
+}
+
+.brand-subtitle {
     color: var(--muted);
     font-size: 15px;
+    margin-top: 4px;
 }
 
-.nav-label {
-    font-size: 13px;
-    text-transform: uppercase;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    margin-top: 14px;
-    margin-bottom: 4px;
+.nav-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-pills a {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--navy) !important;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .hero {
     position: relative;
     overflow: hidden;
     background:
-        radial-gradient(circle at top right, rgba(200,169,106,0.24), transparent 28%),
-        linear-gradient(135deg, #071B3A 0%, #0B2545 48%, #0F766E 100%);
+        radial-gradient(circle at 85% 12%, rgba(200,169,106,0.28), transparent 28%),
+        linear-gradient(135deg, #061A35 0%, #0B2545 50%, #0F766E 100%);
     border-radius: 34px;
-    padding: 64px 54px;
-    margin: 24px 0 26px 0;
-    box-shadow: 0 24px 60px rgba(7,27,58,0.22);
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    width: 340px;
-    height: 340px;
-    right: -130px;
-    bottom: -150px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 50%;
-}
-
-.eyebrow {
-    color: var(--gold);
-    font-size: 14px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 14px;
+    padding: 68px 56px;
+    margin: 8px 0 26px 0;
+    box-shadow: 0 26px 70px rgba(6,26,53,0.22);
 }
 
 .hero h1 {
     color: white;
-    font-size: 56px;
+    font-size: 60px;
     line-height: 1.02;
+    max-width: 900px;
     margin: 0 0 18px 0;
-    max-width: 940px;
 }
 
 .hero p {
     color: #EAF0F7;
     font-size: 22px;
-    max-width: 880px;
-    margin-bottom: 0;
+    max-width: 850px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 14px;
 }
 
 .cta-row {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin: 22px 0 8px 0;
+    margin-top: 26px;
 }
 
-.btn-primary, .btn-secondary, .btn-light {
+.btn-primary,
+.btn-secondary,
+.btn-light {
     display: inline-block;
     padding: 14px 20px;
     border-radius: 999px;
-    font-weight: 700;
-    font-size: 16px;
     text-decoration: none;
+    font-weight: 800;
+    font-size: 15px;
 }
 
 .btn-primary {
@@ -192,44 +186,29 @@ p, li {
 }
 
 .btn-secondary {
-    background: var(--navy);
-    color: white !important;
+    background: white;
+    color: var(--navy) !important;
 }
 
 .btn-light {
-    background: white;
-    color: var(--navy) !important;
-    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.12);
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.25);
 }
 
-.section-title {
-    font-size: 38px;
-    margin-bottom: 10px;
+.section {
+    margin: 34px 0;
+}
+
+.section h2 {
+    font-size: 40px;
+    margin-bottom: 8px;
 }
 
 .section-intro {
+    max-width: 820px;
     color: var(--muted);
-    max-width: 860px;
     font-size: 19px;
-}
-
-.card {
-    background: rgba(255,255,255,0.97);
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    padding: 30px;
-    margin-bottom: 20px;
-    box-shadow: 0 16px 40px rgba(15,23,42,0.06);
-}
-
-.card h2 {
-    font-size: 31px;
-    margin-top: 0;
-}
-
-.card h3 {
-    font-size: 23px;
-    margin-top: 0;
 }
 
 .grid-3 {
@@ -244,57 +223,65 @@ p, li {
     gap: 18px;
 }
 
-.service-card {
-    background: white;
+.card {
+    background: rgba(255,255,255,0.98);
     border: 1px solid var(--line);
     border-radius: 26px;
-    padding: 28px;
-    box-shadow: 0 14px 34px rgba(7,27,58,0.07);
+    padding: 30px;
+    box-shadow: 0 16px 42px rgba(15,23,42,0.06);
+    margin-bottom: 18px;
 }
 
-.service-card h3 {
-    color: var(--navy);
+.card h3 {
     font-size: 24px;
-    margin-bottom: 6px;
+    margin: 0 0 8px 0;
 }
 
 .price {
-    font-size: 30px;
     color: var(--green);
-    font-weight: 800;
+    font-size: 30px;
+    font-weight: 900;
     margin: 10px 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: #EEF8F5;
+    color: var(--green);
+    border: 1px solid #CDEBE4;
+}
+
+.badge-gold {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: #FFF8E8;
+    color: #7A5C13;
+    border: 1px solid #F0DB9B;
 }
 
 .gold-line {
     width: 78px;
     height: 4px;
-    background: var(--gold);
     border-radius: 999px;
+    background: var(--gold);
     margin: 12px 0 18px 0;
 }
 
-.badge {
-    display: inline-block;
-    background: #EEF8F5;
-    color: var(--green);
-    border: 1px solid #CDEBE4;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.gold-badge {
-    display: inline-block;
-    background: #FFF8E8;
-    color: #7A5C13;
-    border: 1px solid #F0DB9B;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 10px;
+.problem-strip {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 14px 38px rgba(15,23,42,0.05);
 }
 
 .notice {
@@ -316,34 +303,35 @@ p, li {
 }
 
 .step {
-    position: relative;
     background: white;
     border: 1px solid var(--line);
     border-radius: 22px;
     padding: 24px;
-    margin-bottom: 14px;
+}
+
+.step-number {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    margin-bottom: 12px;
 }
 
 .footer {
-    margin-top: 36px;
     background: var(--navy);
     color: white;
     border-radius: 28px;
     padding: 34px;
+    margin-top: 34px;
 }
 
 .footer p {
     color: #DDE6F2;
     font-size: 16px;
-}
-
-.footer strong {
-    color: white;
-}
-
-.form-note {
-    font-size: 15px;
-    color: var(--muted);
 }
 
 @media (max-width: 900px) {
@@ -352,37 +340,53 @@ p, li {
         padding-right: 1rem;
     }
 
+    .topbar {
+        display: block;
+    }
+
+    .nav-pills {
+        justify-content: flex-start;
+        margin-top: 16px;
+    }
+
+    .nav-pills a {
+        font-size: 13px;
+        padding: 9px 12px;
+    }
+
     .hero {
-        padding: 42px 26px;
+        padding: 44px 26px;
         border-radius: 28px;
     }
 
     .hero h1 {
-        font-size: 38px;
+        font-size: 39px;
     }
 
     .hero p {
         font-size: 18px;
     }
 
-    .section-title {
+    .section h2 {
         font-size: 31px;
     }
 
-    .grid-3, .grid-2 {
+    .grid-3,
+    .grid-2 {
         grid-template-columns: 1fr;
     }
 
-    .card, .service-card {
+    .card {
         padding: 24px;
-        border-radius: 22px;
     }
 
     p, li {
         font-size: 17px;
     }
 
-    .btn-primary, .btn-secondary, .btn-light {
+    .btn-primary,
+    .btn-secondary,
+    .btn-light {
         width: 100%;
         text-align: center;
     }
@@ -390,185 +394,260 @@ p, li {
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================
-# COMPONENTS
-# =========================================================
-def render_header():
-    if LOGO_PATH:
-        col_logo, col_text = st.columns([1, 5])
-        with col_logo:
-            st.image(LOGO_PATH, width=105)
-        with col_text:
-            st.markdown("""
-            <div class="brand-text">
-                <h1>Nexus Conformité</h1>
-                <p>CQC compliance support, evidence organisation, governance documentation, and operational readiness.</p>
-            </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-        <div class="brand-text">
-            <h1>Nexus Conformité</h1>
-            <p>CQC compliance support, evidence organisation, governance documentation, and operational readiness.</p>
-        </div>
-        """, unsafe_allow_html=True)
 
+# Header
+if LOGO_PATH:
+    st.image(LOGO_PATH, width=135)
 
-def hero(eyebrow, title, body):
-    st.markdown(f"""
-    <div class="hero">
-        <div class="eyebrow">{eyebrow}</div>
-        <h1>{title}</h1>
-        <p>{body}</p>
+st.markdown(f"""
+<div class="topbar">
+    <div>
+        <p class="brand-title">Nexus Conformité</p>
+        <p class="brand-subtitle">CQC evidence support, compliance organisation, governance documentation, and operational readiness.</p>
     </div>
-    """, unsafe_allow_html=True)
+    <div class="nav-pills">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 
-def cta_buttons(primary_text="Start with the £149 Review", primary_url=PAYHIP_URL):
-    st.markdown(f"""
+# Hero
+st.markdown(f"""
+<div class="hero">
+    <div class="eyebrow">UK care compliance support</div>
+    <h1>CQC evidence support for care managers who need clarity before pressure increases.</h1>
+    <p>
+    Nexus Conformité helps care managers and small providers organise evidence files,
+    policies, SOPs, trackers, and governance records into a clearer review-ready structure.
+    </p>
     <div class="cta-row">
-        <a class="btn-primary" href="{primary_url}" target="_blank">{primary_text}</a>
+        <a class="btn-primary" href="{PAYHIP_URL}" target="_blank">Start with the £149 Review</a>
         <a class="btn-secondary" href="{FACEBOOK_URL}" target="_blank">Message on Facebook</a>
         <a class="btn-light" href="mailto:{EMAIL}">Email Nexus</a>
     </div>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
 
-def footer():
-    st.markdown(f"""
-    <div class="footer">
-        <strong>Nexus Conformité</strong>
-        <p>Connecting Law, Risk, and Compliance.</p>
-        <p>
-            Email: {EMAIL}<br>
-            Facebook: @nexusconformite<br>
-            Payhip: payhip.com/NexusConformite<br>
-            LinkedIn: {LINKEDIN_NAME}
-        </p>
-        <p>
-            Nexus Conformité provides compliance organisation, evidence readiness,
-            policy structure, and governance documentation support. Services do not replace
-            legal advice or the provider’s own regulatory responsibilities.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+# Problem psychology section
+st.markdown("""
+<div class="problem-strip">
+    <h2>Most providers do not fail because they have no documents. They struggle because the evidence is scattered.</h2>
+    <div class="gold-line"></div>
+    <p>
+    Policies may exist. Training may be done. Incidents may be recorded. But when evidence is spread across folders,
+    chats, spreadsheets, old templates, and unclear trackers, it becomes difficult to prove what is happening in the service.
+    </p>
+    <p>
+    Nexus turns that scattered information into a clearer structure managers can review, explain, and improve.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 
-def email_request_form(default_service="£149 CQC Evidence File Review", key="general"):
-    st.markdown("""
+# Services
+st.markdown('<div id="services"></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+    <h2>Choose the support level that fits your current risk.</h2>
+    <p class="section-intro">
+    The service ladder is simple: start small, understand the evidence gaps, clean up what matters, then maintain it monthly if needed.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="grid-3">
     <div class="card">
-        <h2>Request support</h2>
-        <div class="gold-line"></div>
-        <p>
-        Complete the details below. The form will prepare an email for you to send to Nexus Conformité.
-        This keeps the process simple, secure, and clear before any scope review begins.
-        </p>
+        <span class="badge-gold">Best first step</span>
+        <h3>£149 CQC Evidence File Review</h3>
+        <div class="price">£149</div>
+        <p>A focused review of your current evidence structure with gap notes, action points, and a practical next step recommendation.</p>
+        <ul>
+            <li>Evidence folder structure review</li>
+            <li>Gap notes</li>
+            <li>Action tracker direction</li>
+            <li>Summary of next steps</li>
+        </ul>
     </div>
-    """, unsafe_allow_html=True)
+    <div class="card">
+        <span class="badge">Structured cleanup</span>
+        <h3>30-Day CQC Evidence Cleanup Sprint</h3>
+        <div class="price">£750–£1,500</div>
+        <p>For providers with scattered or weak evidence files that need structured cleanup and clearer management records.</p>
+        <ul>
+            <li>Evidence folder cleanup</li>
+            <li>Policy and SOP organisation</li>
+            <li>Risk, training, audit, incident, and complaints record structure</li>
+            <li>Management review summary</li>
+        </ul>
+    </div>
+    <div class="card">
+        <span class="badge">Ongoing control</span>
+        <h3>Monthly Compliance Retainer</h3>
+        <div class="price">Scoped</div>
+        <p>For providers that want regular evidence tracking, action tracker updates, document support, and monthly management summaries.</p>
+        <ul>
+            <li>Monthly evidence tracker update</li>
+            <li>Action tracker review</li>
+            <li>Policy update support</li>
+            <li>Management summary notes</li>
+        </ul>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-    with st.form(f"contact_form_{key}"):
-        col1, col2 = st.columns(2)
 
-        with col1:
-            name = st.text_input("Full name")
-            business_name = st.text_input("Business / provider name")
-            email_address = st.text_input("Your email address")
-            phone = st.text_input("Phone / WhatsApp number")
+# Why Nexus
+st.markdown("""
+<div class="section">
+    <h2>Why this works for care managers.</h2>
+    <p class="section-intro">
+    The page is not selling random templates. The offer is built around the real management need: know what evidence exists, what is weak, what is missing, and what needs action.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-        with col2:
-            role = st.selectbox(
-                "Your role",
-                [
-                    "Registered Manager",
-                    "Care Manager",
-                    "Provider / Owner",
-                    "Operations Manager",
-                    "Compliance Lead",
-                    "Small Business Owner",
-                    "Other"
-                ]
-            )
-            provider_type = st.selectbox(
-                "Type of organisation",
-                [
-                    "Domiciliary care provider",
-                    "Home care provider",
-                    "Supported living provider",
-                    "Residential care provider",
-                    "New care provider",
-                    "Small business",
-                    "Other"
-                ]
-            )
-            service_needed = st.selectbox(
-                "Support needed",
-                [
-                    "£149 CQC Evidence File Review",
-                    "30-Day CQC Evidence Cleanup Sprint",
-                    "Monthly Compliance Retainer",
-                    "Small Business Compliance Readiness",
-                    "Not sure yet"
-                ],
-                index=[
-                    "£149 CQC Evidence File Review",
-                    "30-Day CQC Evidence Cleanup Sprint",
-                    "Monthly Compliance Retainer",
-                    "Small Business Compliance Readiness",
-                    "Not sure yet"
-                ].index(default_service) if default_service in [
-                    "£149 CQC Evidence File Review",
-                    "30-Day CQC Evidence Cleanup Sprint",
-                    "Monthly Compliance Retainer",
-                    "Small Business Compliance Readiness",
-                    "Not sure yet"
-                ] else 0
-            )
-            urgency = st.selectbox(
-                "Urgency",
-                [
-                    "Not urgent",
-                    "Need support this month",
-                    "Inspection pressure / urgent",
-                    "Preparing before registration or review",
-                    "Ongoing monthly support needed"
-                ]
-            )
+st.markdown("""
+<div class="grid-2">
+    <div class="card">
+        <h3>Evidence-first</h3>
+        <p>The focus is on the records that show how the service is managed, monitored, reviewed, and improved.</p>
+    </div>
+    <div class="card">
+        <h3>Manager-friendly</h3>
+        <p>The output is designed to help managers understand the evidence position without drowning in paperwork.</p>
+    </div>
+    <div class="card">
+        <h3>Action-focused</h3>
+        <p>Every review should lead to clear next steps, not vague advice.</p>
+    </div>
+    <div class="card">
+        <h3>Scalable</h3>
+        <p>Clients can start with the £149 review, move into cleanup, then continue with monthly support.</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-        document_state = st.radio(
-            "Current document condition",
-            [
-                "Mostly organised",
-                "Some documents are scattered",
-                "Very scattered and unclear",
-                "We are starting from scratch",
-                "Not sure"
-            ],
-            horizontal=False
+
+# Process
+st.markdown('<div id="process"></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+    <h2>A simple process from first contact to clearer records.</h2>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="grid-3">
+    <div class="step">
+        <div class="step-number">1</div>
+        <h3>Send the basics</h3>
+        <p>Share your role, provider type, main concern, urgency, and current document condition.</p>
+    </div>
+    <div class="step">
+        <div class="step-number">2</div>
+        <h3>Start with the right offer</h3>
+        <p>Most clients begin with the £149 review. Urgent or scattered files may move straight to scope review.</p>
+    </div>
+    <div class="step">
+        <div class="step-number">3</div>
+        <h3>Receive clear next steps</h3>
+        <p>You receive practical direction on what is missing, weak, scattered, or ready for cleanup.</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+# What to email
+st.markdown("""
+<div class="green-notice">
+    <h3>What to email Nexus before support begins</h3>
+    <ul>
+        <li>Full name and business/provider name</li>
+        <li>Your role: registered manager, care manager, owner, operations lead, or compliance lead</li>
+        <li>Provider type: domiciliary care, home care, supported living, residential care, new provider, or small business</li>
+        <li>The service you want: £149 review, 30-Day Sprint, monthly support, or not sure yet</li>
+        <li>Your main concern: scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
+        <li>Your urgency level and whether any deadline exists</li>
+    </ul>
+</div>
+""", unsafe_allow_html=True)
+
+
+# Form
+st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+    <h2>Prepare your request.</h2>
+    <p class="section-intro">
+    This form prepares an email for you. It does not store sensitive information on the website.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+with st.form("nexus_contact_form"):
+    col1, col2 = st.columns(2)
+
+    with col1:
+        name = st.text_input("Full name")
+        business_name = st.text_input("Business / provider name")
+        client_email = st.text_input("Your email address")
+        phone = st.text_input("Phone / WhatsApp")
+
+    with col2:
+        role = st.selectbox(
+            "Your role",
+            ["Registered Manager", "Care Manager", "Provider / Owner", "Operations Manager", "Compliance Lead", "Small Business Owner", "Other"]
         )
 
-        main_concern = st.text_area(
-            "Main concern",
-            placeholder="Example: Our policies exist but the evidence folders are scattered. We need help organising audits, incidents, complaints, training records, and action trackers."
+        organisation_type = st.selectbox(
+            "Organisation type",
+            ["Domiciliary care provider", "Home care provider", "Supported living provider", "Residential care provider", "New care provider", "Small business", "Other"]
         )
 
-        submitted = st.form_submit_button("Prepare email request")
+        service_needed = st.selectbox(
+            "Support needed",
+            ["£149 CQC Evidence File Review", "30-Day CQC Evidence Cleanup Sprint", "Monthly Compliance Retainer", "Small Business Compliance Readiness", "Not sure yet"]
+        )
 
-    if submitted:
-        if not name or not email_address or not main_concern:
-            st.error("Please include at least your name, email address, and main concern.")
-        else:
-            subject = f"Nexus Conformité Support Request - {service_needed}"
-            body = f"""Hello Nexus Conformité,
+        urgency = st.selectbox(
+            "Urgency",
+            ["Not urgent", "Need support this month", "Inspection pressure / urgent", "Preparing before registration or review", "Ongoing monthly support needed"]
+        )
+
+    document_state = st.radio(
+        "Current document condition",
+        ["Mostly organised", "Some documents are scattered", "Very scattered and unclear", "Starting from scratch", "Not sure"]
+    )
+
+    main_concern = st.text_area(
+        "Main concern",
+        placeholder="Example: Our policies exist but the evidence folders are scattered. We need help organising audits, incidents, complaints, training records, and action trackers."
+    )
+
+    submitted = st.form_submit_button("Prepare email")
+
+if submitted:
+    if not name or not client_email or not main_concern:
+        st.error("Please include your name, email address, and main concern.")
+    else:
+        subject = f"Nexus Conformité Support Request - {service_needed}"
+        body = f"""Hello Nexus Conformité,
 
 I would like to request support.
 
 Full name: {name}
 Business / provider name: {business_name}
-Email address: {email_address}
+Email address: {client_email}
 Phone / WhatsApp: {phone}
 
 Role: {role}
-Organisation type: {provider_type}
+Organisation type: {organisation_type}
 Support needed: {service_needed}
 Urgency: {urgency}
 Current document condition: {document_state}
@@ -581,436 +660,60 @@ Please advise the suitable next step.
 Kind regards,
 {name}
 """
-            mailto = f"mailto:{EMAIL}?subject={quote(subject)}&body={quote(body)}"
+        mailto = f"mailto:{EMAIL}?subject={quote(subject)}&body={quote(body)}"
 
-            st.success("Your email request is prepared. Tap the button below to open your email app.")
-            st.markdown(f"""
-            <div class="cta-row">
-                <a class="btn-primary" href="{mailto}">Open prepared email</a>
-            </div>
-            """, unsafe_allow_html=True)
-
-            st.text_area("Copy of prepared email", body, height=320)
-
-
-def what_to_email_card():
-    st.markdown("""
-    <div class="card">
-        <h2>What to include when contacting Nexus</h2>
-        <div class="gold-line"></div>
-        <ul>
-            <li>Your full name and business or provider name</li>
-            <li>Your role, such as registered manager, care manager, provider, owner, or operations lead</li>
-            <li>The type of service, such as domiciliary care, home care, supported living, residential care, or small business</li>
-            <li>The support you are interested in: £149 review, 30-Day Cleanup Sprint, monthly retainer, or small business readiness</li>
-            <li>Your main concern, such as scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
-            <li>Your urgency level and whether any deadline or inspection pressure exists</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-# =========================================================
-# HEADER + NAV
-# =========================================================
-render_header()
-
-st.markdown('<div class="nav-label">Select a page</div>', unsafe_allow_html=True)
-
-page = st.selectbox(
-    "Select a page",
-    [
-        "Home",
-        "£149 CQC Evidence File Review",
-        "30-Day CQC Evidence Cleanup Sprint",
-        "Monthly Compliance Retainer",
-        "Small Business Compliance Readiness",
-        "FAQs",
-        "About Nexus",
-        "Contact"
-    ],
-    label_visibility="collapsed"
-)
-
-# =========================================================
-# HOME
-# =========================================================
-if page == "Home":
-    hero(
-        "UK Care Compliance Support",
-        "CQC evidence support for UK care managers and small care providers.",
-        "Nexus Conformité helps care managers organise evidence files, policies, SOPs, trackers, and governance records so compliance is clearer, easier to review, and better prepared for inspection pressure."
-    )
-
-    cta_buttons()
-
-    st.markdown("""
-    <div class="card">
-        <h2>Built for managers who need proof, not just paperwork.</h2>
-        <div class="gold-line"></div>
-        <p>
-        Many care providers are doing the work but struggle to show it clearly through
-        organised records, evidence trails, management reviews, risk logs, incident files,
-        complaints records, training records, and action trackers.
-        </p>
-        <p>
-        Nexus Conformité helps turn scattered compliance documents into a clearer,
-        review-ready evidence structure.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="grid-3">
-        <div class="service-card">
-            <span class="gold-badge">Best first step</span>
-            <h3>£149 CQC Evidence File Review</h3>
-            <div class="price">£149</div>
-            <p>A focused review of your current evidence structure with practical gap notes, action points, and recommended next steps.</p>
+        st.success("Your email is prepared. Tap below to open your email app.")
+        st.markdown(f"""
+        <div class="cta-row">
+            <a class="btn-primary" href="{mailto}">Open prepared email</a>
         </div>
-        <div class="service-card">
-            <span class="badge">Structured cleanup</span>
-            <h3>30-Day CQC Evidence Cleanup Sprint</h3>
-            <div class="price">£750–£1,500</div>
-            <p>A structured cleanup service for providers that need stronger evidence files, clearer trackers, organised policies, and management review records.</p>
-        </div>
-        <div class="service-card">
-            <span class="badge">Ongoing support</span>
-            <h3>Monthly Compliance Retainer</h3>
-            <div class="price">Scoped</div>
-            <p>Ongoing evidence tracking, policy support, action tracker updates, and monthly management summary support.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="green-notice">
-        <strong>Recommended client journey:</strong><br>
-        Start with the £149 CQC Evidence File Review. If deeper support is needed,
-        move into the 30-Day Cleanup Sprint, then monthly compliance support.
-    </div>
-    """, unsafe_allow_html=True)
+        st.text_area("Copy of prepared email", body, height=300)
 
-    what_to_email_card()
-    email_request_form(default_service="£149 CQC Evidence File Review", key="home")
-    footer()
 
-# =========================================================
-# £149 REVIEW
-# =========================================================
-elif page == "£149 CQC Evidence File Review":
-    hero(
-        "Entry Review Offer",
-        "£149 CQC Evidence File Review.",
-        "A focused review for UK care managers who need to understand what is missing, weak, scattered, duplicated, or unclear in their compliance evidence structure."
-    )
+# FAQs
+st.markdown('<div id="faq"></div>', unsafe_allow_html=True)
+st.markdown("""
+<div class="section">
+    <h2>FAQs</h2>
+    <p class="section-intro">Clear answers before a care manager decides to contact Nexus.</p>
+</div>
+""", unsafe_allow_html=True)
 
-    cta_buttons("Request the £149 Review", PAYHIP_URL)
+with st.expander("Is the £149 review a full compliance audit?"):
+    st.write("No. It is a focused evidence structure review. It helps identify obvious gaps, weak organisation, and practical next steps.")
 
-    st.markdown("""
-    <div class="grid-2">
-        <div class="card">
-            <h2>What this review is for</h2>
-            <div class="gold-line"></div>
-            <p>
-            This review is designed for care managers and small providers who need a practical
-            starting point before investing in a larger compliance cleanup package.
-            </p>
-            <p>
-            It helps identify whether your records are easy to explain, easy to locate,
-            and strong enough to support management review, internal monitoring, and inspection preparation.
-            </p>
-        </div>
-        <div class="card">
-            <h2>Price and outcome</h2>
-            <div class="gold-line"></div>
-            <div class="price">£149</div>
-            <p>
-            You receive a practical summary of your current evidence position,
-            gap notes, and recommended next steps.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+with st.expander("Does Nexus replace the provider’s CQC responsibility?"):
+    st.write("No. Nexus supports evidence organisation, documentation structure, action trackers, and management review preparation. The provider remains responsible for meeting regulatory requirements.")
 
-    st.markdown("""
-    <div class="card">
-        <h2>What is included</h2>
-        <ul>
-            <li>Review of your current evidence folder structure</li>
-            <li>Gap notes identifying missing, weak, duplicated, or unclear records</li>
-            <li>CQC evidence checklist direction</li>
-            <li>Basic action tracker</li>
-            <li>Notes on policy and SOP organisation</li>
-            <li>Short written summary of recommended next steps</li>
-            <li>Recommendation on whether a full 30-Day Cleanup Sprint is needed</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
+with st.expander("Can Nexus support domiciliary care providers?"):
+    st.write("Yes. The services are suitable for domiciliary care, home care, supported living, new providers, and small care providers that need clearer evidence structures.")
 
-    what_to_email_card()
-    email_request_form(default_service="£149 CQC Evidence File Review", key="review")
-    footer()
+with st.expander("Can I move from the £149 review to the 30-Day Sprint?"):
+    st.write("Yes. The £149 review is designed as the first step. If deeper cleanup is needed, the provider can move into the 30-Day Cleanup Sprint or monthly support.")
 
-# =========================================================
-# 30 DAY SPRINT
-# =========================================================
-elif page == "30-Day CQC Evidence Cleanup Sprint":
-    hero(
-        "Higher Support Package",
-        "30-Day CQC Evidence Cleanup Sprint.",
-        "A structured cleanup service for care providers that need stronger evidence files, clearer trackers, better documentation, and a more organised compliance system."
-    )
+with st.expander("How are digital products delivered?"):
+    st.write("Digital products and packages are delivered securely through Payhip where applicable. Custom support is scoped before delivery is confirmed.")
 
-    cta_buttons("Request Sprint Scope Review", f"mailto:{EMAIL}")
+with st.expander("Does Nexus provide legal advice?"):
+    st.write("No. Nexus Conformité provides compliance organisation, evidence readiness, governance documentation, and operational support. It does not replace legal advice.")
 
-    st.markdown("""
-    <div class="card">
-        <h2>What the sprint solves</h2>
-        <div class="gold-line"></div>
-        <p>
-        Care providers often have policies, training records, incidents, audits,
-        complaints, risk documents, and management notes spread across different folders or formats.
-        This creates stress when managers need to explain what is happening in the service.
-        </p>
-        <p>
-        The sprint brings those records into a clearer structure so management can see what exists,
-        what is missing, and what needs action.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div class="grid-2">
-        <div class="card">
-            <h2>What can be included</h2>
-            <ul>
-                <li>Evidence folder cleanup</li>
-                <li>Policy and SOP organisation</li>
-                <li>Risk, incident, complaints, training, and audit record structure</li>
-                <li>Evidence gap identification</li>
-                <li>Action tracker development</li>
-                <li>Management review summary</li>
-                <li>Final evidence pack structure</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Pricing</h2>
-            <div class="price">£750–£1,500</div>
-            <p>
-            Final pricing depends on document volume, urgency, provider size,
-            and the current condition of the records.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    email_request_form(default_service="30-Day CQC Evidence Cleanup Sprint", key="sprint")
-    footer()
-
-# =========================================================
-# MONTHLY RETAINER
-# =========================================================
-elif page == "Monthly Compliance Retainer":
-    hero(
-        "Ongoing Support",
-        "Monthly Compliance Retainer.",
-        "Ongoing compliance organisation for care providers and small businesses that want their records, policies, trackers, and management evidence kept under control."
-    )
-
-    cta_buttons("Ask About Monthly Support", f"mailto:{EMAIL}")
-
-    st.markdown("""
-    <div class="card">
-        <h2>Why monthly support matters</h2>
-        <div class="gold-line"></div>
-        <p>
-        Compliance is not a one-time cleanup. Evidence must be maintained, reviewed,
-        updated, and explained over time. Monthly support helps prevent documents
-        from becoming outdated, scattered, or forgotten.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="grid-2">
-        <div class="card">
-            <h2>Monthly support can include</h2>
-            <ul>
-                <li>Monthly evidence tracker update</li>
-                <li>Action tracker review</li>
-                <li>Policy and SOP update support</li>
-                <li>Incident, complaints, training, audit, and risk record checks</li>
-                <li>Monthly management summary notes</li>
-                <li>Compliance improvement follow-up</li>
-                <li>Support preparing internal review packs</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Pricing</h2>
-            <div class="price">Scoped</div>
-            <p>
-            Monthly retainer pricing is agreed after scope review based on provider size,
-            document volume, urgency, and support level.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    email_request_form(default_service="Monthly Compliance Retainer", key="retainer")
-    footer()
-
-# =========================================================
-# SMALL BUSINESS
-# =========================================================
-elif page == "Small Business Compliance Readiness":
-    hero(
-        "Small Business Compliance",
-        "Small Business Compliance Readiness.",
-        "Compliance and operations support for small businesses that need clearer documents, stronger internal controls, better records, and more professional procedures."
-    )
-
-    cta_buttons("Request Small Business Support", f"mailto:{EMAIL}")
-
-    st.markdown("""
-    <div class="card">
-        <h2>What can be included</h2>
-        <ul>
-            <li>Business readiness checklist</li>
-            <li>Policy and procedure structure</li>
-            <li>Risk and control register template</li>
-            <li>Customer and supplier record guidance</li>
-            <li>Basic privacy and data protection document support</li>
-            <li>Internal operations checklist</li>
-            <li>Management action tracker</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-    email_request_form(default_service="Small Business Compliance Readiness", key="smallbiz")
-    footer()
-
-# =========================================================
-# FAQ
-# =========================================================
-elif page == "FAQs":
-    hero(
-        "Questions & Answers",
-        "CQC compliance support FAQs.",
-        "Clear answers for care managers and small providers considering Nexus Conformité support."
-    )
-
-    with st.expander("Is the £149 CQC Evidence File Review a full compliance audit?"):
-        st.write("No. It is a focused evidence structure review. It helps identify obvious gaps, weak organisation, and practical next steps. A deeper cleanup or audit-style review may require a larger package.")
-
-    with st.expander("Does Nexus replace the provider’s responsibility to comply with CQC requirements?"):
-        st.write("No. Nexus supports evidence organisation, documentation structure, trackers, and management review preparation. The provider remains responsible for meeting regulatory requirements.")
-
-    with st.expander("Can Nexus support domiciliary care providers?"):
-        st.write("Yes. The services are suitable for small care providers, domiciliary care providers, home care providers, supported living providers, and managers who need clearer evidence structures.")
-
-    with st.expander("What should I send before the £149 review?"):
-        st.write("Send your role, provider type, current document condition, main concern, urgency, and whether you have existing evidence folders, policies, SOPs, trackers, training records, incident logs, complaints records, audits, or risk documents.")
-
-    with st.expander("Is the 30-Day Cleanup Sprint suitable before inspection pressure?"):
-        st.write("It can help organise records and identify gaps before inspection pressure increases. The earlier the provider starts, the better the outcome. Urgent work may affect pricing.")
-
-    with st.expander("How are digital packages delivered?"):
-        st.write("Digital products and packages are delivered securely through Payhip where applicable. Custom support is scoped first before the final delivery method is confirmed.")
-
-    with st.expander("Can I move from the £149 review to the 30-Day Sprint?"):
-        st.write("Yes. The £149 review is designed as the first step. If the evidence file needs deeper cleanup, the provider can move into the 30-Day Sprint or monthly compliance support.")
-
-    with st.expander("Do you provide legal advice?"):
-        st.write("No. Nexus Conformité provides compliance organisation, governance documentation, evidence readiness, and operational support. It does not replace legal advice.")
-
-    what_to_email_card()
-    cta_buttons()
-    footer()
-
-# =========================================================
-# ABOUT
-# =========================================================
-elif page == "About Nexus":
-    hero(
-        "About the Firm",
-        "Practical compliance support with a governance-first approach.",
-        "Nexus Conformité connects law, risk, compliance, data protection, governance, and operational documentation into practical support for regulated and growing businesses."
-    )
-
-    st.markdown("""
-    <div class="card">
-        <h2>Our focus</h2>
-        <div class="gold-line"></div>
-        <p>
-        Nexus Conformité focuses on practical compliance systems, not generic paperwork.
-        The aim is to help businesses organise their evidence, strengthen governance records,
-        improve accountability, and prepare clearer documentation for review.
-        </p>
-        <p>
-        The firm supports care compliance, small business readiness, policy and SOP structure,
-        evidence tracking, risk documentation, and internal control organisation.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="grid-2">
-        <div class="card">
-            <h2>Our approach</h2>
-            <ul>
-                <li>Evidence-first compliance support</li>
-                <li>Governance and internal control focus</li>
-                <li>Clear action trackers and management summaries</li>
-                <li>Practical organisation for real business operations</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Core areas</h2>
-            <ul>
-                <li>CQC evidence organisation</li>
-                <li>Policy and SOP structure</li>
-                <li>Risk and action tracking</li>
-                <li>Compliance documentation cleanup</li>
-            </ul>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    cta_buttons()
-    footer()
-
-# =========================================================
-# CONTACT
-# =========================================================
-elif page == "Contact":
-    hero(
-        "Contact Nexus",
-        "Start with the right support level.",
-        "Message Nexus Conformité to request the £149 review, discuss the 30-Day Cleanup Sprint, or ask about monthly compliance support."
-    )
-
-    cta_buttons()
-
-    st.markdown(f"""
-    <div class="grid-2">
-        <div class="card">
-            <h2>Contact details</h2>
-            <p><strong>Email:</strong> {EMAIL}</p>
-            <p><strong>Facebook:</strong> @nexusconformite</p>
-            <p><strong>Payhip:</strong> payhip.com/NexusConformite</p>
-            <p><strong>LinkedIn:</strong> {LINKEDIN_NAME}</p>
-        </div>
-        <div class="card">
-            <h2>Best first step</h2>
-            <p>
-            Start with the £149 CQC Evidence File Review if you are unsure what support you need.
-            If your records are already known to be scattered or urgent, request a 30-Day Cleanup Sprint scope review.
-            </p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    what_to_email_card()
-    email_request_form(default_service="Not sure yet", key="contact")
-    footer()
+# Footer
+st.markdown(f"""
+<div class="footer">
+    <h3 style="color:white;">Nexus Conformité</h3>
+    <p>Connecting Law, Risk, and Compliance.</p>
+    <p>
+        Email: {EMAIL}<br>
+        Facebook: @nexusconformite<br>
+        Payhip: payhip.com/NexusConformite<br>
+        LinkedIn: {LINKEDIN_NAME}
+    </p>
+    <p>
+        Nexus Conformité provides compliance organisation, evidence readiness, policy structure,
+        and governance documentation support. Services do not replace legal advice or the provider’s own regulatory responsibilities.
+    </p>
+</div>
+""", unsafe_allow_html=True)
