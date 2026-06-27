@@ -1,8 +1,11 @@
 import streamlit as st
 import os
 import glob
-from urllib.parse import quote
+import streamlit.components.v1 as components
 
+# =========================================================
+# PAGE CONFIG
+# =========================================================
 st.set_page_config(
     page_title="Nexus Conformité | CQC Evidence & Compliance Support",
     page_icon="◆",
@@ -10,13 +13,18 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# =========================================================
+# BUSINESS DETAILS
+# =========================================================
 BUSINESS_NAME = "Nexus Conformité"
 EMAIL = "nexusconformite@proton.me"
 FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
 LINKEDIN_NAME = "Nexus Conformité"
 
-
+# =========================================================
+# LOGO FINDER
+# =========================================================
 def find_logo():
     preferred_names = [
         ".Nexus_Conformite_logo_transparent.png",
@@ -42,6 +50,9 @@ def find_logo():
 
 LOGO_PATH = find_logo()
 
+# =========================================================
+# CSS
+# =========================================================
 st.markdown("""
 <style>
 :root {
@@ -196,6 +207,17 @@ p, li {
     border: 1px solid rgba(255,255,255,0.25);
 }
 
+.btn-dark {
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 15px;
+    background: var(--navy);
+    color: white !important;
+}
+
 .section {
     margin: 34px 0;
 }
@@ -334,6 +356,10 @@ p, li {
     font-size: 16px;
 }
 
+.footer h3 {
+    color: white;
+}
+
 @media (max-width: 900px) {
     .block-container {
         padding-left: 1rem;
@@ -386,7 +412,8 @@ p, li {
 
     .btn-primary,
     .btn-secondary,
-    .btn-light {
+    .btn-light,
+    .btn-dark {
         width: 100%;
         text-align: center;
     }
@@ -394,8 +421,9 @@ p, li {
 </style>
 """, unsafe_allow_html=True)
 
-
-# Header
+# =========================================================
+# HEADER
+# =========================================================
 if LOGO_PATH:
     st.image(LOGO_PATH, width=135)
 
@@ -408,14 +436,16 @@ st.markdown(f"""
     <div class="nav-pills">
         <a href="#services">Services</a>
         <a href="#process">Process</a>
+        <a href="#request">Request Support</a>
         <a href="#faq">FAQs</a>
         <a href="#contact">Contact</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-
-# Hero
+# =========================================================
+# HERO
+# =========================================================
 st.markdown(f"""
 <div class="hero">
     <div class="eyebrow">UK care compliance support</div>
@@ -425,15 +455,16 @@ st.markdown(f"""
     policies, SOPs, trackers, and governance records into a clearer review-ready structure.
     </p>
     <div class="cta-row">
-        <a class="btn-primary" href="{PAYHIP_URL}" target="_blank">Start with the £149 Review</a>
-        <a class="btn-secondary" href="{FACEBOOK_URL}" target="_blank">Message on Facebook</a>
-        <a class="btn-light" href="mailto:{EMAIL}">Email Nexus</a>
+        <a class="btn-primary" href="#request">Request Service Support</a>
+        <a class="btn-secondary" href="#services">View Services</a>
+        <a class="btn-light" href="{PAYHIP_URL}" target="_blank">View Digital Products</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-
-# Problem psychology section
+# =========================================================
+# PROBLEM SECTION
+# =========================================================
 st.markdown("""
 <div class="problem-strip">
     <h2>Most providers do not fail because they have no documents. They struggle because the evidence is scattered.</h2>
@@ -448,8 +479,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-
-# Services
+# =========================================================
+# SERVICES
+# =========================================================
 st.markdown('<div id="services"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="section">
@@ -473,6 +505,7 @@ st.markdown("""
             <li>Action tracker direction</li>
             <li>Summary of next steps</li>
         </ul>
+        <a class="btn-dark" href="#request">Request This Service</a>
     </div>
     <div class="card">
         <span class="badge">Structured cleanup</span>
@@ -485,6 +518,7 @@ st.markdown("""
             <li>Risk, training, audit, incident, and complaints record structure</li>
             <li>Management review summary</li>
         </ul>
+        <a class="btn-dark" href="#request">Request This Service</a>
     </div>
     <div class="card">
         <span class="badge">Ongoing control</span>
@@ -497,17 +531,30 @@ st.markdown("""
             <li>Policy update support</li>
             <li>Management summary notes</li>
         </ul>
+        <a class="btn-dark" href="#request">Request This Service</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown(f"""
+<div class="notice">
+    <h3>Looking for digital products?</h3>
+    <p>
+    Payhip is available for digital products, templates, and packaged resources.
+    Custom service requests should begin through the Nexus intake form so the support level can be reviewed properly.
+    </p>
+    <a class="btn-dark" href="{PAYHIP_URL}" target="_blank">View Digital Products on Payhip</a>
+</div>
+""", unsafe_allow_html=True)
 
-# Why Nexus
+# =========================================================
+# WHY NEXUS
+# =========================================================
 st.markdown("""
 <div class="section">
     <h2>Why this works for care managers.</h2>
     <p class="section-intro">
-    The page is not selling random templates. The offer is built around the real management need: know what evidence exists, what is weak, what is missing, and what needs action.
+    Nexus does not sell random paperwork. The focus is evidence: what exists, what is weak, what is missing, and what needs action.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -527,14 +574,15 @@ st.markdown("""
         <p>Every review should lead to clear next steps, not vague advice.</p>
     </div>
     <div class="card">
-        <h3>Scalable</h3>
+        <h3>Scalable support</h3>
         <p>Clients can start with the £149 review, move into cleanup, then continue with monthly support.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-
-# Process
+# =========================================================
+# PROCESS
+# =========================================================
 st.markdown('<div id="process"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="section">
@@ -547,133 +595,223 @@ st.markdown("""
     <div class="step">
         <div class="step-number">1</div>
         <h3>Send the basics</h3>
-        <p>Share your role, provider type, main concern, urgency, and current document condition.</p>
+        <p>Share your role, provider type, main concern, urgency, current document condition, and available evidence areas.</p>
     </div>
     <div class="step">
         <div class="step-number">2</div>
-        <h3>Start with the right offer</h3>
-        <p>Most clients begin with the £149 review. Urgent or scattered files may move straight to scope review.</p>
+        <h3>Upload supporting files</h3>
+        <p>Upload redacted documents such as folder indexes, trackers, policies, audit summaries, risk registers, or training matrices.</p>
     </div>
     <div class="step">
         <div class="step-number">3</div>
-        <h3>Receive clear next steps</h3>
-        <p>You receive practical direction on what is missing, weak, scattered, or ready for cleanup.</p>
+        <h3>Receive the next step</h3>
+        <p>Nexus reviews the request and advises whether the £149 review, cleanup sprint, or monthly support is suitable.</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-
-# What to email
+# =========================================================
+# WHAT TO SEND
+# =========================================================
 st.markdown("""
 <div class="green-notice">
-    <h3>What to email Nexus before support begins</h3>
+    <h3>What Nexus needs before support begins</h3>
     <ul>
         <li>Full name and business/provider name</li>
         <li>Your role: registered manager, care manager, owner, operations lead, or compliance lead</li>
         <li>Provider type: domiciliary care, home care, supported living, residential care, new provider, or small business</li>
-        <li>The service you want: £149 review, 30-Day Sprint, monthly support, or not sure yet</li>
-        <li>Your main concern: scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
-        <li>Your urgency level and whether any deadline exists</li>
+        <li>The support you want: £149 review, 30-Day Sprint, monthly support, or not sure yet</li>
+        <li>Main concern: scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
+        <li>Document condition and available evidence areas</li>
+        <li>Redacted supporting documents where possible</li>
     </ul>
 </div>
 """, unsafe_allow_html=True)
 
+# =========================================================
+# REQUEST FORM WITH UPLOAD
+# =========================================================
+st.markdown('<div id="request"></div>', unsafe_allow_html=True)
 
-# Form
-st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div class="section">
-    <h2>Prepare your request.</h2>
+    <h2>Request service support.</h2>
     <p class="section-intro">
-    This form prepares an email for you. It does not store sensitive information on the website.
+    Complete the intake form below so Nexus Conformité can understand your support need,
+    evidence position, urgency, and the documents available for review. Your request is sent to Nexus by email.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-with st.form("nexus_contact_form"):
-    col1, col2 = st.columns(2)
+components.html(f"""
+<div style="background:#ffffff; border:1px solid #E5E7EB; border-radius:26px; padding:28px; box-shadow:0 16px 42px rgba(15,23,42,0.06); font-family:Arial, sans-serif; color:#172033;">
 
-    with col1:
-        name = st.text_input("Full name")
-        business_name = st.text_input("Business / provider name")
-        client_email = st.text_input("Your email address")
-        phone = st.text_input("Phone / WhatsApp")
+    <form action="https://formsubmit.co/{EMAIL}" method="POST" enctype="multipart/form-data">
 
-    with col2:
-        role = st.selectbox(
-            "Your role",
-            ["Registered Manager", "Care Manager", "Provider / Owner", "Operations Manager", "Compliance Lead", "Small Business Owner", "Other"]
-        )
+        <input type="hidden" name="_subject" value="New Nexus Conformité Service Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
 
-        organisation_type = st.selectbox(
-            "Organisation type",
-            ["Domiciliary care provider", "Home care provider", "Supported living provider", "Residential care provider", "New care provider", "Small business", "Other"]
-        )
+        <h2 style="color:#061A35; margin-top:0;">Service Request Intake</h2>
+        <p style="color:#6B7280; font-size:15px; line-height:1.6;">
+            Please provide enough detail for Nexus to recommend the right support level.
+            Upload redacted documents only. Avoid sending identifiable service-user records unless Nexus later requests them through a secure method.
+        </p>
 
-        service_needed = st.selectbox(
-            "Support needed",
-            ["£149 CQC Evidence File Review", "30-Day CQC Evidence Cleanup Sprint", "Monthly Compliance Retainer", "Small Business Compliance Readiness", "Not sure yet"]
-        )
+        <hr style="border:none; border-top:1px solid #E5E7EB; margin:24px 0;">
 
-        urgency = st.selectbox(
-            "Urgency",
-            ["Not urgent", "Need support this month", "Inspection pressure / urgent", "Preparing before registration or review", "Ongoing monthly support needed"]
-        )
+        <h3 style="color:#061A35;">1. Contact details</h3>
 
-    document_state = st.radio(
-        "Current document condition",
-        ["Mostly organised", "Some documents are scattered", "Very scattered and unclear", "Starting from scratch", "Not sure"]
-    )
+        <label style="font-weight:700; color:#061A35;">Full name *</label><br>
+        <input type="text" name="Full Name" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
 
-    main_concern = st.text_area(
-        "Main concern",
-        placeholder="Example: Our policies exist but the evidence folders are scattered. We need help organising audits, incidents, complaints, training records, and action trackers."
-    )
+        <label style="font-weight:700; color:#061A35;">Business / provider name *</label><br>
+        <input type="text" name="Business or Provider Name" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
 
-    submitted = st.form_submit_button("Prepare email")
+        <label style="font-weight:700; color:#061A35;">Email address *</label><br>
+        <input type="email" name="email" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
 
-if submitted:
-    if not name or not client_email or not main_concern:
-        st.error("Please include your name, email address, and main concern.")
-    else:
-        subject = f"Nexus Conformité Support Request - {service_needed}"
-        body = f"""Hello Nexus Conformité,
+        <label style="font-weight:700; color:#061A35;">Phone / WhatsApp</label><br>
+        <input type="text" name="Phone or WhatsApp" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
 
-I would like to request support.
+        <h3 style="color:#061A35;">2. Organisation profile</h3>
 
-Full name: {name}
-Business / provider name: {business_name}
-Email address: {client_email}
-Phone / WhatsApp: {phone}
+        <label style="font-weight:700; color:#061A35;">Your role *</label><br>
+        <select name="Role" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option value="">Select one</option>
+            <option>Registered Manager</option>
+            <option>Care Manager</option>
+            <option>Provider / Owner</option>
+            <option>Operations Manager</option>
+            <option>Compliance Lead</option>
+            <option>Small Business Owner</option>
+            <option>Other</option>
+        </select>
 
-Role: {role}
-Organisation type: {organisation_type}
-Support needed: {service_needed}
-Urgency: {urgency}
-Current document condition: {document_state}
+        <label style="font-weight:700; color:#061A35;">Organisation type *</label><br>
+        <select name="Organisation Type" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option value="">Select one</option>
+            <option>Domiciliary care provider</option>
+            <option>Home care provider</option>
+            <option>Supported living provider</option>
+            <option>Residential care provider</option>
+            <option>New care provider</option>
+            <option>Small business</option>
+            <option>Other</option>
+        </select>
 
-Main concern:
-{main_concern}
+        <label style="font-weight:700; color:#061A35;">Approximate size</label><br>
+        <select name="Approximate Size" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option>Not sure / prefer to discuss</option>
+            <option>New provider / pre-registration</option>
+            <option>1–10 staff</option>
+            <option>11–25 staff</option>
+            <option>26–50 staff</option>
+            <option>51+ staff</option>
+        </select>
 
-Please advise the suitable next step.
+        <h3 style="color:#061A35;">3. Support needed</h3>
 
-Kind regards,
-{name}
-"""
-        mailto = f"mailto:{EMAIL}?subject={quote(subject)}&body={quote(body)}"
+        <label style="font-weight:700; color:#061A35;">Support needed *</label><br>
+        <select name="Support Needed" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option value="">Select one</option>
+            <option>£149 CQC Evidence File Review</option>
+            <option>30-Day CQC Evidence Cleanup Sprint</option>
+            <option>Monthly Compliance Retainer</option>
+            <option>Small Business Compliance Readiness</option>
+            <option>Not sure yet</option>
+        </select>
 
-        st.success("Your email is prepared. Tap below to open your email app.")
-        st.markdown(f"""
-        <div class="cta-row">
-            <a class="btn-primary" href="{mailto}">Open prepared email</a>
-        </div>
-        """, unsafe_allow_html=True)
+        <label style="font-weight:700; color:#061A35;">Urgency *</label><br>
+        <select name="Urgency" required style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option value="">Select one</option>
+            <option>Not urgent</option>
+            <option>Need support this month</option>
+            <option>Inspection pressure / urgent</option>
+            <option>Preparing before registration or review</option>
+            <option>Ongoing monthly support needed</option>
+        </select>
 
-        st.text_area("Copy of prepared email", body, height=300)
+        <label style="font-weight:700; color:#061A35;">Current document condition *</label><br>
+        <select name="Current Document Condition" required style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option value="">Select one</option>
+            <option>Mostly organised</option>
+            <option>Some documents are scattered</option>
+            <option>Very scattered and unclear</option>
+            <option>Starting from scratch</option>
+            <option>Not sure</option>
+        </select>
 
+        <h3 style="color:#061A35;">4. Evidence areas available</h3>
+        <p style="color:#6B7280; font-size:15px; line-height:1.6;">
+            Tick the areas you can provide now. You do not need to upload everything at first contact.
+        </p>
 
-# FAQs
+        <label><input type="checkbox" name="Available Evidence Areas" value="Policies and SOPs"> Policies and SOPs</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Evidence folder index or screenshots"> Evidence folder index or screenshots</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Risk register"> Risk register</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Training matrix or training records"> Training matrix or training records</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Audit records"> Audit records</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Incident records or incident tracker"> Incident records or incident tracker</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Complaints records or complaints tracker"> Complaints records or complaints tracker</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Action tracker"> Action tracker</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Management review notes"> Management review notes</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="CQC correspondence or report"> CQC correspondence or report, if relevant</label><br>
+
+        <br>
+
+        <h3 style="color:#061A35;">5. Upload supporting documents</h3>
+        <p style="color:#6B7280; font-size:15px; line-height:1.6;">
+            Upload redacted documents only. Useful examples include a folder index, policy list,
+            evidence tracker, action tracker, audit summary, risk register, training matrix,
+            or screenshots showing the document structure.
+        </p>
+
+        <label style="font-weight:700; color:#061A35;">Upload files *</label><br>
+        <input type="file" name="attachment" multiple required accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" style="width:100%; padding:14px; margin:8px 0 12px 0; border:1px dashed #C8A96A; border-radius:14px; font-size:16px; background:#FFF8E8; box-sizing:border-box;">
+
+        <label style="font-weight:700; color:#061A35;">Additional files, if needed</label><br>
+        <input type="file" name="attachment2" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" style="width:100%; padding:14px; margin:8px 0 12px 0; border:1px dashed #D1D5DB; border-radius:14px; font-size:16px; box-sizing:border-box;">
+
+        <label style="font-weight:700; color:#061A35;">Additional files, if needed</label><br>
+        <input type="file" name="attachment3" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px dashed #D1D5DB; border-radius:14px; font-size:16px; box-sizing:border-box;">
+
+        <h3 style="color:#061A35;">6. Main concern</h3>
+
+        <label style="font-weight:700; color:#061A35;">Describe the issue *</label><br>
+        <textarea name="Main Concern" required rows="7" placeholder="Example: Our policies exist but the evidence folders are scattered. We need help organising audits, incidents, complaints, training records, action trackers, and management review notes." style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;"></textarea>
+
+        <label style="font-weight:700; color:#061A35;">Preferred next step</label><br>
+        <select name="Preferred Next Step" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
+            <option>Please review and advise the best support level</option>
+            <option>I want to start with the £149 review</option>
+            <option>I want a scope review for the 30-Day Sprint</option>
+            <option>I want to discuss monthly support</option>
+        </select>
+
+        <label style="display:block; font-size:14px; line-height:1.5; color:#374151; margin-bottom:18px;">
+            <input type="checkbox" name="Client Confirmation" required value="Confirmed authority and redaction notice accepted">
+            I confirm that I have authority to submit this request and that uploaded documents have been redacted where necessary.
+        </label>
+
+        <button type="submit" style="width:100%; background:#C8A96A; color:#061A35; padding:16px 22px; border:none; border-radius:999px; font-weight:800; font-size:17px; cursor:pointer;">
+            Submit Request to Nexus
+        </button>
+
+        <p style="font-size:14px; color:#6B7280; margin-top:16px; line-height:1.6;">
+            Nexus Conformité will review the request and advise the suitable next step. Payment links or secure delivery instructions are provided after review where applicable.
+        </p>
+
+    </form>
+</div>
+""", height=2450, scrolling=True)
+
+# =========================================================
+# FAQS
+# =========================================================
 st.markdown('<div id="faq"></div>', unsafe_allow_html=True)
+
 st.markdown("""
 <div class="section">
     <h2>FAQs</h2>
@@ -696,14 +834,20 @@ with st.expander("Can I move from the £149 review to the 30-Day Sprint?"):
 with st.expander("How are digital products delivered?"):
     st.write("Digital products and packages are delivered securely through Payhip where applicable. Custom support is scoped before delivery is confirmed.")
 
+with st.expander("Should I upload confidential service-user records?"):
+    st.write("No. Upload redacted documents only. Nexus will advise the next secure step if more sensitive records are required.")
+
 with st.expander("Does Nexus provide legal advice?"):
     st.write("No. Nexus Conformité provides compliance organisation, evidence readiness, governance documentation, and operational support. It does not replace legal advice.")
 
+# =========================================================
+# CONTACT / FOOTER
+# =========================================================
+st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 
-# Footer
 st.markdown(f"""
 <div class="footer">
-    <h3 style="color:white;">Nexus Conformité</h3>
+    <h3>Nexus Conformité</h3>
     <p>Connecting Law, Risk, and Compliance.</p>
     <p>
         Email: {EMAIL}<br>
