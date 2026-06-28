@@ -22,8 +22,8 @@ FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
 LINKEDIN_NAME = "Nexus Conformité"
 
-# Public direct checkout for the fixed £149 service
-CQC_REVIEW_CHECKOUT_URL = "https://payhip.com/buy?link=90Um6"
+# Correct Payhip direct checkout link for £149 review
+CQC_REVIEW_CHECKOUT_URL = "https://payhip.com/buy?link=9OUm6"
 
 # =========================================================
 # LOGO FINDER
@@ -60,10 +60,8 @@ st.markdown("""
 <style>
 :root {
     --navy: #061A35;
-    --navy2: #0B2545;
     --gold: #C8A96A;
     --green: #0F766E;
-    --soft: #F6F7FA;
     --cream: #FAF7F0;
     --white: #FFFFFF;
     --text: #172033;
@@ -185,7 +183,8 @@ p, li {
 
 .btn-primary,
 .btn-secondary,
-.btn-light {
+.btn-light,
+.btn-dark {
     display: inline-block;
     padding: 14px 20px;
     border-radius: 999px;
@@ -211,12 +210,6 @@ p, li {
 }
 
 .btn-dark {
-    display: inline-block;
-    padding: 14px 20px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
     background: var(--navy);
     color: white !important;
 }
@@ -458,9 +451,9 @@ st.markdown(f"""
     policies, SOPs, trackers, and governance records into a clearer review-ready structure.
     </p>
     <div class="cta-row">
-        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank">Buy £149 Review</a>
+        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy £149 Review</a>
         <a class="btn-secondary" href="#request">Request Custom Support</a>
-        <a class="btn-light" href="{PAYHIP_URL}" target="_blank">View Digital Products</a>
+        <a class="btn-light" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">View Digital Products</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -510,7 +503,7 @@ st.markdown(f"""
             <li>Summary of next steps</li>
             <li>Delivered within 3–5 business days after payment and receipt of required intake documents</li>
         </ul>
-        <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank">Buy Now</a>
+        <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
 
     <div class="card">
@@ -550,7 +543,7 @@ st.markdown(f"""
     <h3>Payment and delivery method</h3>
     <p>
     The £149 CQC Evidence File Review is the only fixed-price public checkout service.
-    It can be purchased directly through Payhip.
+    It can be purchased directly through Payhip checkout.
     </p>
     <p>
     Custom services, including the 30-Day Cleanup Sprint and Monthly Compliance Retainer,
@@ -564,7 +557,7 @@ st.markdown(f"""
     Files are released only after final payment through Payhip. The private delivery link is hidden
     from general customers and may be closed or archived after successful purchase.
     </p>
-    <a class="btn-dark" href="{PAYHIP_URL}" target="_blank">View Digital Products on Payhip</a>
+    <a class="btn-dark" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">View Digital Products on Payhip</a>
 </div>
 """, unsafe_allow_html=True)
 
