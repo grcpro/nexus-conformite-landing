@@ -380,12 +380,21 @@ p, li {
 }
 
 .footer {
-    background: var(--navy);
+    background:
+        radial-gradient(circle at top right, rgba(200,169,106,0.20), transparent 30%),
+        linear-gradient(135deg, #061A35 0%, #0B2545 58%, #0F766E 100%);
     color: white;
     border-radius: 28px;
-    padding: 34px;
+    padding: 38px 34px;
     margin-top: 34px;
     box-sizing: border-box;
+    box-shadow: 0 22px 60px rgba(6,26,53,0.20);
+}
+
+.footer h3 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
 .footer p {
@@ -393,8 +402,53 @@ p, li {
     font-size: 16px;
 }
 
-.footer h3 {
-    color: white;
+.footer-cta {
+    font-size: 20px;
+    color: #FFFFFF !important;
+    max-width: 720px;
+    margin-bottom: 22px;
+}
+
+.footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 20px 0;
+}
+
+.footer-icon-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.icon-link {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.10);
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.24);
+    text-decoration: none !important;
+    font-weight: 900;
+    font-size: 17px;
+    transition: 0.2s ease;
+}
+
+.icon-link:hover {
+    background: var(--gold);
+    color: var(--navy) !important;
+    border-color: var(--gold);
+}
+
+.footer-small {
+    color: #C9D4E5 !important;
+    font-size: 14px !important;
+    margin-top: 22px;
 }
 
 @media (max-width: 1100px) {
@@ -462,6 +516,22 @@ p, li {
         text-align: center;
         display: block;
     }
+
+    .footer {
+        padding: 32px 24px;
+    }
+
+    .footer-actions {
+        display: block;
+    }
+
+    .footer-actions a {
+        margin-bottom: 12px;
+    }
+
+    .footer-icon-row {
+        justify-content: flex-start;
+    }
 }
 </style>
 """)
@@ -473,7 +543,7 @@ if LOGO_PATH:
     st.image(LOGO_PATH, width=135)
 
 html(f"""
-<div class="topbar">
+<div class="topbar" id="top">
     <div>
         <p class="brand-title">Nexus Conformité</p>
         <p class="brand-subtitle">CQC evidence support, compliance organisation, governance documentation, and operational readiness.</p>
@@ -923,14 +993,24 @@ html('<div id="contact"></div>')
 html(f"""
 <div class="footer">
     <h3>Nexus Conformité</h3>
-    <p>Connecting Law, Risk, and Compliance.</p>
-    <p>
-        Email: {EMAIL}<br>
-        Facebook: @nexusconformite<br>
-        Payhip: payhip.com/NexusConformite<br>
-        LinkedIn: {LINKEDIN_NAME}
+    <p class="footer-cta">
+        Ready to stop guessing what your evidence file says about your service?
+        Start with the review, request scoped support, or contact Nexus directly.
     </p>
-    <p>
+
+    <div class="footer-actions">
+        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy £149 Review</a>
+        <a class="btn-secondary" href="#request">Contact / Request Support</a>
+        <a class="btn-light" href="#top">Back to Top</a>
+    </div>
+
+    <div class="footer-icon-row" aria-label="Nexus Conformité contact links">
+        <a class="icon-link" href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" title="Facebook">f</a>
+        <a class="icon-link" href="mailto:{EMAIL}" title="Email">@</a>
+        <a class="icon-link" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" title="Payhip">P</a>
+    </div>
+
+    <p class="footer-small">
         Nexus Conformité provides compliance organisation, evidence readiness, policy structure,
         and governance documentation support. Services do not replace legal advice or the provider’s own regulatory responsibilities.
     </p>
