@@ -102,6 +102,10 @@ p, li {
     color: var(--text);
 }
 
+[data-testid="stMarkdownContainer"] {
+    overflow-wrap: anywhere;
+}
+
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -176,47 +180,6 @@ p, li {
     margin-bottom: 14px;
 }
 
-.cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 26px;
-}
-
-.btn-primary,
-.btn-secondary,
-.btn-light,
-.btn-dark {
-    display: inline-block;
-    padding: 14px 20px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background: var(--gold);
-    color: var(--navy) !important;
-}
-
-.btn-secondary {
-    background: white;
-    color: var(--navy) !important;
-}
-
-.btn-light {
-    background: rgba(255,255,255,0.12);
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
-.btn-dark {
-    background: var(--navy);
-    color: white !important;
-}
-
 .section {
     margin: 34px 0;
 }
@@ -230,63 +193,6 @@ p, li {
     max-width: 850px;
     color: var(--muted);
     font-size: 19px;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.card {
-    background: rgba(255,255,255,0.98);
-    border: 1px solid var(--line);
-    border-radius: 26px;
-    padding: 30px;
-    box-shadow: 0 16px 42px rgba(15,23,42,0.06);
-    margin-bottom: 18px;
-}
-
-.card h3 {
-    font-size: 24px;
-    margin: 0 0 8px 0;
-}
-
-.price {
-    color: var(--green);
-    font-size: 30px;
-    font-weight: 900;
-    margin: 10px 0;
-}
-
-.badge {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    background: #EEF8F5;
-    color: var(--green);
-    border: 1px solid #CDEBE4;
-}
-
-.badge-gold {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    background: #FFF8E8;
-    color: #7A5C13;
-    border: 1px solid #F0DB9B;
 }
 
 .gold-line {
@@ -323,25 +229,6 @@ p, li {
     margin: 18px 0;
 }
 
-.step {
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    padding: 24px;
-}
-
-.step-number {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: white;
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    margin-bottom: 12px;
-}
-
 .footer {
     background: var(--navy);
     color: white;
@@ -357,6 +244,24 @@ p, li {
 
 .footer h3 {
     color: white;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 26px !important;
+    box-shadow: 0 16px 42px rgba(15,23,42,0.06);
+    background: rgba(255,255,255,0.98);
+}
+
+.stLinkButton a {
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    padding: 0.75rem 1rem !important;
+}
+
+.stLinkButton a[href*="payhip.com/buy"] {
+    background: #061A35 !important;
+    color: white !important;
+    border: 1px solid #061A35 !important;
 }
 
 @media (max-width: 900px) {
@@ -396,25 +301,17 @@ p, li {
         font-size: 31px;
     }
 
-    .grid-3,
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        padding: 24px;
-    }
-
     p, li {
         font-size: 17px;
     }
 
-    .btn-primary,
-    .btn-secondary,
-    .btn-light,
-    .btn-dark {
-        width: 100%;
-        text-align: center;
+    [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap;
+    }
+
+    [data-testid="stHorizontalBlock"] > div {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
     }
 }
 </style>
@@ -454,13 +351,19 @@ st.markdown(f"""
     policies, trackers, SOPs, and governance records into a clearer review-ready structure.
     Start with the £149 review before spending hundreds on deeper cleanup.
     </p>
-    <div class="cta-row">
-        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy £149 Review</a>
-        <a class="btn-secondary" href="#request">Request Custom Support</a>
-        <a class="btn-light" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">View Digital Products</a>
-    </div>
 </div>
 """, unsafe_allow_html=True)
+
+hero_col1, hero_col2, hero_col3 = st.columns(3)
+
+with hero_col1:
+    st.link_button("Buy £149 Review", CQC_REVIEW_CHECKOUT_URL, use_container_width=True)
+
+with hero_col2:
+    st.link_button("Request Custom Support", "#request", use_container_width=True)
+
+with hero_col3:
+    st.link_button("View Digital Products", PAYHIP_URL, use_container_width=True)
 
 # =========================================================
 # PROBLEM SECTION
@@ -495,60 +398,64 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="grid-3">
-    <div class="card">
-        <span class="badge-gold">Best first step</span>
-        <h3>£149 CQC Evidence File Review</h3>
-        <div class="price">£149</div>
-        <p>
-        A focused evidence review for managers who need clarity before deciding whether a full cleanup is worth the investment.
-        </p>
-        <ul>
-            <li>Evidence folder structure review</li>
-            <li>Gap notes on weak or missing records</li>
-            <li>Action tracker direction</li>
-            <li>Summary of practical next steps</li>
-            <li>Delivered within 3–5 business days after payment and receipt of required intake documents</li>
-        </ul>
-        <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
-    </div>
+service_col1, service_col2, service_col3 = st.columns(3)
 
-    <div class="card">
-        <span class="badge">Scoped private Payhip link</span>
-        <h3>30-Day CQC Evidence Cleanup Sprint</h3>
-        <div class="price">From £750</div>
-        <p>
-        For providers whose evidence exists but is scattered, inconsistent, outdated, or not easy to present under pressure.
-        </p>
-        <ul>
-            <li>Scoped after intake review</li>
-            <li>40% deposit paid through a private Payhip link before work starts</li>
-            <li>Evidence cleanup, policy structure, trackers, and management summary support</li>
-            <li>Preview or summary shown before final payment</li>
-            <li>Final 60% paid through a private Payhip delivery link before files are released</li>
-        </ul>
-        <a class="btn-dark" href="#request">Request Scope Review</a>
-    </div>
+with service_col1:
+    with st.container(border=True):
+        st.markdown("**Best first step**")
+        st.subheader("£149 CQC Evidence File Review")
+        st.markdown("## £149")
+        st.write(
+            "A focused evidence review for managers who need clarity before deciding whether a full cleanup is worth the investment."
+        )
+        st.markdown(
+            """
+            - Evidence folder structure review
+            - Gap notes on weak or missing records
+            - Action tracker direction
+            - Summary of practical next steps
+            - Delivered within 3–5 business days after payment and receipt of required intake documents
+            """
+        )
+        st.link_button("Buy Now", CQC_REVIEW_CHECKOUT_URL, use_container_width=True)
 
-    <div class="card">
-        <span class="badge">Scoped private Payhip link</span>
-        <h3>Monthly Compliance Retainer</h3>
-        <div class="price">Scoped</div>
-        <p>
-        For providers that want evidence tracking, action tracker updates, policy support, and continuity after the first review or cleanup.
-        </p>
-        <ul>
-            <li>Monthly support priced after scope review</li>
-            <li>40% deposit paid through a private Payhip link before the month starts</li>
-            <li>Ongoing evidence tracker and action tracker support</li>
-            <li>Preview or summary shown before final payment where applicable</li>
-            <li>Final files or package updates released after balance payment</li>
-        </ul>
-        <a class="btn-dark" href="#request">Request Retainer Scope</a>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+with service_col2:
+    with st.container(border=True):
+        st.markdown("**Scoped private Payhip link**")
+        st.subheader("30-Day CQC Evidence Cleanup Sprint")
+        st.markdown("## From £750")
+        st.write(
+            "For providers whose evidence exists but is scattered, inconsistent, outdated, or not easy to present under pressure."
+        )
+        st.markdown(
+            """
+            - Scoped after intake review
+            - 40% deposit paid through a private Payhip link before work starts
+            - Evidence cleanup, policy structure, trackers, and management summary support
+            - Preview or summary shown before final payment
+            - Final 60% paid through a private Payhip delivery link before files are released
+            """
+        )
+        st.link_button("Request Scope Review", "#request", use_container_width=True)
+
+with service_col3:
+    with st.container(border=True):
+        st.markdown("**Scoped private Payhip link**")
+        st.subheader("Monthly Compliance Retainer")
+        st.markdown("## Scoped")
+        st.write(
+            "For providers that want evidence tracking, action tracker updates, policy support, and continuity after the first review or cleanup."
+        )
+        st.markdown(
+            """
+            - Monthly support priced after scope review
+            - 40% deposit paid through a private Payhip link before the month starts
+            - Ongoing evidence tracker and action tracker support
+            - Preview or summary shown before final payment where applicable
+            - Final files or package updates released after balance payment
+            """
+        )
+        st.link_button("Request Retainer Scope", "#request", use_container_width=True)
 
 st.markdown(f"""
 <div class="notice">
@@ -566,7 +473,6 @@ st.markdown(f"""
     Completed files are released only after final payment through Payhip. The private link is hidden from general customers and may be
     closed or archived after successful purchase.
     </p>
-    <a class="btn-dark" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">View Digital Products on Payhip</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -583,26 +489,27 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="grid-2">
-    <div class="card">
-        <h3>Evidence-first</h3>
-        <p>The review looks at whether records can show management control, monitoring, review, and improvement.</p>
-    </div>
-    <div class="card">
-        <h3>Manager-friendly</h3>
-        <p>The output is designed to help managers understand the evidence position without drowning in paperwork.</p>
-    </div>
-    <div class="card">
-        <h3>Action-focused</h3>
-        <p>Every review should lead to clear next steps, not vague advice or generic templates.</p>
-    </div>
-    <div class="card">
-        <h3>Secure staged delivery</h3>
-        <p>Custom packages are handled through intake, private Payhip deposit links, preview or summary review, and final Payhip delivery links before file release.</p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+why_col1, why_col2 = st.columns(2)
+
+with why_col1:
+    with st.container(border=True):
+        st.subheader("Evidence-first")
+        st.write("The review looks at whether records can show management control, monitoring, review, and improvement.")
+
+    with st.container(border=True):
+        st.subheader("Action-focused")
+        st.write("Every review should lead to clear next steps, not vague advice or generic templates.")
+
+with why_col2:
+    with st.container(border=True):
+        st.subheader("Manager-friendly")
+        st.write("The output is designed to help managers understand the evidence position without drowning in paperwork.")
+
+    with st.container(border=True):
+        st.subheader("Secure staged delivery")
+        st.write(
+            "Custom packages are handled through intake, private Payhip deposit links, preview or summary review, and final Payhip delivery links before file release."
+        )
 
 # =========================================================
 # PROCESS
@@ -615,29 +522,25 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="grid-3">
-    <div class="step">
-        <div class="step-number">1</div>
-        <h3>Choose the right route</h3>
-        <p>Buy the £149 review directly, or submit the intake form for scoped support such as the 30-Day Sprint or Monthly Retainer.</p>
-    </div>
-    <div class="step">
-        <div class="step-number">2</div>
-        <h3>Submit intake and documents</h3>
-        <p>Upload redacted documents such as folder indexes, trackers, policies, audit summaries, risk registers, or training matrices.</p>
-    </div>
-    <div class="step">
-        <div class="step-number">3</div>
-        <h3>Pay and receive securely</h3>
-        <p>Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview or summary, then final 60% Payhip delivery link before files are released.</p>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+process_col1, process_col2, process_col3 = st.columns(3)
 
-# =========================================================
-# WHAT TO SEND
-# =========================================================
+with process_col1:
+    with st.container(border=True):
+        st.subheader("1. Choose the right route")
+        st.write("Buy the £149 review directly, or submit the intake form for scoped support such as the 30-Day Sprint or Monthly Retainer.")
+
+with process_col2:
+    with st.container(border=True):
+        st.subheader("2. Submit intake and documents")
+        st.write("Upload redacted documents such as folder indexes, trackers, policies, audit summaries, risk registers, or training matrices.")
+
+with process_col3:
+    with st.container(border=True):
+        st.subheader("3. Pay and receive securely")
+        st.write(
+            "Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview or summary, then final 60% Payhip delivery link before files are released."
+        )
+
 st.markdown("""
 <div class="green-notice">
     <h3>What Nexus needs before support begins</h3>
