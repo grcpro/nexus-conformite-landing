@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import glob
+import textwrap
 import streamlit.components.v1 as components
 
 # =========================================================
@@ -22,8 +23,14 @@ FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
 LINKEDIN_NAME = "Nexus Conformité"
 
-# Product code is 9OUm6 with capital O, not zero.
+# Payhip product code: 9OUm6 with capital O, not zero.
 CQC_REVIEW_CHECKOUT_URL = "https://payhip.com/buy?link=9OUm6"
+
+# =========================================================
+# SAFE HTML RENDERER
+# =========================================================
+def html(source: str):
+    st.markdown(textwrap.dedent(source).strip(), unsafe_allow_html=True)
 
 # =========================================================
 # LOGO FINDER
@@ -56,7 +63,7 @@ LOGO_PATH = find_logo()
 # =========================================================
 # CSS
 # =========================================================
-st.markdown("""
+html("""
 <style>
 :root {
     --navy: #061A35;
@@ -78,12 +85,15 @@ header {visibility: hidden;}
 [data-testid="stDecoration"] {display: none;}
 [data-testid="stStatusWidget"] {display: none;}
 
+html, body, .stApp {
+    overflow-x: hidden;
+}
+
 .stApp {
     background:
         radial-gradient(circle at top left, rgba(200,169,106,0.10), transparent 26%),
         linear-gradient(180deg, #FFFFFF 0%, #F6F7FA 54%, #FAF7F0 100%);
     color: var(--text);
-    overflow-x: hidden;
 }
 
 .block-container {
@@ -157,7 +167,7 @@ p, li {
 
 .hero h1 {
     color: white;
-    font-size: 60px;
+    font-size: clamp(38px, 5vw, 60px);
     line-height: 1.02;
     max-width: 900px;
     margin: 0 0 18px 0;
@@ -165,7 +175,7 @@ p, li {
 
 .hero p {
     color: #EAF0F7;
-    font-size: 22px;
+    font-size: clamp(18px, 2.2vw, 22px);
     max-width: 850px;
 }
 
@@ -226,7 +236,7 @@ p, li {
 }
 
 .section h2 {
-    font-size: 40px;
+    font-size: clamp(31px, 4vw, 40px);
     margin-bottom: 8px;
 }
 
@@ -240,12 +250,14 @@ p, li {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
+    width: 100%;
 }
 
 .grid-2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
+    width: 100%;
 }
 
 .card {
@@ -256,6 +268,7 @@ p, li {
     box-shadow: 0 16px 42px rgba(15,23,42,0.06);
     margin-bottom: 18px;
     box-sizing: border-box;
+    max-width: 100%;
     overflow: hidden;
 }
 
@@ -268,6 +281,7 @@ p, li {
 .card p,
 .card li {
     overflow-wrap: break-word;
+    word-break: normal;
 }
 
 .price {
@@ -317,6 +331,11 @@ p, li {
     box-shadow: 0 14px 38px rgba(15,23,42,0.05);
     box-sizing: border-box;
     overflow: hidden;
+}
+
+.problem-strip h2 {
+    font-size: clamp(31px, 4vw, 40px);
+    line-height: 1.18;
 }
 
 .notice {
@@ -378,6 +397,16 @@ p, li {
     color: white;
 }
 
+@media (max-width: 1100px) {
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 900px) {
     .block-container {
         padding-left: 1rem;
@@ -405,21 +434,11 @@ p, li {
     }
 
     .hero h1 {
-        font-size: 38px;
         line-height: 1.08;
     }
 
     .hero p {
         font-size: 18px;
-    }
-
-    .section h2 {
-        font-size: 31px;
-    }
-
-    .grid-3,
-    .grid-2 {
-        grid-template-columns: 1fr;
     }
 
     .card {
@@ -429,11 +448,6 @@ p, li {
 
     .problem-strip {
         padding: 24px;
-    }
-
-    .problem-strip h2 {
-        font-size: 31px;
-        line-height: 1.15;
     }
 
     p, li {
@@ -450,7 +464,7 @@ p, li {
     }
 }
 </style>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # HEADER
@@ -458,7 +472,7 @@ p, li {
 if LOGO_PATH:
     st.image(LOGO_PATH, width=135)
 
-st.markdown(f"""
+html(f"""
 <div class="topbar">
     <div>
         <p class="brand-title">Nexus Conformité</p>
@@ -472,12 +486,12 @@ st.markdown(f"""
         <a href="#contact">Contact</a>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # HERO
 # =========================================================
-st.markdown(f"""
+html(f"""
 <div class="hero">
     <div class="eyebrow">UK care compliance support</div>
     <h1>Before inspection pressure builds, know exactly where your CQC evidence is weak.</h1>
@@ -492,12 +506,12 @@ st.markdown(f"""
         <a class="btn-light" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">View Digital Products</a>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # PROBLEM SECTION
 # =========================================================
-st.markdown("""
+html("""
 <div class="problem-strip">
     <h2>You may already have documents. The real question is whether they prove control.</h2>
     <div class="gold-line"></div>
@@ -510,14 +524,14 @@ st.markdown("""
     and what needs to happen next.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # SERVICES
 # =========================================================
-st.markdown('<div id="services"></div>', unsafe_allow_html=True)
+html('<div id="services"></div>')
 
-st.markdown("""
+html("""
 <div class="section">
     <h2>Choose the support route that fits your current risk.</h2>
     <p class="section-intro">
@@ -525,9 +539,9 @@ st.markdown("""
     documents, urgency, and final delivery package are different.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
-services_html = f"""
+html(f"""
 <div class="grid-3">
     <div class="card">
         <span class="badge-gold">Best first step</span>
@@ -543,7 +557,6 @@ services_html = f"""
         </ul>
         <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
-
     <div class="card">
         <span class="badge">Scoped private Payhip link</span>
         <h3>30-Day CQC Evidence Cleanup Sprint</h3>
@@ -558,7 +571,6 @@ services_html = f"""
         </ul>
         <a class="btn-dark" href="#request">Request Scope Review</a>
     </div>
-
     <div class="card">
         <span class="badge">Scoped private Payhip link</span>
         <h3>Monthly Compliance Retainer</h3>
@@ -574,11 +586,9 @@ services_html = f"""
         <a class="btn-dark" href="#request">Request Retainer Scope</a>
     </div>
 </div>
-"""
+""")
 
-st.markdown(services_html, unsafe_allow_html=True)
-
-st.markdown(f"""
+html("""
 <div class="notice">
     <h3>How payment and delivery works</h3>
     <p>
@@ -595,12 +605,12 @@ st.markdown(f"""
     closed or archived after successful purchase.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # WHY NEXUS
 # =========================================================
-st.markdown("""
+html("""
 <div class="section">
     <h2>Why this works for care managers.</h2>
     <p class="section-intro">
@@ -608,9 +618,9 @@ st.markdown("""
     and what needs action.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
-st.markdown("""
+html("""
 <div class="grid-2">
     <div class="card">
         <h3>Evidence-first</h3>
@@ -629,20 +639,20 @@ st.markdown("""
         <p>Custom packages are handled through intake, private Payhip deposit links, preview or summary review, and final Payhip delivery links before file release.</p>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # PROCESS
 # =========================================================
-st.markdown('<div id="process"></div>', unsafe_allow_html=True)
+html('<div id="process"></div>')
 
-st.markdown("""
+html("""
 <div class="section">
     <h2>A simple process from first contact to clearer records.</h2>
 </div>
-""", unsafe_allow_html=True)
+""")
 
-st.markdown("""
+html("""
 <div class="grid-3">
     <div class="step">
         <div class="step-number">1</div>
@@ -660,12 +670,9 @@ st.markdown("""
         <p>Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview or summary, then final 60% Payhip delivery link before files are released.</p>
     </div>
 </div>
-""", unsafe_allow_html=True)
+""")
 
-# =========================================================
-# WHAT TO SEND
-# =========================================================
-st.markdown("""
+html("""
 <div class="green-notice">
     <h3>What Nexus needs before support begins</h3>
     <ul>
@@ -679,14 +686,14 @@ st.markdown("""
         <li>For paid orders, include the Payhip order email or reference if available</li>
     </ul>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 # =========================================================
 # REQUEST FORM WITH UPLOAD
 # =========================================================
-st.markdown('<div id="request"></div>', unsafe_allow_html=True)
+html('<div id="request"></div>')
 
-st.markdown("""
+html("""
 <div class="section">
     <h2>Request service support.</h2>
     <p class="section-intro">
@@ -695,7 +702,7 @@ st.markdown("""
     your request and issues a private Payhip deposit link where suitable.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 components.html(f"""
 <div style="background:#ffffff; border:1px solid #E5E7EB; border-radius:26px; padding:28px; box-shadow:0 16px 42px rgba(15,23,42,0.06); font-family:Arial, sans-serif; color:#172033;">
@@ -869,14 +876,14 @@ components.html(f"""
 # =========================================================
 # FAQS
 # =========================================================
-st.markdown('<div id="faq"></div>', unsafe_allow_html=True)
+html('<div id="faq"></div>')
 
-st.markdown("""
+html("""
 <div class="section">
     <h2>FAQs</h2>
     <p class="section-intro">Clear answers before a care manager decides to contact Nexus.</p>
 </div>
-""", unsafe_allow_html=True)
+""")
 
 with st.expander("Is the £149 review a full compliance audit?"):
     st.write("No. It is a focused evidence structure review. It helps identify obvious gaps, weak organisation, and practical next steps.")
@@ -911,9 +918,9 @@ with st.expander("Does Nexus provide legal advice?"):
 # =========================================================
 # CONTACT / FOOTER
 # =========================================================
-st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
+html('<div id="contact"></div>')
 
-st.markdown(f"""
+html(f"""
 <div class="footer">
     <h3>Nexus Conformité</h3>
     <p>Connecting Law, Risk, and Compliance.</p>
@@ -928,4 +935,4 @@ st.markdown(f"""
         and governance documentation support. Services do not replace legal advice or the provider’s own regulatory responsibilities.
     </p>
 </div>
-""", unsafe_allow_html=True)
+""")
