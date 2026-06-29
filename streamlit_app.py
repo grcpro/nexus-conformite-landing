@@ -21,16 +21,54 @@ BUSINESS_NAME = "Nexus Conformité"
 EMAIL = "nexusconformite@proton.me"
 FACEBOOK_URL = "https://www.facebook.com/nexusconformite"
 PAYHIP_URL = "https://payhip.com/NexusConformite"
+LINKEDIN_URL = "https://www.linkedin.com/company/nexus-conformit%C3%A9/"
 LINKEDIN_NAME = "Nexus Conformité"
 
 # Payhip product code: 9OUm6 with capital O, not zero.
 CQC_REVIEW_CHECKOUT_URL = "https://payhip.com/buy?link=9OUm6"
 
 # =========================================================
+# META PIXEL
+# =========================================================
+META_PIXEL_CODE = """
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;
+n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;
+n.loaded=!0;
+n.version='2.0';
+n.queue=[];
+t=b.createElement(e);
+t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1010121488430688');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1010121488430688&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+"""
+
+components.html(META_PIXEL_CODE, height=1, scrolling=False)
+
+# =========================================================
 # SAFE HTML RENDERER
 # =========================================================
 def html(source: str):
-    st.markdown(textwrap.dedent(source).strip(), unsafe_allow_html=True)
+    clean_source = textwrap.dedent(source).strip()
+    if hasattr(st, "html"):
+        st.html(clean_source)
+    else:
+        st.markdown(clean_source, unsafe_allow_html=True)
 
 # =========================================================
 # LOGO FINDER
@@ -389,6 +427,7 @@ p, li {
     margin-top: 34px;
     box-sizing: border-box;
     box-shadow: 0 22px 60px rgba(6,26,53,0.20);
+    overflow: hidden;
 }
 
 .footer h3 {
@@ -405,7 +444,7 @@ p, li {
 .footer-cta {
     font-size: 20px;
     color: #FFFFFF !important;
-    max-width: 720px;
+    max-width: 760px;
     margin-bottom: 22px;
 }
 
@@ -437,6 +476,7 @@ p, li {
     font-weight: 900;
     font-size: 17px;
     transition: 0.2s ease;
+    line-height: 1;
 }
 
 .icon-link:hover {
@@ -941,7 +981,7 @@ components.html(f"""
 
     </form>
 </div>
-""", height=2550, scrolling=True)
+""", height=4300, scrolling=True)
 
 # =========================================================
 # FAQS
@@ -1005,9 +1045,10 @@ html(f"""
     </div>
 
     <div class="footer-icon-row" aria-label="Nexus Conformité contact links">
-        <a class="icon-link" href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" title="Facebook">f</a>
-        <a class="icon-link" href="mailto:{EMAIL}" title="Email">@</a>
-        <a class="icon-link" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" title="Payhip">P</a>
+        <a class="icon-link" href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">f</a>
+        <a class="icon-link" href="mailto:{EMAIL}" aria-label="Email" title="Email">@</a>
+        <a class="icon-link" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" aria-label="Payhip" title="Payhip">P</a>
+        <a class="icon-link" href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">in</a>
     </div>
 
     <p class="footer-small">
