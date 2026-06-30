@@ -65,10 +65,7 @@ components.html(META_PIXEL_CODE, height=1, scrolling=False)
 # =========================================================
 def html(source: str):
     clean_source = textwrap.dedent(source).strip()
-    if hasattr(st, "html"):
-        st.html(clean_source)
-    else:
-        st.markdown(clean_source, unsafe_allow_html=True)
+    st.markdown(clean_source, unsafe_allow_html=True)
 
 # =========================================================
 # LOGO FINDER
@@ -116,6 +113,10 @@ html("""
     --line: #E5E7EB;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
@@ -124,7 +125,8 @@ header {visibility: hidden;}
 [data-testid="stStatusWidget"] {display: none;}
 
 html, body, .stApp {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
 }
 
 .stApp {
@@ -138,6 +140,17 @@ html, body, .stApp {
     max-width: 1160px;
     padding-top: 1.2rem;
     padding-bottom: 4rem;
+    overflow-x: hidden !important;
+}
+
+[data-testid="stImage"] {
+    max-width: 150px !important;
+}
+
+[data-testid="stImage"] img {
+    max-width: 150px !important;
+    width: 150px !important;
+    height: auto !important;
 }
 
 h1, h2, h3 {
@@ -157,6 +170,8 @@ p, li {
     align-items: center;
     gap: 24px;
     padding: 10px 0 24px 0;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .brand-title {
@@ -164,12 +179,16 @@ p, li {
     font-weight: 800;
     color: var(--navy);
     margin: 0;
+    line-height: 1.15;
+    overflow-wrap: break-word;
 }
 
 .brand-subtitle {
     color: var(--muted);
     font-size: 15px;
     margin-top: 4px;
+    line-height: 1.45;
+    max-width: 620px;
 }
 
 .nav-pills {
@@ -177,6 +196,7 @@ p, li {
     gap: 10px;
     flex-wrap: wrap;
     justify-content: flex-end;
+    max-width: 100%;
 }
 
 .nav-pills a {
@@ -188,6 +208,7 @@ p, li {
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .hero {
@@ -201,11 +222,12 @@ p, li {
     margin: 8px 0 26px 0;
     box-shadow: 0 26px 70px rgba(6,26,53,0.22);
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 .hero h1 {
     color: white;
-    font-size: clamp(38px, 5vw, 60px);
+    font-size: clamp(36px, 5vw, 60px);
     line-height: 1.02;
     max-width: 900px;
     margin: 0 0 18px 0;
@@ -439,6 +461,211 @@ p, li {
     font-size: 18px;
 }
 
+.service-card-slider {
+    background: rgba(255,255,255,0.98);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    padding: 26px;
+    box-shadow: 0 16px 42px rgba(15,23,42,0.06);
+    margin-bottom: 18px;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    min-height: 690px;
+}
+
+.service-card-slider h3 {
+    font-size: 23px;
+    margin: 0 0 8px 0;
+    color: var(--navy);
+    line-height: 1.15;
+}
+
+.service-card-slider p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+.service-card-slider ul {
+    margin: 12px 0 18px 0;
+    padding-left: 19px;
+}
+
+.service-card-slider li {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 7px;
+}
+
+.service-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.service-slide {
+    display: none;
+    min-height: 520px;
+}
+
+#review-overview:checked ~ .service-slides .review-overview,
+#review-details:checked ~ .service-slides .review-details,
+#review-sample:checked ~ .service-slides .review-sample,
+#cleanup-overview:checked ~ .service-slides .cleanup-overview,
+#cleanup-details:checked ~ .service-slides .cleanup-details,
+#cleanup-sample:checked ~ .service-slides .cleanup-sample,
+#retainer-overview:checked ~ .service-slides .retainer-overview,
+#retainer-details:checked ~ .service-slides .retainer-details,
+#retainer-sample:checked ~ .service-slides .retainer-sample {
+    display: block;
+}
+
+.slide-indicators {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.slide-indicators label {
+    display: block;
+    text-align: center;
+    padding: 9px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--navy);
+    background: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#review-overview:checked ~ .slide-indicators label[for="review-overview"],
+#review-details:checked ~ .slide-indicators label[for="review-details"],
+#review-sample:checked ~ .slide-indicators label[for="review-sample"],
+#cleanup-overview:checked ~ .slide-indicators label[for="cleanup-overview"],
+#cleanup-details:checked ~ .slide-indicators label[for="cleanup-details"],
+#cleanup-sample:checked ~ .slide-indicators label[for="cleanup-sample"],
+#retainer-overview:checked ~ .slide-indicators label[for="retainer-overview"],
+#retainer-details:checked ~ .slide-indicators label[for="retainer-details"],
+#retainer-sample:checked ~ .slide-indicators label[for="retainer-sample"] {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.result-box {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 13px;
+    background: #FBFCFE;
+}
+
+.result-box strong {
+    display: block;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.result-box span {
+    display: block;
+    color: #4B5563;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.sample-collage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.sample-frame {
+    border: 1px solid #D7DEE8;
+    border-radius: 16px;
+    background: #FFFFFF;
+    box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+    overflow: hidden;
+}
+
+.sample-top {
+    background: linear-gradient(135deg, #061A35 0%, #0B2545 100%);
+    color: white;
+    padding: 9px 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+}
+
+.sample-top strong {
+    font-size: 12px;
+}
+
+.sample-top span {
+    font-size: 10px;
+    color: #DDE6F2;
+}
+
+.sample-table {
+    padding: 8px 10px 10px 10px;
+}
+
+.sample-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    border-bottom: 1px solid #EEF1F5;
+    padding: 6px 0;
+    font-size: 11px;
+    color: #374151;
+}
+
+.sample-row:last-child {
+    border-bottom: none;
+}
+
+.sample-status {
+    border-radius: 999px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: 800;
+    background: #FFF8E8;
+    color: #7A5C13;
+    white-space: nowrap;
+}
+
+.sample-status.green {
+    background: #EAF7F4;
+    color: #0F766E;
+}
+
+.sample-status.red {
+    background: #FEECEC;
+    color: #991B1B;
+}
+
+.sample-note {
+    border-left: 4px solid var(--gold);
+    padding: 10px 12px;
+    background: #FFFDF7;
+    color: #374151;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
 .notice {
     background: #FFF8E8;
     border: 1px solid #F0DB9B;
@@ -566,43 +793,96 @@ p, li {
     .review-cover-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .service-card-slider {
+        min-height: auto;
+    }
+
+    .service-slide {
+        min-height: auto;
+    }
 }
 
 @media (max-width: 900px) {
     .block-container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        max-width: 100%;
+        padding-left: 0.9rem !important;
+        padding-right: 0.9rem !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    [data-testid="stImage"] {
+        max-width: 118px !important;
+    }
+
+    [data-testid="stImage"] img {
+        max-width: 118px !important;
+        width: 118px !important;
+        height: auto !important;
     }
 
     .topbar {
         display: block;
+        width: 100%;
+        padding-bottom: 22px;
+    }
+
+    .brand-title {
+        font-size: clamp(28px, 8vw, 36px);
+        line-height: 1.08;
+        max-width: 100%;
+    }
+
+    .brand-subtitle {
+        font-size: 15px;
+        line-height: 1.45;
+        max-width: 100%;
+        overflow-wrap: normal;
+        word-break: normal;
     }
 
     .nav-pills {
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
         margin-top: 16px;
+        overflow: hidden;
     }
 
     .nav-pills a {
-        font-size: 13px;
-        padding: 9px 12px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        white-space: normal;
+        min-width: 0;
+        padding: 10px 8px;
+        font-size: 14px;
+        line-height: 1.15;
+    }
+
+    .nav-pills a:nth-child(3) {
+        grid-column: span 2;
     }
 
     .hero {
-        padding: 42px 24px;
+        padding: 38px 22px;
         border-radius: 28px;
+        width: 100%;
     }
 
     .hero h1 {
+        font-size: clamp(32px, 8vw, 40px);
         line-height: 1.08;
     }
 
     .hero p {
-        font-size: 18px;
+        font-size: 17px;
+        line-height: 1.55;
     }
 
-    .card {
+    .card,
+    .service-card-slider {
         padding: 22px;
         border-radius: 24px;
     }
@@ -638,6 +918,10 @@ p, li {
         display: block;
     }
 
+    .slide-indicators {
+        grid-template-columns: 1fr;
+    }
+
     .footer {
         padding: 32px 24px;
     }
@@ -654,6 +938,29 @@ p, li {
         justify-content: flex-start;
     }
 }
+
+@media (max-width: 420px) {
+    .brand-title {
+        font-size: 31px;
+    }
+
+    .brand-subtitle {
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero {
+        padding: 34px 20px;
+    }
+
+    .nav-pills a {
+        font-size: 13px;
+        padding: 10px 6px;
+    }
+}
 </style>
 """)
 
@@ -661,7 +968,7 @@ p, li {
 # HEADER
 # =========================================================
 if LOGO_PATH:
-    st.image(LOGO_PATH, width=135)
+    st.image(LOGO_PATH, width=118)
 
 html(f"""
 <div class="topbar" id="top">
@@ -768,7 +1075,7 @@ html("""
 """)
 
 # =========================================================
-# SERVICES
+# SERVICES WITH INTEGRATED SLIDES
 # =========================================================
 html('<div id="services"></div>')
 
@@ -776,583 +1083,235 @@ html("""
 <div class="section">
     <h2>Select the level of support that matches your evidence position.</h2>
     <p class="section-intro">
-    The £149 CQC Evidence File Review is a fixed first step. Larger services are scoped privately because the level of work depends on document volume,
-    urgency, evidence quality, and the final delivery package required.
+    Each service card includes a quick overview, detail of what Nexus does, and a sample-style preview of the type of output the client may receive.
     </p>
 </div>
 """)
 
 html(f"""
 <div class="grid-3">
-    <div class="card">
-        <span class="badge-gold">Fixed first step</span>
-        <h3>£149 CQC Evidence File Review</h3>
-        <div class="price">£149</div>
-        <p>A focused review for providers that need a clear evidence assessment before deciding whether deeper support is required.</p>
-        <ul>
-            <li>Evidence structure review</li>
-            <li>Gap notes on weak or unclear records</li>
-            <li>Priority action direction</li>
-            <li>Written summary of next steps</li>
-        </ul>
-        <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
+
+    <div class="service-card-slider">
+        <input class="service-radio" type="radio" name="review-service" id="review-overview" checked>
+        <input class="service-radio" type="radio" name="review-service" id="review-details">
+        <input class="service-radio" type="radio" name="review-service" id="review-sample">
+
+        <div class="service-slides">
+            <div class="service-slide review-overview">
+                <span class="badge-gold">Fixed first step</span>
+                <h3>£149 CQC Evidence File Review</h3>
+                <div class="price">£149</div>
+                <p>A focused review for providers that need a clear evidence assessment before deciding whether deeper support is required.</p>
+                <ul>
+                    <li>Evidence structure review</li>
+                    <li>Gap notes on weak or unclear records</li>
+                    <li>Priority action direction</li>
+                    <li>Written summary of next steps</li>
+                </ul>
+                <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
+            </div>
+
+            <div class="service-slide review-details">
+                <span class="badge-gold">What Nexus checks</span>
+                <h3>What the review gives you.</h3>
+                <p>The review is designed to help a manager understand the evidence position before committing to a larger package.</p>
+                <div class="result-grid">
+                    <div class="result-box"><strong>Evidence structure check</strong><span>How policies, trackers, audits, risk records, complaints, and governance evidence are arranged.</span></div>
+                    <div class="result-box"><strong>Gap notes</strong><span>Weak, unclear, missing, outdated, or hard-to-explain records are identified.</span></div>
+                    <div class="result-box"><strong>Priority direction</strong><span>The output shows what should be addressed first.</span></div>
+                    <div class="result-box"><strong>Decision point</strong><span>The provider can decide whether a cleanup sprint or monthly support is justified.</span></div>
+                </div>
+            </div>
+
+            <div class="service-slide review-sample">
+                <span class="badge-gold">Sample-style output</span>
+                <h3>Evidence review preview.</h3>
+                <p>Sample visual only. Final output depends on the documents received.</p>
+                <div class="sample-collage">
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Evidence Gap Summary.pdf</strong><span>Review extract</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Risk assessments</span><span class="sample-status">Check</span></div>
+                            <div class="sample-row"><span>Training matrix</span><span class="sample-status red">Weak</span></div>
+                            <div class="sample-row"><span>Audit tracker</span><span class="sample-status">Update</span></div>
+                            <div class="sample-row"><span>Governance minutes</span><span class="sample-status green">Present</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Priority Action Direction.xlsx</strong><span>Tracker view</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Update audit tracker</span><span class="sample-status">Priority</span></div>
+                            <div class="sample-row"><span>Review complaints log</span><span class="sample-status">Check</span></div>
+                            <div class="sample-row"><span>Confirm GDPR evidence</span><span class="sample-status red">Gap</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-note">The client receives a clear evidence position with practical next steps, not a generic document pack.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-indicators">
+            <label for="review-overview">1 Overview</label>
+            <label for="review-details">2 Details</label>
+            <label for="review-sample">3 Sample</label>
+        </div>
     </div>
-    <div class="card">
-        <span class="badge">Scoped private Payhip link</span>
-        <h3>30-Day CQC Evidence Cleanup Sprint</h3>
-        <div class="price">From £750</div>
-        <p>For providers that need structured cleanup of evidence folders, trackers, policies, and management review records.</p>
-        <ul>
-            <li>Scoped after intake review</li>
-            <li>Evidence folder organisation</li>
-            <li>Tracker and document-control cleanup</li>
-            <li>Preview before final balance</li>
-        </ul>
-        <a class="btn-dark" href="#request">Request Scope Review</a>
+
+    <div class="service-card-slider">
+        <input class="service-radio" type="radio" name="cleanup-service" id="cleanup-overview" checked>
+        <input class="service-radio" type="radio" name="cleanup-service" id="cleanup-details">
+        <input class="service-radio" type="radio" name="cleanup-service" id="cleanup-sample">
+
+        <div class="service-slides">
+            <div class="service-slide cleanup-overview">
+                <span class="badge">Scoped private Payhip link</span>
+                <h3>30-Day CQC Evidence Cleanup Sprint</h3>
+                <div class="price">From £750</div>
+                <p>For providers that need structured cleanup of evidence folders, trackers, policies, and management review records.</p>
+                <ul>
+                    <li>Scoped after intake review</li>
+                    <li>Evidence folder organisation</li>
+                    <li>Tracker and document-control cleanup</li>
+                    <li>Preview before final balance</li>
+                </ul>
+                <a class="btn-dark" href="#request">Request Scope Review</a>
+            </div>
+
+            <div class="service-slide cleanup-details">
+                <span class="badge">What Nexus does</span>
+                <h3>What the cleanup sprint includes.</h3>
+                <p>This service turns scattered evidence into a clearer working evidence pack.</p>
+                <div class="result-grid">
+                    <div class="result-box"><strong>Audit tracker update</strong><span>Actions, dates, owners, status, and follow-up points are made clearer.</span></div>
+                    <div class="result-box"><strong>Incident and complaints logs</strong><span>Structure, missing fields, action links, trend visibility, and closure status are reviewed.</span></div>
+                    <div class="result-box"><strong>Evidence index</strong><span>Records are grouped so the manager can locate what exists and what remains outstanding.</span></div>
+                    <div class="result-box"><strong>Handover summary</strong><span>The client receives a clear summary of completed work, key gaps, and recommended next actions.</span></div>
+                </div>
+            </div>
+
+            <div class="service-slide cleanup-sample">
+                <span class="badge">Sample-style output</span>
+                <h3>Cleanup package preview.</h3>
+                <p>Sample visual only. Final files depend on the agreed scope.</p>
+                <div class="sample-collage">
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Audit Tracker.xlsx</strong><span>Updated tracker</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Medication audit</span><span class="sample-status green">Closed</span></div>
+                            <div class="sample-row"><span>Care plan audit</span><span class="sample-status">Open</span></div>
+                            <div class="sample-row"><span>Staff file audit</span><span class="sample-status red">Overdue</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Incident Log.xlsx</strong><span>Cleaned log</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Incident type</span><span class="sample-status green">Added</span></div>
+                            <div class="sample-row"><span>Follow-up action</span><span class="sample-status">Review</span></div>
+                            <div class="sample-row"><span>Manager sign-off</span><span class="sample-status red">Missing</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Complaints Log.xlsx</strong><span>Review status</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Outcome recorded</span><span class="sample-status">Partial</span></div>
+                            <div class="sample-row"><span>Learning captured</span><span class="sample-status red">Gap</span></div>
+                            <div class="sample-row"><span>Closed status</span><span class="sample-status">Check</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Evidence Index.xlsx</strong><span>Folder map</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Policies</span><span class="sample-status green">Indexed</span></div>
+                            <div class="sample-row"><span>Risk records</span><span class="sample-status">Check</span></div>
+                            <div class="sample-row"><span>Governance minutes</span><span class="sample-status green">Mapped</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-indicators">
+            <label for="cleanup-overview">1 Overview</label>
+            <label for="cleanup-details">2 Details</label>
+            <label for="cleanup-sample">3 Sample</label>
+        </div>
     </div>
-    <div class="card">
-        <span class="badge">Scoped private Payhip link</span>
-        <h3>Monthly Compliance Retainer</h3>
-        <div class="price">Scoped</div>
-        <p>For providers that need continued support with evidence tracking, action follow-up, document control, and monthly review records.</p>
-        <ul>
-            <li>Monthly support after scope review</li>
-            <li>Evidence and action tracker updates</li>
-            <li>Policy and documentation support</li>
-            <li>Monthly management summary</li>
-        </ul>
-        <a class="btn-dark" href="#request">Request Retainer Scope</a>
+
+    <div class="service-card-slider">
+        <input class="service-radio" type="radio" name="retainer-service" id="retainer-overview" checked>
+        <input class="service-radio" type="radio" name="retainer-service" id="retainer-details">
+        <input class="service-radio" type="radio" name="retainer-service" id="retainer-sample">
+
+        <div class="service-slides">
+            <div class="service-slide retainer-overview">
+                <span class="badge">Scoped private Payhip link</span>
+                <h3>Monthly Compliance Retainer</h3>
+                <div class="price">Scoped</div>
+                <p>For providers that need continued support with evidence tracking, action follow-up, document control, and monthly review records.</p>
+                <ul>
+                    <li>Monthly support after scope review</li>
+                    <li>Evidence and action tracker updates</li>
+                    <li>Policy and documentation support</li>
+                    <li>Monthly management summary</li>
+                </ul>
+                <a class="btn-dark" href="#request">Request Retainer Scope</a>
+            </div>
+
+            <div class="service-slide retainer-details">
+                <span class="badge">What Nexus does</span>
+                <h3>What monthly support maintains.</h3>
+                <p>This service supports evidence discipline so records do not fall behind after the first review or cleanup.</p>
+                <div class="result-grid">
+                    <div class="result-box"><strong>Monthly evidence check</strong><span>Selected evidence areas are reviewed and flagged for action.</span></div>
+                    <div class="result-box"><strong>Action tracker follow-up</strong><span>Owners, due dates, open items, and status updates are maintained.</span></div>
+                    <div class="result-box"><strong>Document-control support</strong><span>Policy lists, review dates, version control, and evidence indexing are supported.</span></div>
+                    <div class="result-box"><strong>Management summary</strong><span>A concise monthly summary helps internal governance and follow-up.</span></div>
+                </div>
+            </div>
+
+            <div class="service-slide retainer-sample">
+                <span class="badge">Sample-style output</span>
+                <h3>Monthly support preview.</h3>
+                <p>Sample visual only. Monthly outputs are agreed after scope review.</p>
+                <div class="sample-collage">
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Monthly Evidence Dashboard.xlsx</strong><span>Status view</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Policies reviewed</span><span class="sample-status green">4</span></div>
+                            <div class="sample-row"><span>Trackers updated</span><span class="sample-status green">3</span></div>
+                            <div class="sample-row"><span>High priority items</span><span class="sample-status red">2</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Action Tracker Update.xlsx</strong><span>Month-end</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Owner assigned</span><span class="sample-status green">Yes</span></div>
+                            <div class="sample-row"><span>Due dates added</span><span class="sample-status green">Yes</span></div>
+                            <div class="sample-row"><span>Overdue items</span><span class="sample-status red">Review</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-frame">
+                        <div class="sample-top"><strong>Governance Summary.docx</strong><span>Monthly note</span></div>
+                        <div class="sample-table">
+                            <div class="sample-row"><span>Management review</span><span class="sample-status">Prepared</span></div>
+                            <div class="sample-row"><span>Risk points</span><span class="sample-status red">2</span></div>
+                            <div class="sample-row"><span>Next actions</span><span class="sample-status green">Listed</span></div>
+                        </div>
+                    </div>
+                    <div class="sample-note">The monthly retainer keeps the evidence position visible, current, and easier to review.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-indicators">
+            <label for="retainer-overview">1 Overview</label>
+            <label for="retainer-details">2 Details</label>
+            <label for="retainer-sample">3 Sample</label>
+        </div>
     </div>
+
 </div>
 """)
-
-# =========================================================
-# SERVICE DETAIL CAROUSEL
-# =========================================================
-components.html("""
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-:root {
-    --navy: #061A35;
-    --navy2: #0B2545;
-    --gold: #C8A96A;
-    --green: #0F766E;
-    --text: #172033;
-    --muted: #6B7280;
-    --line: #E5E7EB;
-    --cream: #FAF7F0;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: transparent;
-    color: var(--text);
-}
-
-.carousel-shell {
-    background:
-        radial-gradient(circle at top right, rgba(200,169,106,0.18), transparent 28%),
-        linear-gradient(135deg, #FFFFFF 0%, #FAF7F0 100%);
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    padding: 28px;
-    box-shadow: 0 16px 42px rgba(15,23,42,0.06);
-    overflow: hidden;
-}
-
-.carousel-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.carousel-eyebrow {
-    color: #8A6519;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 12px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.carousel-top h2 {
-    color: var(--navy);
-    font-size: 34px;
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: -0.04em;
-}
-
-.carousel-top p {
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.55;
-    max-width: 560px;
-    margin: 8px 0 0 0;
-}
-
-.carousel-controls {
-    display: flex;
-    gap: 10px;
-    flex: 0 0 auto;
-}
-
-.carousel-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(6,26,53,0.16);
-    background: #FFFFFF;
-    color: var(--navy);
-    font-size: 22px;
-    font-weight: 900;
-    cursor: pointer;
-}
-
-.carousel-btn:hover {
-    background: var(--navy);
-    color: white;
-}
-
-.slide-frame {
-    position: relative;
-    min-height: 500px;
-}
-
-.nc-slide {
-    display: none;
-    animation: fadeIn 0.35s ease;
-}
-
-.nc-slide.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-card {
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 26px;
-    min-height: 485px;
-}
-
-.service-tag {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: #EEF8F5;
-    border: 1px solid #CDEBE4;
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 800;
-    margin-bottom: 12px;
-}
-
-.service-tag.gold {
-    background: #FFF8E8;
-    border-color: #F0DB9B;
-    color: #7A5C13;
-}
-
-.slide-card h3 {
-    color: var(--navy);
-    font-size: 28px;
-    margin: 0 0 10px 0;
-    letter-spacing: -0.03em;
-}
-
-.slide-card p {
-    font-size: 16px;
-    line-height: 1.55;
-    color: #374151;
-    margin-top: 0;
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 18px;
-}
-
-.detail-box {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 16px;
-    background: #FBFCFE;
-}
-
-.detail-box strong {
-    display: block;
-    color: var(--navy);
-    font-size: 15px;
-    margin-bottom: 6px;
-}
-
-.detail-box span {
-    color: #4B5563;
-    font-size: 14px;
-    line-height: 1.45;
-}
-
-.mini-collage {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 18px;
-}
-
-.mini-sheet {
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 14px;
-    background: #FBFCFE;
-    min-height: 210px;
-}
-
-.mini-sheet h4 {
-    color: var(--navy);
-    font-size: 15px;
-    margin: 0 0 10px 0;
-}
-
-.mini-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 8px;
-    border-top: 1px solid #EDF0F5;
-    padding: 8px 0;
-    font-size: 12px;
-    color: #374151;
-}
-
-.status {
-    border-radius: 999px;
-    padding: 4px 7px;
-    font-size: 11px;
-    font-weight: 800;
-    background: #FFF8E8;
-    color: #7A5C13;
-}
-
-.status.green {
-    background: #EAF7F4;
-    color: #0F766E;
-}
-
-.status.red {
-    background: #FEECEC;
-    color: #991B1B;
-}
-
-.dots {
-    display: flex;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 18px;
-}
-
-.dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #D1D5DB;
-}
-
-.dot.active {
-    background: var(--gold);
-}
-
-@media (max-width: 760px) {
-    .carousel-shell {
-        padding: 22px;
-        border-radius: 24px;
-    }
-
-    .carousel-top {
-        display: block;
-    }
-
-    .carousel-controls {
-        margin-top: 14px;
-    }
-
-    .carousel-top h2 {
-        font-size: 28px;
-    }
-
-    .slide-frame {
-        min-height: 610px;
-    }
-
-    .slide-card {
-        min-height: 590px;
-        padding: 20px;
-    }
-
-    .slide-card h3 {
-        font-size: 24px;
-    }
-
-    .detail-grid,
-    .mini-collage {
-        grid-template-columns: 1fr;
-    }
-
-    .mini-sheet {
-        min-height: auto;
-    }
-}
-</style>
-</head>
-<body>
-<div class="carousel-shell">
-    <div class="carousel-top">
-        <div>
-            <div class="carousel-eyebrow">Service detail preview</div>
-            <h2>See what each service is designed to produce.</h2>
-            <p>Use the arrows to move through the service detail slides. The section also rotates automatically.</p>
-        </div>
-        <div class="carousel-controls">
-            <button class="carousel-btn" onclick="prevSlide()" aria-label="Previous slide">‹</button>
-            <button class="carousel-btn" onclick="nextSlide()" aria-label="Next slide">›</button>
-        </div>
-    </div>
-
-    <div class="slide-frame">
-
-        <div class="nc-slide active">
-            <div class="slide-card">
-                <span class="service-tag gold">£149 Evidence File Review · What you receive</span>
-                <h3>A focused review of your evidence position.</h3>
-                <p>The review gives the manager a clear first assessment before deciding whether deeper cleanup is needed.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Evidence structure check</strong><span>Review of how policies, trackers, audits, risk records, complaints, and governance evidence are arranged.</span></div>
-                    <div class="detail-box"><strong>Gap notes</strong><span>Identification of weak, unclear, missing, outdated, or hard-to-explain records.</span></div>
-                    <div class="detail-box"><strong>Priority actions</strong><span>A practical action direction so the manager can see what needs attention first.</span></div>
-                    <div class="detail-box"><strong>Written summary</strong><span>A concise review outcome suitable for internal follow-up and service planning.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag gold">£149 Evidence File Review · Result</span>
-                <h3>Clearer judgement before spending more.</h3>
-                <p>The result is a practical evidence summary, not a generic template pack.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Manager clarity</strong><span>Know whether the evidence is organised, traceable, and ready to explain.</span></div>
-                    <div class="detail-box"><strong>Risk visibility</strong><span>See where document gaps may create pressure during review, inspection, or internal checks.</span></div>
-                    <div class="detail-box"><strong>Decision point</strong><span>Decide whether a 30-Day Cleanup Sprint or monthly support is justified.</span></div>
-                    <div class="detail-box"><strong>Low-risk entry</strong><span>Start with a fixed £149 review before committing to a larger service.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag gold">£149 Evidence File Review · Sample preview</span>
-                <h3>Example of the type of output reviewed.</h3>
-                <p>Sample visual only. Final output depends on the documents received.</p>
-                <div class="mini-collage">
-                    <div class="mini-sheet">
-                        <h4>Evidence Gap Summary</h4>
-                        <div class="mini-row"><span>Risk assessments</span><span class="status">Check</span></div>
-                        <div class="mini-row"><span>Training matrix</span><span class="status red">Weak</span></div>
-                        <div class="mini-row"><span>Audit tracker</span><span class="status">Update</span></div>
-                        <div class="mini-row"><span>Governance minutes</span><span class="status green">Present</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Action Direction</h4>
-                        <div class="mini-row"><span>Update audit tracker</span><span class="status">Priority</span></div>
-                        <div class="mini-row"><span>Index policies</span><span class="status green">Next</span></div>
-                        <div class="mini-row"><span>Review complaints log</span><span class="status">Check</span></div>
-                        <div class="mini-row"><span>Confirm GDPR evidence</span><span class="status red">Gap</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Manager Summary</h4>
-                        <div class="mini-row"><span>Evidence structure</span><span class="status">Mixed</span></div>
-                        <div class="mini-row"><span>Traceability</span><span class="status red">Weak</span></div>
-                        <div class="mini-row"><span>Immediate action</span><span class="status">Yes</span></div>
-                        <div class="mini-row"><span>Cleanup needed</span><span class="status green">Likely</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">30-Day Cleanup Sprint · What Nexus does</span>
-                <h3>Structured cleanup of the evidence file.</h3>
-                <p>This service is for providers that already have records but need them organised, updated, and easier to manage.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Evidence folder structure</strong><span>Organise the evidence file around core review areas and management visibility.</span></div>
-                    <div class="detail-box"><strong>Audit tracker cleanup</strong><span>Update or rebuild the tracker so actions, dates, owners, and status are clearer.</span></div>
-                    <div class="detail-box"><strong>Incident and complaints logs</strong><span>Review structure, missing fields, action links, and follow-up visibility.</span></div>
-                    <div class="detail-box"><strong>Governance summary</strong><span>Prepare a clearer management summary of what was cleaned, updated, and still needs attention.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">30-Day Cleanup Sprint · Result</span>
-                <h3>A clearer evidence pack managers can use.</h3>
-                <p>The work is designed to make records easier to locate, explain, and maintain.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Updated tracker position</strong><span>Audit, action, incident, or complaints trackers become easier to read and follow up.</span></div>
-                    <div class="detail-box"><strong>Cleaner evidence structure</strong><span>Folders and records are arranged so the manager can see what exists and what remains outstanding.</span></div>
-                    <div class="detail-box"><strong>Stronger management review</strong><span>Evidence becomes more suitable for internal review, governance meetings, and action monitoring.</span></div>
-                    <div class="detail-box"><strong>Final handover summary</strong><span>The client receives a summary of completed work, key gaps, and recommended next steps.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">30-Day Cleanup Sprint · Sample preview</span>
-                <h3>Example cleanup outputs.</h3>
-                <p>Sample visual only. Final files depend on the scope agreed after intake.</p>
-                <div class="mini-collage">
-                    <div class="mini-sheet">
-                        <h4>Audit Tracker</h4>
-                        <div class="mini-row"><span>Medication audit</span><span class="status green">Closed</span></div>
-                        <div class="mini-row"><span>Care plan audit</span><span class="status">Open</span></div>
-                        <div class="mini-row"><span>Staff file audit</span><span class="status red">Overdue</span></div>
-                        <div class="mini-row"><span>Action owner added</span><span class="status green">Yes</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Incident Log</h4>
-                        <div class="mini-row"><span>Incident type</span><span class="status green">Added</span></div>
-                        <div class="mini-row"><span>Follow-up action</span><span class="status">Review</span></div>
-                        <div class="mini-row"><span>Trend field</span><span class="status">Added</span></div>
-                        <div class="mini-row"><span>Manager sign-off</span><span class="status red">Missing</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Complaints Log</h4>
-                        <div class="mini-row"><span>Date received</span><span class="status green">Clear</span></div>
-                        <div class="mini-row"><span>Outcome recorded</span><span class="status">Partial</span></div>
-                        <div class="mini-row"><span>Learning captured</span><span class="status red">Gap</span></div>
-                        <div class="mini-row"><span>Closed status</span><span class="status">Check</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">Monthly Retainer · What Nexus does</span>
-                <h3>Ongoing support for evidence discipline.</h3>
-                <p>This service is for providers that need monthly structure, follow-up, and documentation support after review or cleanup.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Monthly evidence check</strong><span>Review selected evidence areas and identify records needing attention.</span></div>
-                    <div class="detail-box"><strong>Action tracker follow-up</strong><span>Update action status, owner fields, due dates, and outstanding items.</span></div>
-                    <div class="detail-box"><strong>Document-control support</strong><span>Support policy lists, version control, review dates, and evidence indexing.</span></div>
-                    <div class="detail-box"><strong>Management summary</strong><span>Prepare a short monthly summary for internal governance and follow-up.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">Monthly Retainer · Result</span>
-                <h3>Records stay current instead of falling behind.</h3>
-                <p>The aim is to support consistent evidence maintenance, not last-minute document pressure.</p>
-                <div class="detail-grid">
-                    <div class="detail-box"><strong>Ongoing visibility</strong><span>Managers can see current actions, overdue items, and priority document gaps.</span></div>
-                    <div class="detail-box"><strong>Better governance records</strong><span>Monthly updates help evidence show review, follow-up, and improvement activity.</span></div>
-                    <div class="detail-box"><strong>Reduced drift</strong><span>Policies, trackers, and action logs are less likely to become outdated or inconsistent.</span></div>
-                    <div class="detail-box"><strong>Clear month-end position</strong><span>The provider receives a concise update on what changed and what needs action next.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nc-slide">
-            <div class="slide-card">
-                <span class="service-tag">Monthly Retainer · Sample preview</span>
-                <h3>Example monthly management view.</h3>
-                <p>Sample visual only. Monthly outputs are agreed after scope review.</p>
-                <div class="mini-collage">
-                    <div class="mini-sheet">
-                        <h4>Monthly Evidence Status</h4>
-                        <div class="mini-row"><span>Policies reviewed</span><span class="status green">4</span></div>
-                        <div class="mini-row"><span>Trackers updated</span><span class="status green">3</span></div>
-                        <div class="mini-row"><span>Open actions</span><span class="status">6</span></div>
-                        <div class="mini-row"><span>High priority</span><span class="status red">2</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Action Tracker</h4>
-                        <div class="mini-row"><span>Owner assigned</span><span class="status green">Yes</span></div>
-                        <div class="mini-row"><span>Due dates added</span><span class="status green">Yes</span></div>
-                        <div class="mini-row"><span>Overdue items</span><span class="status red">Review</span></div>
-                        <div class="mini-row"><span>Closed this month</span><span class="status">3</span></div>
-                    </div>
-                    <div class="mini-sheet">
-                        <h4>Governance Note</h4>
-                        <div class="mini-row"><span>Management review</span><span class="status">Prepared</span></div>
-                        <div class="mini-row"><span>Risk points</span><span class="status red">2</span></div>
-                        <div class="mini-row"><span>Next actions</span><span class="status green">Listed</span></div>
-                        <div class="mini-row"><span>Month-end summary</span><span class="status green">Ready</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="dots" id="dots"></div>
-</div>
-
-<script>
-let currentSlide = 0;
-const slides = document.querySelectorAll(".nc-slide");
-const dotsContainer = document.getElementById("dots");
-
-slides.forEach(function(_, i) {
-    const dot = document.createElement("div");
-    dot.className = "dot" + (i === 0 ? " active" : "");
-    dot.onclick = function() { showSlide(i); };
-    dotsContainer.appendChild(dot);
-});
-
-const dots = document.querySelectorAll(".dot");
-
-function showSlide(index) {
-    slides[currentSlide].classList.remove("active");
-    dots[currentSlide].classList.remove("active");
-    currentSlide = (index + slides.length) % slides.length;
-    slides[currentSlide].classList.add("active");
-    dots[currentSlide].classList.add("active");
-}
-
-function nextSlide() {
-    showSlide(currentSlide + 1);
-}
-
-function prevSlide() {
-    showSlide(currentSlide - 1);
-}
-
-setInterval(nextSlide, 7000);
-</script>
-</body>
-</html>
-""", height=840, scrolling=False)
 
 html("""
 <div class="notice">
