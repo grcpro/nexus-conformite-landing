@@ -784,306 +784,83 @@ def report_preview_component():
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * { box-sizing: border-box; }
-body {
-    margin: 0;
-    background: transparent;
-    font-family: Arial, sans-serif;
-}
-.frame {
-    width: 100%;
-    height: 500px;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #071C35;
-    padding: 10px;
-    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
-}
-.stage {
-    width: 100%;
-    height: 100%;
-    background: #071C35;
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-}
-.sheet {
-    width: 760px;
-    height: 980px;
-    background: white;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.48);
-    transform-origin: center center;
-    border-left: 9px solid #C8A96A;
-    color: #172033;
-}
-.header {
-    height: 78px;
-    background: #F6F9FC;
-    padding: 18px 58px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.header-left strong {
-    display: block;
-    color: #0B4778;
-    font-size: 14px;
-}
-.header-left span {
-    display: block;
-    color: #7B8796;
-    font-size: 11px;
-    margin-top: 4px;
-}
-.logo-wrap {
-    width: 170px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.report-logo {
-    max-width: 165px;
-    max-height: 54px;
-    object-fit: contain;
-    display: block;
-}
-.fallback-logo {
-    text-align: right;
-    color: #C8A96A;
-    font-weight: 900;
-    font-size: 26px;
-}
-.fallback-logo span {
-    display: block;
-    color: #061A35;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-}
-.content {
-    padding: 34px 60px;
-}
-.kicker {
-    color: #B18420;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-h1 {
-    margin: 8px 0 12px 0;
-    color: #172033;
-    font-size: 40px;
-    line-height: 1.05;
-}
-.lead {
-    color: #6B7280;
-    font-size: 20px;
-    line-height: 1.25;
-    margin-bottom: 22px;
-}
-.box-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 18px;
-}
-.box {
-    border: 1px solid #E5E7EB;
-    border-left: 5px solid #C8A96A;
-    background: #FFFDF7;
-    padding: 14px;
-}
-.box.teal {
-    border-left-color: #0F766E;
-    background: #EAF7F4;
-}
-.box strong {
-    display: block;
-    font-size: 18px;
-    color: #172033;
-    margin-bottom: 8px;
-}
-.box span {
-    font-size: 15px;
-    color: #64748B;
-    line-height: 1.25;
-}
-.metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 1px solid #E5E7EB;
-    margin: 18px 0;
-}
-.metric {
-    padding: 10px;
-    text-align: center;
-    border-right: 1px solid #E5E7EB;
-    background: #EEF7FC;
-}
+body { margin: 0; background: transparent; font-family: Arial, sans-serif; }
+.frame { width: 100%; height: 500px; border-radius: 18px; overflow: hidden; background: #071C35; padding: 10px; box-shadow: 0 12px 28px rgba(15,23,42,0.18); }
+.stage { width: 100%; height: 100%; background: #071C35; border-radius: 14px; overflow: hidden; position: relative; }
+.sheet { width: 760px; height: 980px; background: white; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.48); transform-origin: center center; border-left: 9px solid #C8A96A; color: #172033; }
+.header { height: 78px; background: #F6F9FC; padding: 18px 58px; display: flex; justify-content: space-between; align-items: center; }
+.header-left strong { display: block; color: #0B4778; font-size: 14px; }
+.header-left span { display: block; color: #7B8796; font-size: 11px; margin-top: 4px; }
+.logo-wrap { width: 170px; display: flex; justify-content: flex-end; align-items: center; }
+.report-logo { max-width: 165px; max-height: 54px; object-fit: contain; display: block; }
+.fallback-logo { text-align: right; color: #C8A96A; font-weight: 900; font-size: 26px; }
+.fallback-logo span { display: block; color: #061A35; font-size: 10px; letter-spacing: 0.08em; }
+.content { padding: 34px 60px; }
+.kicker { color: #B18420; font-size: 13px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+h1 { margin: 8px 0 12px 0; color: #172033; font-size: 40px; line-height: 1.05; }
+.lead { color: #6B7280; font-size: 20px; line-height: 1.25; margin-bottom: 22px; }
+.box-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.box { border: 1px solid #E5E7EB; border-left: 5px solid #C8A96A; background: #FFFDF7; padding: 14px; }
+.box.teal { border-left-color: #0F766E; background: #EAF7F4; }
+.box strong { display: block; font-size: 18px; color: #172033; margin-bottom: 8px; }
+.box span { font-size: 15px; color: #64748B; line-height: 1.25; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid #E5E7EB; margin: 18px 0; }
+.metric { padding: 10px; text-align: center; border-right: 1px solid #E5E7EB; background: #EEF7FC; }
 .metric:nth-child(2) { background: #EAF7F4; }
 .metric:nth-child(3) { background: #FFF8E8; }
 .metric:nth-child(4) { background: #FEECEC; border-right: none; }
-.metric strong {
-    display: block;
-    font-size: 34px;
-    color: #0B4778;
-}
+.metric strong { display: block; font-size: 34px; color: #0B4778; }
 .metric:nth-child(2) strong { color: #0F766E; }
 .metric:nth-child(3) strong { color: #B18420; }
 .metric:nth-child(4) strong { color: #B94343; }
-.metric span {
-    color: #64748B;
-    font-size: 11px;
-    font-weight: 700;
-}
-.conclusion {
-    border: 1px solid #E5E7EB;
-    border-left: 5px solid #061A35;
-    padding: 14px 16px;
-    margin-top: 18px;
-}
-.conclusion strong {
-    display: block;
-    font-size: 18px;
-    color: #172033;
-    margin-bottom: 8px;
-}
-.conclusion p {
-    color: #64748B;
-    font-size: 16px;
-    line-height: 1.28;
-    margin: 0 0 10px 0;
-}
-.mini-pages {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 18px;
-}
-.mini {
-    border: 1px solid #E5E7EB;
-    background: #FFFFFF;
-    padding: 10px;
-    min-height: 126px;
-}
-.mini h3 {
-    margin: 0 0 8px 0;
-    font-size: 15px;
-    color: #172033;
-}
-.mini-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 6px;
-    border-top: 1px solid #EEF1F5;
-    padding: 5px 0;
-    font-size: 11px;
-    color: #4B5563;
-}
-.badge {
-    font-size: 10px;
-    font-weight: 900;
-    border-radius: 999px;
-    padding: 2px 6px;
-    background: #FFF8E8;
-    color: #8A6519;
-}
+.metric span { color: #64748B; font-size: 11px; font-weight: 700; }
+.conclusion { border: 1px solid #E5E7EB; border-left: 5px solid #061A35; padding: 14px 16px; margin-top: 18px; }
+.conclusion strong { display: block; font-size: 18px; color: #172033; margin-bottom: 8px; }
+.conclusion p { color: #64748B; font-size: 16px; line-height: 1.28; margin: 0 0 10px 0; }
+.mini-pages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+.mini { border: 1px solid #E5E7EB; background: #FFFFFF; padding: 10px; min-height: 126px; }
+.mini h3 { margin: 0 0 8px 0; font-size: 15px; color: #172033; }
+.mini-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; border-top: 1px solid #EEF1F5; padding: 5px 0; font-size: 11px; color: #4B5563; }
+.badge { font-size: 10px; font-weight: 900; border-radius: 999px; padding: 2px 6px; background: #FFF8E8; color: #8A6519; }
 .badge.green { background: #EAF7F4; color: #0F766E; }
 .badge.red { background: #FEECEC; color: #991B1B; }
-.footer {
-    position: absolute;
-    bottom: 26px;
-    left: 60px;
-    right: 60px;
-    display: flex;
-    justify-content: space-between;
-    color: #9AA4B2;
-    font-size: 10px;
-    border-top: 1px solid #E5E7EB;
-    padding-top: 8px;
-}
-@media (max-width: 430px) {
-    .frame { height: 470px; }
-    .sheet { transform: translate(-50%, -50%) scale(0.43); }
-}
+.footer { position: absolute; bottom: 26px; left: 60px; right: 60px; display: flex; justify-content: space-between; color: #9AA4B2; font-size: 10px; border-top: 1px solid #E5E7EB; padding-top: 8px; }
+@media (max-width: 430px) { .frame { height: 470px; } .sheet { transform: translate(-50%, -50%) scale(0.43); } }
 </style>
 </head>
 <body>
-<div class="frame">
-    <div class="stage">
-        <div class="sheet">
-            <div class="header">
-                <div class="header-left">
-                    <strong>Nexus Conformité | CQC Evidence Review</strong>
-                    <span>Redacted UK care provider · client report</span>
-                </div>
-                <div class="logo-wrap">
-                    __LOGO_BLOCK__
-                </div>
-            </div>
-
-            <div class="content">
-                <div class="kicker">Executive brief</div>
-                <h1>Executive Summary</h1>
-                <div class="lead">
-                    This report gives the provider a clear evidence position before relying on its documentation for CQC readiness, commissioner assurance or internal governance reporting.
-                </div>
-
-                <div class="box-row">
-                    <div class="box">
-                        <strong>Overall readiness</strong>
-                        <span><b>Amber - controlled cleanup required.</b><br>The evidence pack is usable, but not yet inspection-ready. The main weakness is inconsistent ownership, dating, version control and closure notes.</span>
-                    </div>
-                    <div class="box teal">
-                        <strong>Client outcome</strong>
-                        <span>The provider can now see what is strong, what is incomplete, and what must be corrected first. The action plan should be assigned to named owners and reviewed weekly.</span>
-                    </div>
-                </div>
-
-                <div class="metrics">
-                    <div class="metric"><strong>149</strong><span>Evidence points applied</span></div>
-                    <div class="metric"><strong>87</strong><span>Acceptable / near-ready</span></div>
-                    <div class="metric"><strong>42</strong><span>Partial / weak</span></div>
-                    <div class="metric"><strong>20</strong><span>Missing / not supplied</span></div>
-                </div>
-
-                <div class="conclusion">
-                    <strong>Executive conclusion</strong>
-                    <p>The provider should not present the current file as a complete inspection evidence pack. The safer position is to use it as a working evidence base, complete the missing links, and create a short governance narrative showing how risks are identified, acted on, checked and closed.</p>
-                    <p>The first corrections should focus on governance minutes, risk review records, training assurance, complaints and improvement logs, and care plan audit closure evidence.</p>
-                </div>
-
-                <div class="mini-pages">
-                    <div class="mini">
-                        <h3>Priorities</h3>
-                        <div class="mini-row"><span>Governance oversight</span><span class="badge red">1</span></div>
-                        <div class="mini-row"><span>Risk review records</span><span class="badge">2</span></div>
-                        <div class="mini-row"><span>Training assurance</span><span class="badge">3</span></div>
-                    </div>
-                    <div class="mini">
-                        <h3>CQC lens</h3>
-                        <div class="mini-row"><span>Safe</span><span class="badge green">Used</span></div>
-                        <div class="mini-row"><span>Effective</span><span class="badge green">Used</span></div>
-                        <div class="mini-row"><span>Well-led</span><span class="badge red">Key</span></div>
-                    </div>
-                    <div class="mini">
-                        <h3>14-day plan</h3>
-                        <div class="mini-row"><span>Set control</span><span class="badge">D1-2</span></div>
-                        <div class="mini-row"><span>Fix governance</span><span class="badge">D3-5</span></div>
-                        <div class="mini-row"><span>Sign-off pack</span><span class="badge green">D12-14</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                <span>Confidential · redacted client report</span>
-                <span>Sample preview</span>
-            </div>
-        </div>
-    </div>
+<div class="frame"><div class="stage"><div class="sheet">
+<div class="header">
+<div class="header-left"><strong>Nexus Conformité | CQC Evidence Review</strong><span>Redacted UK care provider · client report</span></div>
+<div class="logo-wrap">__LOGO_BLOCK__</div>
 </div>
+<div class="content">
+<div class="kicker">Executive brief</div>
+<h1>Executive Summary</h1>
+<div class="lead">This report gives the provider a clear evidence position before relying on its documentation for CQC readiness, commissioner assurance or internal governance reporting.</div>
+<div class="box-row">
+<div class="box"><strong>Overall readiness</strong><span><b>Amber - controlled cleanup required.</b><br>The evidence pack is usable, but not yet inspection-ready. The main weakness is inconsistent ownership, dating, version control and closure notes.</span></div>
+<div class="box teal"><strong>Client outcome</strong><span>The provider can now see what is strong, what is incomplete, and what must be corrected first. The action plan should be assigned to named owners and reviewed weekly.</span></div>
+</div>
+<div class="metrics">
+<div class="metric"><strong>149</strong><span>Evidence points applied</span></div>
+<div class="metric"><strong>87</strong><span>Acceptable / near-ready</span></div>
+<div class="metric"><strong>42</strong><span>Partial / weak</span></div>
+<div class="metric"><strong>20</strong><span>Missing / not supplied</span></div>
+</div>
+<div class="conclusion">
+<strong>Executive conclusion</strong>
+<p>The provider should not present the current file as a complete inspection evidence pack. The safer position is to use it as a working evidence base, complete the missing links, and create a short governance narrative showing how risks are identified, acted on, checked and closed.</p>
+<p>The first corrections should focus on governance minutes, risk review records, training assurance, complaints and improvement logs, and care plan audit closure evidence.</p>
+</div>
+<div class="mini-pages">
+<div class="mini"><h3>Priorities</h3><div class="mini-row"><span>Governance oversight</span><span class="badge red">1</span></div><div class="mini-row"><span>Risk review records</span><span class="badge">2</span></div><div class="mini-row"><span>Training assurance</span><span class="badge">3</span></div></div>
+<div class="mini"><h3>CQC lens</h3><div class="mini-row"><span>Safe</span><span class="badge green">Used</span></div><div class="mini-row"><span>Effective</span><span class="badge green">Used</span></div><div class="mini-row"><span>Well-led</span><span class="badge red">Key</span></div></div>
+<div class="mini"><h3>14-day plan</h3><div class="mini-row"><span>Set control</span><span class="badge">D1-2</span></div><div class="mini-row"><span>Fix governance</span><span class="badge">D3-5</span></div><div class="mini-row"><span>Sign-off pack</span><span class="badge green">D12-14</span></div></div>
+</div>
+</div>
+<div class="footer"><span>Confidential · redacted client report</span><span>Sample preview</span></div>
+</div></div></div>
 </body>
 </html>
 """
@@ -1091,6 +868,104 @@ h1 {
     components.html(preview_html, height=515, scrolling=False)
 
 def incident_complaints_preview_component():
+    logo_block = logo_block_html()
+
+    preview_html = """
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: transparent; font-family: Arial, sans-serif; }
+.frame { width: 100%; height: 500px; border-radius: 18px; overflow: hidden; background: #071C35; padding: 10px; box-shadow: 0 12px 28px rgba(15,23,42,0.18); }
+.stage { width: 100%; height: 100%; background: #071C35; border-radius: 14px; overflow: hidden; position: relative; }
+.sheet { width: 760px; height: 980px; background: white; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.48); transform-origin: center center; border-left: 9px solid #C8A96A; color: #172033; }
+.header { height: 78px; background: #F6F9FC; padding: 18px 58px; display: flex; justify-content: space-between; align-items: center; }
+.header-left strong { display: block; color: #0B4778; font-size: 14px; }
+.header-left span { display: block; color: #7B8796; font-size: 11px; margin-top: 4px; }
+.logo-wrap { width: 170px; display: flex; justify-content: flex-end; align-items: center; }
+.report-logo { max-width: 165px; max-height: 54px; object-fit: contain; display: block; }
+.fallback-logo { text-align: right; color: #C8A96A; font-weight: 900; font-size: 26px; }
+.fallback-logo span { display: block; color: #061A35; font-size: 10px; letter-spacing: 0.08em; }
+.content { padding: 34px 58px; }
+.kicker { color: #B18420; font-size: 13px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+h1 { margin: 8px 0 12px 0; color: #172033; font-size: 38px; line-height: 1.05; }
+.lead { color: #6B7280; font-size: 19px; line-height: 1.28; margin-bottom: 20px; }
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.chart-card { border: 1px solid #E5E7EB; border-left: 6px solid #0F766E; background: #FFFFFF; padding: 13px; height: 150px; }
+.chart-card.gold { border-left-color: #C8A96A; }
+.chart-title { font-size: 14px; font-weight: 900; color: #172033; margin-bottom: 8px; }
+.bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; align-items: end; height: 82px; }
+.bar-wrap { display: grid; grid-template-rows: 1fr auto; gap: 4px; text-align: center; font-size: 9px; color: #64748B; }
+.bar-track { height: 70px; border-radius: 8px; background: #EEF2F7; display: flex; align-items: end; overflow: hidden; }
+.bar { width: 100%; border-radius: 8px 8px 0 0; background: #0F766E; color: white; font-size: 10px; font-weight: 900; display: flex; align-items: flex-start; justify-content: center; padding-top: 4px; }
+.gold .bar { background: #C8A96A; color: #172033; }
+.main-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.main-table th { background: #061A35; color: white; font-size: 12px; text-align: left; padding: 10px; }
+.main-table td { border: 1px solid #E5E7EB; color: #4B5563; font-size: 12px; padding: 10px; vertical-align: top; }
+.main-table td:first-child { color: #172033; font-weight: 900; }
+.conclusion { border: 1px solid #CDEBE4; border-left: 6px solid #0F766E; background: #EAF7F4; padding: 15px 18px; margin-top: 18px; }
+.conclusion strong { display: block; color: #172033; font-size: 18px; margin-bottom: 8px; }
+.conclusion p { color: #64748B; font-size: 17px; line-height: 1.28; margin: 0; }
+.footer { position: absolute; bottom: 26px; left: 60px; right: 60px; display: flex; justify-content: space-between; color: #9AA4B2; font-size: 10px; border-top: 1px solid #E5E7EB; padding-top: 8px; }
+@media (max-width: 430px) { .frame { height: 470px; } .sheet { transform: translate(-50%, -50%) scale(0.43); } }
+</style>
+</head>
+<body>
+<div class="frame"><div class="stage"><div class="sheet">
+<div class="header">
+<div class="header-left"><strong>Nexus Conformité | Incident & Complaints Log Review</strong><span>Redacted UK care provider · client report</span></div>
+<div class="logo-wrap">__LOGO_BLOCK__</div>
+</div>
+<div class="content">
+<div class="kicker">Trend visibility</div>
+<h1>Trend Review - January to June 2026</h1>
+<div class="lead">The entries show enough activity to create a trend view, but the supplied logs do not present trends clearly. The provider should add a monthly trend dashboard and discuss it at governance review.</div>
+<div class="chart-grid">
+<div class="chart-card">
+<div class="chart-title">Incident entries by month</div>
+<div class="bars">
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Jan</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Feb</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>Mar</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Apr</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>May</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Jun</span></div>
+</div>
+</div>
+<div class="chart-card gold">
+<div class="chart-title">Complaint entries by month</div>
+<div class="bars">
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Jan</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:8%;">0</div></div><span>Feb</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Mar</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Apr</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>May</span></div>
+<div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Jun</span></div>
+</div>
+</div>
+</div>
+<table class="main-table">
+<thead><tr><th>Theme</th><th>Count</th><th>Trend interpretation</th><th>Governance action required</th></tr></thead>
+<tbody>
+<tr><td>Medication and MAR-related incidents</td><td>5</td><td>Largest incident theme across the review period.</td><td>Link to medication audit, staff competency checks and re-audit date.</td></tr>
+<tr><td>Late / missed calls</td><td>7 combined</td><td>Appears in both incident and complaint records, mainly Apr-Jun.</td><td>Review rostering, call monitoring and communication with relatives.</td></tr>
+<tr><td>Falls / manual handling / near misses</td><td>4</td><td>Recorded as isolated entries, but no monthly learning note found.</td><td>Add risk review and care plan update evidence where relevant.</td></tr>
+<tr><td>Communication complaints</td><td>2</td><td>Relatives raised concerns about response and updates.</td><td>Add response standard, escalation route and close-out call record.</td></tr>
+</tbody>
+</table>
+<div class="conclusion"><strong>Trend conclusion</strong><p>The data suggests the provider should focus first on medication governance, late or missed calls, communication with relatives and closure discipline. These themes should be visible in the next management meeting minutes and in the master action tracker.</p></div>
+</div>
+<div class="footer"><span>Confidential · redacted client report</span><span>Sample preview</span></div>
+</div></div></div>
+</body>
+</html>
+"""
+    preview_html = preview_html.replace("__LOGO_BLOCK__", logo_block)
+    components.html(preview_html, height=515, scrolling=False)
+
+def monthly_retainer_dashboard_preview_component():
     logo_block = logo_block_html()
 
     preview_html = """
@@ -1123,45 +998,65 @@ body {
     position: relative;
 }
 .sheet {
-    width: 760px;
-    height: 980px;
+    width: 920px;
+    height: 900px;
     background: white;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0.48);
+    transform: translate(-50%, -50%) scale(0.50);
     transform-origin: center center;
     border-left: 9px solid #C8A96A;
     color: #172033;
 }
-.header {
-    height: 78px;
-    background: #F6F9FC;
-    padding: 18px 58px;
+.tabs {
+    height: 42px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background: #B8C1D2;
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+    text-align: center;
+}
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255,255,255,0.35);
+}
+.tab.active {
+    background: white;
+    color: #172033;
+}
+.titlebar {
+    background: #061A35;
+    color: white;
+    padding: 14px 18px 12px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.header-left strong {
-    display: block;
-    color: #0B4778;
-    font-size: 14px;
+.title-left h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.05;
+    color: white;
 }
-.header-left span {
-    display: block;
-    color: #7B8796;
+.title-left p {
+    margin: 6px 0 0 0;
     font-size: 11px;
-    margin-top: 4px;
+    color: #DDE6F2;
 }
 .logo-wrap {
-    width: 170px;
+    width: 155px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 .report-logo {
-    max-width: 165px;
-    max-height: 54px;
+    max-width: 150px;
+    max-height: 48px;
     object-fit: contain;
     display: block;
 }
@@ -1169,144 +1064,190 @@ body {
     text-align: right;
     color: #C8A96A;
     font-weight: 900;
-    font-size: 26px;
+    font-size: 24px;
 }
 .fallback-logo span {
     display: block;
+    color: white;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+}
+.meta-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+    border-left: 1px solid #D7DEE8;
+    border-right: 1px solid #D7DEE8;
+}
+.meta {
+    border-right: 1px solid #D7DEE8;
+    padding: 7px 9px;
+    font-size: 10px;
+    color: #374151;
+}
+.meta strong {
+    display: block;
     color: #061A35;
     font-size: 10px;
-    letter-spacing: 0.08em;
+    margin-bottom: 3px;
 }
-.content {
-    padding: 34px 58px;
-}
-.kicker {
-    color: #B18420;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-h1 {
-    margin: 8px 0 12px 0;
-    color: #172033;
-    font-size: 38px;
-    line-height: 1.05;
-}
-.lead {
-    color: #6B7280;
-    font-size: 19px;
-    line-height: 1.28;
-    margin-bottom: 20px;
-}
-.chart-grid {
+.kpi-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #D7DEE8;
 }
-.chart-card {
-    border: 1px solid #E5E7EB;
-    border-left: 6px solid #0F766E;
-    background: #FFFFFF;
-    padding: 13px;
-    height: 150px;
+.kpi {
+    min-height: 92px;
+    border-right: 1px solid #D7DEE8;
+    padding: 10px 12px;
+    background: #F8FBFE;
 }
-.chart-card.gold {
-    border-left-color: #C8A96A;
-}
-.chart-title {
-    font-size: 14px;
-    font-weight: 900;
+.kpi:nth-child(1) { border-top: 8px solid #0F766E; }
+.kpi:nth-child(2) { border-top: 8px solid #C8A96A; }
+.kpi:nth-child(3) { border-top: 8px solid #C33113; }
+.kpi:nth-child(4) { border-top: 8px solid #061A35; border-right: none; }
+.kpi strong {
+    display: block;
+    font-size: 34px;
+    line-height: 1;
     color: #172033;
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 }
-.bars {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 7px;
-    align-items: end;
-    height: 82px;
+.kpi span {
+    display: block;
+    font-size: 11px;
+    color: #4B5563;
+    font-weight: 800;
 }
-.bar-wrap {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 4px;
-    text-align: center;
-    font-size: 9px;
-    color: #64748B;
-}
-.bar-track {
-    height: 70px;
-    border-radius: 8px;
-    background: #EEF2F7;
-    display: flex;
-    align-items: end;
-    overflow: hidden;
-}
-.bar {
-    width: 100%;
-    border-radius: 8px 8px 0 0;
-    background: #0F766E;
-    color: white;
-    font-size: 10px;
-    font-weight: 900;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 4px;
-}
-.gold .bar {
-    background: #C8A96A;
-    color: #172033;
-}
-.main-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-.main-table th {
+.position {
     background: #061A35;
     color: white;
-    font-size: 12px;
-    text-align: left;
+    text-align: center;
     padding: 10px;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 0.02em;
 }
-.main-table td {
-    border: 1px solid #E5E7EB;
-    color: #4B5563;
-    font-size: 12px;
-    padding: 10px;
+.content {
+    padding: 14px 18px 18px 18px;
+}
+.section-title {
+    background: #FFF8E8;
+    color: #172033;
+    border: 1px solid #D7DEE8;
+    padding: 8px 10px;
+    font-size: 15px;
+    font-weight: 900;
+}
+.grid-main {
+    display: grid;
+    grid-template-columns: 1.45fr 0.9fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    background: #061A35;
+    color: white;
+    text-align: left;
+    font-size: 11px;
+    padding: 8px;
+}
+td {
+    border: 1px solid #D7DEE8;
+    color: #374151;
+    font-size: 11px;
+    padding: 7px 8px;
     vertical-align: top;
 }
-.main-table td:first-child {
+td:first-child {
     color: #172033;
     font-weight: 900;
 }
-.conclusion {
-    border: 1px solid #CDEBE4;
-    border-left: 6px solid #0F766E;
-    background: #EAF7F4;
-    padding: 15px 18px;
-    margin-top: 18px;
+.triple-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
 }
-.conclusion strong {
-    display: block;
-    color: #172033;
-    font-size: 18px;
-    margin-bottom: 8px;
+.mini-box {
+    border: 1px solid #D7DEE8;
+    background: white;
 }
-.conclusion p {
-    color: #64748B;
-    font-size: 17px;
-    line-height: 1.28;
+.mini-box h3 {
     margin: 0;
+    background: #FFF8E8;
+    color: #172033;
+    font-size: 14px;
+    padding: 8px 10px;
+}
+.visual-dots {
+    letter-spacing: 2px;
+    color: #061A35;
+    font-weight: 900;
+}
+.risk-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 12px;
+}
+.client-note {
+    border: 1px solid #D7DEE8;
+    background: #EEF7FC;
+    padding: 14px;
+    min-height: 160px;
+}
+.client-note h3 {
+    margin: 0 0 8px 0;
+    color: #172033;
+    font-size: 17px;
+}
+.client-note p {
+    margin: 0;
+    color: #4B5563;
+    font-size: 14px;
+    line-height: 1.35;
+}
+.trend {
+    margin-top: 12px;
+    border: 1px solid #D7DEE8;
+}
+.trend-row {
+    display: grid;
+    grid-template-columns: 135px repeat(6, 1fr) 1.8fr;
+    border-top: 1px solid #D7DEE8;
+}
+.trend-row:first-child {
+    border-top: none;
+}
+.trend-head {
+    background: #061A35;
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 7px;
+    text-align: center;
+    border-right: 1px solid #D7DEE8;
+}
+.trend-cell {
+    min-height: 28px;
+    padding: 5px;
+    font-size: 10px;
+    color: #374151;
+    border-right: 1px solid #D7DEE8;
+}
+.bar {
+    height: 14px;
+    background: #0F766E;
+    border-radius: 0 7px 7px 0;
 }
 .footer {
     position: absolute;
-    bottom: 26px;
-    left: 60px;
-    right: 60px;
+    bottom: 18px;
+    left: 22px;
+    right: 22px;
     display: flex;
     justify-content: space-between;
     color: #9AA4B2;
@@ -1316,7 +1257,7 @@ h1 {
 }
 @media (max-width: 430px) {
     .frame { height: 470px; }
-    .sheet { transform: translate(-50%, -50%) scale(0.43); }
+    .sheet { transform: translate(-50%, -50%) scale(0.42); }
 }
 </style>
 </head>
@@ -1324,96 +1265,156 @@ h1 {
 <div class="frame">
     <div class="stage">
         <div class="sheet">
-            <div class="header">
-                <div class="header-left">
-                    <strong>Nexus Conformité | Incident & Complaints Log Review</strong>
-                    <span>Redacted UK care provider · client report</span>
-                </div>
-                <div class="logo-wrap">
-                    __LOGO_BLOCK__
-                </div>
+
+            <div class="tabs">
+                <div class="tab">Cover</div>
+                <div class="tab active">Dashboard</div>
+                <div class="tab">Management Pack</div>
+                <div class="tab">Retainer Control</div>
+                <div class="tab">Evidence Register</div>
+                <div class="tab">Action Tracker</div>
             </div>
 
+            <div class="titlebar">
+                <div class="title-left">
+                    <h1>Monthly Compliance Retainer Dashboard</h1>
+                    <p>Client: [CONFIDENTIAL UK CARE PROVIDER] | Retainer cycle: July 2026 | Baseline: January 2026 – June 2026</p>
+                </div>
+                <div class="logo-wrap">__LOGO_BLOCK__</div>
+            </div>
+
+            <div class="meta-row">
+                <div class="meta"><strong>Review date</strong>30 Jun 2026</div>
+                <div class="meta"><strong>Display status</strong>Redacted client copy</div>
+                <div class="meta"><strong>Prepared by</strong>Nexus Conformité</div>
+                <div class="meta"><strong>Service type</strong>Adult social care</div>
+                <div class="meta"><strong>Focus</strong>Retainer control</div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi"><span>Evidence readiness</span><strong>42%</strong><span>Complete = 50% credit for partial evidence.</span></div>
+                <div class="kpi"><span>Active actions</span><strong>26</strong><span>Actions still active or needing proof.</span></div>
+                <div class="kpi"><span>Critical / high exposure</span><strong>18</strong><span>Non-closed critical/high priority items.</span></div>
+                <div class="kpi"><span>Incident / complaint closure</span><strong>46%</strong><span>Closed records across the combined monitor.</span></div>
+            </div>
+
+            <div class="position">Current management position: PARTIAL READINESS - CONTROLLED CLEAN-UP REQUIRED</div>
+
             <div class="content">
-                <div class="kicker">Trend visibility</div>
-                <h1>Trend Review - January to June 2026</h1>
-                <div class="lead">
-                    The entries show enough activity to create a trend view, but the supplied logs do not present trends clearly. The provider should add a monthly trend dashboard and discuss it at governance review.
-                </div>
-
-                <div class="chart-grid">
-                    <div class="chart-card">
-                        <div class="chart-title">Incident entries by month</div>
-                        <div class="bars">
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Jan</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Feb</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>Mar</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Apr</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>May</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Jun</span></div>
-                        </div>
+                <div class="grid-main">
+                    <div>
+                        <div class="section-title">Retainer component position</div>
+                        <table>
+                            <thead>
+                                <tr><th>Component</th><th>Status</th><th>Evidence / Output</th><th>Management Attention</th><th>Owner</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Evidence Register</td><td>At Risk</td><td>Updated evidence register</td><td>Missing / partial evidence</td><td>Compliance Lead</td></tr>
+                                <tr><td>Action Tracker</td><td>In Progress</td><td>Updated actions with evidence status</td><td>Overdue high-priority actions</td><td>Provider Lead</td></tr>
+                                <tr><td>Incidents & Complaints</td><td>At Risk</td><td>Combined monitor and trend view</td><td>Open complaints and no-action-link records</td><td>Registered Manager</td></tr>
+                                <tr><td>Policy Queue</td><td>At Risk</td><td>Prioritised policy review list</td><td>Complaints, incident and rota policies</td><td>Compliance Lead</td></tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div class="chart-card gold">
-                        <div class="chart-title">Complaint entries by month</div>
-                        <div class="bars">
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Jan</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:8%;">0</div></div><span>Feb</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Mar</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Apr</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>May</span></div>
-                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Jun</span></div>
-                        </div>
+                    <div>
+                        <div class="section-title">Exception summary</div>
+                        <table>
+                            <thead><tr><th>Exception</th><th>Count</th></tr></thead>
+                            <tbody>
+                                <tr><td>Missing evidence</td><td>6</td></tr>
+                                <tr><td>Outdated evidence</td><td>2</td></tr>
+                                <tr><td>Requires confirmation</td><td>1</td></tr>
+                                <tr><td>Overdue actions</td><td>5</td></tr>
+                                <tr><td>No action-link records</td><td>5</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <table class="main-table">
-                    <thead>
-                        <tr>
-                            <th>Theme</th>
-                            <th>Count</th>
-                            <th>Trend interpretation</th>
-                            <th>Governance action required</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Medication and MAR-related incidents</td>
-                            <td>5</td>
-                            <td>Largest incident theme across the review period.</td>
-                            <td>Link to medication audit, staff competency checks and re-audit date.</td>
-                        </tr>
-                        <tr>
-                            <td>Late / missed calls</td>
-                            <td>7 combined</td>
-                            <td>Appears in both incident and complaint records, mainly Apr-Jun.</td>
-                            <td>Review rostering, call monitoring and communication with relatives.</td>
-                        </tr>
-                        <tr>
-                            <td>Falls / manual handling / near misses</td>
-                            <td>4</td>
-                            <td>Recorded as isolated entries, but no monthly learning note found.</td>
-                            <td>Add risk review and care plan update evidence where relevant.</td>
-                        </tr>
-                        <tr>
-                            <td>Communication complaints</td>
-                            <td>2</td>
-                            <td>Relatives raised concerns about response and updates.</td>
-                            <td>Add response standard, escalation route and close-out call record.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="triple-grid">
+                    <div class="mini-box">
+                        <h3>Action status breakdown</h3>
+                        <table>
+                            <thead><tr><th>Status</th><th>Count</th><th>Visual</th></tr></thead>
+                            <tbody>
+                                <tr><td>In Progress</td><td>4</td><td class="visual-dots">••••</td></tr>
+                                <tr><td>Open</td><td>16</td><td class="visual-dots">••••••••••</td></tr>
+                                <tr><td>Overdue</td><td>5</td><td class="visual-dots">•••••</td></tr>
+                                <tr><td>Awaiting Evidence</td><td>1</td><td class="visual-dots">•</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="conclusion">
-                    <strong>Trend conclusion</strong>
-                    <p>The data suggests the provider should focus first on medication governance, late or missed calls, communication with relatives and closure discipline. These themes should be visible in the next management meeting minutes and in the master action tracker.</p>
+                    <div class="mini-box">
+                        <h3>Evidence status breakdown</h3>
+                        <table>
+                            <thead><tr><th>Status</th><th>Count</th><th>Visual</th></tr></thead>
+                            <tbody>
+                                <tr><td>Complete</td><td>4</td><td class="visual-dots">••••</td></tr>
+                                <tr><td>Partial</td><td>17</td><td class="visual-dots">••••••••••</td></tr>
+                                <tr><td>Missing</td><td>6</td><td class="visual-dots">••••••</td></tr>
+                                <tr><td>Outdated</td><td>2</td><td class="visual-dots">••</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mini-box">
+                        <h3>Incident and complaint trend</h3>
+                        <table>
+                            <thead><tr><th>Month</th><th>Incidents</th><th>Complaints</th><th>Open / weak</th></tr></thead>
+                            <tbody>
+                                <tr><td>Jan</td><td>3</td><td>2</td><td>2</td></tr>
+                                <tr><td>Feb</td><td>3</td><td>1</td><td>3</td></tr>
+                                <tr><td>Mar</td><td>3</td><td>2</td><td>4</td></tr>
+                                <tr><td>Apr</td><td>3</td><td>1</td><td>3</td></tr>
+                                <tr><td>May</td><td>3</td><td>1</td><td>2</td></tr>
+                                <tr><td>Jun</td><td>3</td><td>1</td><td>5</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="risk-grid">
+                    <div>
+                        <div class="section-title">Top risk themes requiring management attention</div>
+                        <table>
+                            <thead>
+                                <tr><th>Theme</th><th>Incidents</th><th>Complaints</th><th>Linked Open Actions</th><th>Next Move</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Medication</td><td>5</td><td>1</td><td>3</td><td>Close ACT-008, ACT-025 and register decision rationale.</td></tr>
+                                <tr><td>Fall</td><td>4</td><td>0</td><td>1</td><td>Create falls trend review and add to governance minutes.</td></tr>
+                                <tr><td>Late / missed visits</td><td>3</td><td>2</td><td>1</td><td>Implement rota exception log and update SOP.</td></tr>
+                                <tr><td>Safeguarding</td><td>2</td><td>0</td><td>1</td><td>Upload local authority outcome or interim risk review.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="client-note">
+                        <h3>Client-facing interpretation</h3>
+                        <p>The provider has useful evidence, but the monthly retainer should focus on proving closure, not simply showing that logs exist. The highest-value work is to convert partial records into traceable, dated evidence with named owners, clear due dates and management sign-off.</p>
+                    </div>
+                </div>
+
+                <div class="trend">
+                    <div class="trend-row">
+                        <div class="trend-head">Indicator</div><div class="trend-head">Jan</div><div class="trend-head">Feb</div><div class="trend-head">Mar</div><div class="trend-head">Apr</div><div class="trend-head">May</div><div class="trend-head">Jun</div><div class="trend-head">Interpretation</div>
+                    </div>
+                    <div class="trend-row">
+                        <div class="trend-cell"><b>Incident volume</b></div><div class="trend-cell"><div class="bar" style="width:60%;"></div></div><div class="trend-cell"><div class="bar" style="width:55%;"></div></div><div class="trend-cell"><div class="bar" style="width:58%;"></div></div><div class="trend-cell"><div class="bar" style="width:62%;"></div></div><div class="trend-cell"><div class="bar" style="width:56%;"></div></div><div class="trend-cell"><div class="bar" style="width:60%;"></div></div><div class="trend-cell">Incident volume is flat at 3 per month; stability does not remove the need for theme-level review.</div>
+                    </div>
+                    <div class="trend-row">
+                        <div class="trend-cell"><b>Open / weak records</b></div><div class="trend-cell"><div class="bar" style="width:35%;"></div></div><div class="trend-cell"><div class="bar" style="width:45%;"></div></div><div class="trend-cell"><div class="bar" style="width:52%;"></div></div><div class="trend-cell"><div class="bar" style="width:48%;"></div></div><div class="trend-cell"><div class="bar" style="width:42%;"></div></div><div class="trend-cell"><div class="bar" style="width:80%;"></div></div><div class="trend-cell">Open or weak records rise by June, making July clean-up important.</div>
+                    </div>
                 </div>
             </div>
 
             <div class="footer">
                 <span>Confidential · redacted client report</span>
-                <span>Sample preview</span>
+                <span>Monthly retainer dashboard sample</span>
             </div>
+
         </div>
     </div>
 </div>
@@ -1555,12 +1556,9 @@ def retainer_card():
 
         else:
             st.markdown("**Sample-style output**")
-            st.subheader("Monthly support preview")
-            st.caption("Sample visual only. Monthly outputs are agreed after scope review.")
-            sample_frame("Monthly Evidence Dashboard.xlsx", "Status view", [("Policies reviewed", "4"), ("Trackers updated", "3"), ("High priority items", "2")])
-            sample_frame("Action Tracker Update.xlsx", "Month-end", [("Owner assigned", "Yes"), ("Due dates added", "Yes"), ("Overdue items", "Review")])
-            sample_frame("Governance Summary.docx", "Monthly note", [("Management review", "Prepared"), ("Risk points", "2"), ("Next actions", "Listed")])
-            st.info("The monthly retainer keeps the evidence position visible, current, and easier to review.")
+            st.subheader("Monthly retainer dashboard preview")
+            st.caption("Sample visual only. Final dashboard depends on the monthly scope agreed with the provider.")
+            monthly_retainer_dashboard_preview_component()
 
 service_cols = st.columns(3)
 with service_cols[0]:
