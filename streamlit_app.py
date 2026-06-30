@@ -131,13 +131,6 @@ img {
     object-fit: contain !important;
 }
 
-[data-testid="stTextInput"], 
-[data-testid="stSelectbox"],
-[data-testid="stTextArea"],
-[data-testid="stFileUploader"] {
-    width: 100% !important;
-}
-
 .stApp {
     background: var(--bg-gradient);
     color: var(--text);
@@ -294,6 +287,24 @@ p, li {
     border: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Fix black Streamlit link buttons */
+[data-testid="stLinkButton"] a,
+a[data-testid="stBaseButton-secondary"] {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    border: 1px solid var(--gold) !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 14px rgba(200,169,106,0.3) !important;
+    text-decoration: none !important;
+}
+
+[data-testid="stLinkButton"] a *,
+a[data-testid="stBaseButton-secondary"] * {
+    color: var(--navy) !important;
+    font-weight: 800 !important;
+}
+
 /* Pain Point Banner */
 .pain-banner {
     background: #FFFFFF;
@@ -378,110 +389,11 @@ p, li {
     margin: 30px 0;
 }
 
-/* Footer */
-.footer-container {
-    width: 100%;
-    background: linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%);
-    color: white;
-    border-radius: 24px;
-    padding: 45px;
-    box-shadow: 0 20px 50px rgba(5,22,46,0.15);
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    margin-top: 40px;
-}
-
-.footer-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-
-.footer-socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 24px;
-}
-
-.footer-socials a {
-    color: white !important;
-    text-decoration: none !important;
-    background: rgba(255,255,255,0.12);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-    font-size: 13px;
-}
-
 @media (max-width: 900px) {
     .review-cover-grid { grid-template-columns: repeat(2, 1fr); }
     .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
     .nav-pills { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); }
     .nav-pills a { text-align: center; }
-}
-
-@media (max-width: 768px) {
-    .block-container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-
-    .hero {
-        padding: 38px 24px !important;
-        border-radius: 18px !important;
-    }
-
-    .hero h1 {
-        font-size: 32px !important;
-        line-height: 1.12 !important;
-    }
-
-    .hero p {
-        font-size: 16px !important;
-    }
-
-    .cta-row {
-        flex-direction: column !important;
-    }
-
-    .btn-primary,
-    .btn-secondary,
-    .btn-light {
-        width: 100% !important;
-        text-align: center !important;
-        display: block !important;
-    }
-
-    .review-cover-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .footer-container {
-        padding: 34px 20px !important;
-        text-align: center !important;
-        border-radius: 18px !important;
-    }
-
-    .footer-actions {
-        flex-direction: column !important;
-    }
-
-    .footer-actions a {
-        width: 100% !important;
-        text-align: center !important;
-        display: block !important;
-    }
-
-    .footer-socials {
-        justify-content: center !important;
-        padding-bottom: 8px !important;
-    }
 }
 </style>
 """)
@@ -583,13 +495,11 @@ def get_logo_html():
         return f'<img src="{LOGO_DATA_URI}" alt="Logo" style="max-width:165px; max-height:54px; object-fit:contain;">'
     return '<div style="color:#C8A96A; font-weight:900; font-size:22px;">NEXUS CONFORMITÉ</div>'
 
-# FIXED MOBILE GRID CLIPPING: Changed metric-box from 4 columns to a 2x2 grid
 def render_preview_1():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
-    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #C8A96A; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #EEE; padding-bottom:10px; }}
     .badge {{ background:#FEF3C7; color:#92400E; padding:4px 8px; font-size:11px; font-weight:bold; border-radius:4px; }}
@@ -615,8 +525,7 @@ def render_preview_2():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
-    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #0D9488; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #EEE; padding-bottom:10px; }}
     table {{ width:100%; border-collapse:collapse; margin-top:15px; font-size:12px; }}
@@ -638,8 +547,7 @@ def render_preview_3():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
-    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #05162E; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; background:#05162E; color:white; padding:15px; }}
     .kpi-row {{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:15px; }}
@@ -696,10 +604,7 @@ with col2:
 - Fixing your training and complaints logs
 - Handing back a fully organized folder system
 """)
-            st.markdown(
-                '<a class="btn-secondary" href="#request" style="display:block; text-align:center; margin-top:12px;">Request a Cleanup Quote</a>',
-                unsafe_allow_html=True
-            )
+            st.link_button("Request a Cleanup Quote", "#request", use_container_width=True)
         elif v2 == "How We Check":
             st.caption("Perfect for providers who have fallen behind on paperwork and need to get ready for an inspection fast.")
         else:
@@ -720,10 +625,7 @@ with col3:
 - Continuous updates to policies
 - A monthly health-check report for owners
 """)
-            st.markdown(
-                '<a class="btn-secondary" href="#request" style="display:block; text-align:center; margin-top:12px;">Apply for Ongoing Support</a>',
-                unsafe_allow_html=True
-            )
+            st.link_button("Apply for Ongoing Support", "#request", use_container_width=True)
         elif v3 == "How We Check":
             st.caption("For busy care managers who want peace of mind knowing their paperwork won't drift out of date again.")
         else:
@@ -783,120 +685,7 @@ html("""
 """)
 
 form_html = f"""
-<style>
-    * {{
-        box-sizing: border-box;
-    }}
-
-    html, body {{
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }}
-
-    .intake-card {{
-        background: #ffffff;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 30px;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.02);
-        color: #05162E;
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
-    }}
-
-    .form-grid-2 {{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-bottom: 16px;
-    }}
-
-    .form-grid-3 {{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px;
-        margin-bottom: 24px;
-    }}
-
-    label {{
-        font-weight: 700;
-        font-size: 13px;
-        color: #475569;
-        display: block;
-        margin-bottom: 6px;
-    }}
-
-    input,
-    select,
-    textarea {{
-        width: 100%;
-        max-width: 100%;
-        padding: 12px;
-        border: 1px solid #CBD5E1;
-        border-radius: 8px;
-        font-family: sans-serif;
-        font-size: 14px;
-        background: white;
-        color: #05162E;
-    }}
-
-    textarea {{
-        resize: vertical;
-    }}
-
-    .upload-primary {{
-        width: 100%;
-        padding: 15px;
-        border: 2px dashed #C8A96A;
-        background: #FFFDF7;
-        border-radius: 8px;
-    }}
-
-    .upload-secondary {{
-        width: 100%;
-        padding: 15px;
-        border: 1px dashed #CBD5E1;
-        margin-top: 8px;
-        border-radius: 8px;
-    }}
-
-    .submit-btn {{
-        width: 100%;
-        background: #C8A96A;
-        color: #05162E;
-        padding: 16px;
-        border: none;
-        border-radius: 999px;
-        font-weight: 800;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(200,169,106,0.25);
-    }}
-
-    @media (max-width: 820px) {{
-        .intake-card {{
-            padding: 22px 16px;
-            border-radius: 14px;
-        }}
-
-        .form-grid-2,
-        .form-grid-3 {{
-            grid-template-columns: 1fr;
-            gap: 14px;
-        }}
-
-        input,
-        select,
-        textarea {{
-            font-size: 16px;
-        }}
-    }}
-</style>
-
-<div class="intake-card">
+<div style="background:#ffffff; border:1px solid #E2E8F0; border-radius:16px; padding:30px; box-shadow:0 10px 35px rgba(0,0,0,0.02); font-family:sans-serif; color:#05162E;">
     <form action="https://formsubmit.co/{EMAIL}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="New Client Intake Form Received">
         <input type="hidden" name="_template" value="table">
@@ -904,33 +693,33 @@ form_html = f"""
         <input type="text" name="_honey" style="display:none">
 
         <h3 style="margin-top:0; color:#05162E;">1. Your Details</h3>
-        <div class="form-grid-2">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
             <div>
-                <label>Your Full Name *</label>
-                <input type="text" name="Name" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Your Full Name *</label>
+                <input type="text" name="Name" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
             </div>
             <div>
-                <label>Company Name *</label>
-                <input type="text" name="Company" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Company Name *</label>
+                <input type="text" name="Company" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
             </div>
         </div>
         
-        <div class="form-grid-2" style="margin-bottom:24px;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:24px;">
             <div>
-                <label>Email Address *</label>
-                <input type="email" name="email" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Email Address *</label>
+                <input type="email" name="email" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
             </div>
             <div>
-                <label>Order ID (If you already paid for the £149 Review)</label>
-                <input type="text" name="Order ID" placeholder="Leave blank if requesting a quote">
+                <label style="font-weight:700; font-size:13px; color:#475569;">Order ID (If you already paid for the £149 Review)</label>
+                <input type="text" name="Order ID" placeholder="Leave blank if requesting a quote" style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
             </div>
         </div>
 
         <h3 style="color:#05162E;">2. Your Business Type</h3>
-        <div class="form-grid-3">
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin-bottom:24px;">
             <div>
-                <label>Your Job Title *</label>
-                <select name="Job Title" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Your Job Title *</label>
+                <select name="Job Title" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
                     <option value="">Select Role</option>
                     <option>Registered Manager</option>
                     <option>Care Manager</option>
@@ -941,8 +730,8 @@ form_html = f"""
                 </select>
             </div>
             <div>
-                <label>Type of Care Service *</label>
-                <select name="Service Type" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Type of Care Service *</label>
+                <select name="Service Type" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
                     <option value="">Select Service</option>
                     <option>Domiciliary Care (Home Care)</option>
                     <option>Supported Living</option>
@@ -952,8 +741,8 @@ form_html = f"""
                 </select>
             </div>
             <div>
-                <label>Service Requested *</label>
-                <select name="Requested Service" required>
+                <label style="font-weight:700; font-size:13px; color:#475569;">Service Requested *</label>
+                <select name="Requested Service" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
                     <option value="">Select Option</option>
                     <option>Submitting files for the £149 Review</option>
                     <option>Quote for 30-Day Cleanup Sprint</option>
@@ -964,23 +753,23 @@ form_html = f"""
 
         <h3 style="color:#05162E;">3. What do you need help with?</h3>
         <div style="margin-bottom:24px;">
-            <label>Tell us your main concerns or what you want us to focus on *</label>
-            <textarea name="Main Concerns" required rows="4" placeholder="Example: We have a CQC inspection coming up soon. We know our staff training spreadsheet is out of date and our incident logs are messy."></textarea>
+            <label style="font-weight:700; font-size:13px; color:#475569;">Tell us your main concerns or what you want us to focus on *</label>
+            <textarea name="Main Concerns" required rows="4" placeholder="Example: We have a CQC inspection coming up soon. We know our staff training spreadsheet is out of date and our incident logs are messy." style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; font-family:sans-serif;"></textarea>
         </div>
 
         <h3 style="color:#05162E;">4. Secure File Upload</h3>
         <p style="font-size:13px; color:#64748B; margin-top:-8px;">Upload your tracker sheets, spreadsheets, or audit logs here. (Max 20MB per file).</p>
         <div style="margin-bottom:24px;">
-            <input class="upload-primary" type="file" name="Document 1" required>
-            <input class="upload-secondary" type="file" name="Document 2">
+            <input type="file" name="Document 1" required style="width:100%; padding:15px; border:2px dashed #C8A96A; background:#FFFDF7; border-radius:8px;">
+            <input type="file" name="Document 2" style="width:100%; padding:15px; border:1px dashed #CBD5E1; margin-top:8px; border-radius:8px;">
         </div>
 
         <label style="display:block; font-size:13px; color:#334155; margin-bottom:24px; cursor:pointer;">
-            <input type="checkbox" name="Consent & Privacy" required value="Agreed" style="width:auto; margin-right:8px;">
+            <input type="checkbox" name="Consent & Privacy" required value="Agreed" style="margin-right:8px;">
             I confirm I have the authority to share these documents and have removed highly sensitive patient names where necessary.
         </label>
 
-        <button type="submit" class="submit-btn">
+        <button type="submit" style="width:100%; background:#C8A96A; color:#05162E; padding:16px; border:none; border-radius:999px; font-weight:800; font-size:16px; cursor:pointer; box-shadow:0 4px 12px rgba(200,169,106,0.25);">
             Send Details to the Nexus Team
         </button>
     </form>
@@ -1014,29 +803,189 @@ with st.expander("How quickly will I get my £149 Review results back?"):
 # FOOTER
 # =========================================================
 footer_html = f"""
-<div class="footer-container">
-    <h3 style="color:white; font-size:32px; margin:0 0 10px 0;">Nexus Conformité</h3>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {{
+    box-sizing: border-box;
+}}
 
-    <p style="color:#CBD5E1; font-size:18px; max-width:760px; line-height:1.5; margin-bottom:30px;">
+html, body {{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    height: 100%;
+}}
+
+.footer {{
+    width: 100%;
+    min-height: 100%;
+    background: linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 45px;
+    box-shadow: 0 20px 50px rgba(5,22,46,0.15);
+}}
+
+.footer h3 {{
+    color: white;
+    font-size: 32px;
+    margin: 0 0 10px 0;
+}}
+
+.footer p {{
+    color: #CBD5E1;
+    font-size: 18px;
+    max-width: 760px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}}
+
+.footer-actions {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}}
+
+.btn-primary {{
+    background: #C8A96A;
+    color: #05162E !important;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(200,169,106,0.3);
+    display: inline-block;
+}}
+
+.btn-secondary {{
+    background: white;
+    color: #05162E !important;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid #E2E8F0;
+    display: inline-block;
+}}
+
+.btn-light {{
+    background: rgba(255,255,255,0.1);
+    color: white !important;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-block;
+}}
+
+.footer-socials {{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+}}
+
+.footer-socials a {{
+    color: white !important;
+    text-decoration: none;
+    background: rgba(255,255,255,0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}}
+
+.legal {{
+    color: #94A3B8 !important;
+    font-size: 13px !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+}}
+
+@media (max-width: 768px) {{
+    .footer {{
+        padding: 42px 28px;
+        text-align: center;
+        border-radius: 24px;
+    }}
+
+    .footer h3 {{
+        font-size: 36px;
+        line-height: 1.15;
+    }}
+
+    .footer p {{
+        font-size: 18px;
+        margin-left: auto;
+        margin-right: auto;
+    }}
+
+    .footer-actions {{
+        flex-direction: column;
+        gap: 14px;
+    }}
+
+    .footer-actions a {{
+        width: 100%;
+        text-align: center;
+        display: block;
+    }}
+
+    .footer-socials {{
+        justify-content: center;
+    }}
+}}
+</style>
+
+<script>
+function goToSection(sectionId) {{
+    try {{
+        const target = window.parent.document.getElementById(sectionId);
+        if (target) {{
+            target.scrollIntoView({{ behavior: "smooth", block: "start" }});
+        }} else {{
+            window.parent.location.hash = sectionId;
+        }}
+    }} catch (e) {{
+        window.parent.location.hash = sectionId;
+    }}
+}}
+</script>
+</head>
+
+<body>
+<div class="footer">
+    <h3>Nexus Conformité</h3>
+
+    <p>
     Don't enter an inspection window guessing if your paperwork is ready. We organize your documents so you can focus on delivering care.
     </p>
     
     <div class="footer-actions">
         <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Start £149 Review</a>
-        <a class="btn-secondary" href="#request">Request a Quote</a>
-        <a class="btn-light" href="#top">Back to Top</a>
+        <a class="btn-secondary" href="#" onclick="goToSection('request'); return false;">Request a Quote</a>
+        <a class="btn-light" href="#" onclick="goToSection('top'); return false;">Back to Top</a>
     </div>
 
     <div class="footer-socials">
-        <a href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-        <a href="mailto:{EMAIL}" aria-label="Email">@</a>
-        <a href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" aria-label="Payhip">PH</a>
-        <a href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LN</a>
+        <a href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer">FB</a>
+        <a href="mailto:{EMAIL}">@</a>
+        <a href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer">PH</a>
+        <a href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer">LN</a>
     </div>
 
-    <p style="color:#94A3B8; font-size:13px; margin:0; line-height:1.5;">
+    <p class="legal">
     Nexus Conformité is an independent compliance support firm. We help providers organize their paperwork and evidence. This service does not constitute formal legal representation.
     </p>
 </div>
+</body>
+</html>
 """
-html(footer_html)
+components.html(footer_html, height=720, scrolling=False)
