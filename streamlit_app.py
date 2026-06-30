@@ -64,10 +64,7 @@ components.html(META_PIXEL_CODE, height=1, scrolling=False)
 # =========================================================
 def html(source: str):
     clean_source = textwrap.dedent(source).strip()
-    if hasattr(st, "html"):
-        st.html(clean_source)
-    else:
-        st.markdown(clean_source, unsafe_allow_html=True)
+    st.markdown(clean_source, unsafe_allow_html=True)
 
 # =========================================================
 # LOGO FINDER
@@ -445,18 +442,6 @@ div[data-testid="stRadio"] label {
     overflow: hidden;
 }
 
-.step-number {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: white;
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    margin-bottom: 12px;
-}
-
 .footer {
     background:
         radial-gradient(circle at top right, rgba(200,169,106,0.20), transparent 30%),
@@ -546,6 +531,15 @@ div[data-testid="stRadio"] label {
         padding-right: 0.9rem !important;
         max-width: 100vw !important;
         width: 100% !important;
+    }
+
+    [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+    }
+
+    [data-testid="stHorizontalBlock"] > div {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
     }
 
     .topbar {
@@ -758,6 +752,304 @@ html("""
 </div>
 """)
 
+def report_preview_component():
+    components.html("""
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+}
+.frame {
+    width: 100%;
+    height: 500px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #071C35;
+    padding: 10px;
+    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+}
+.stage {
+    width: 100%;
+    height: 100%;
+    background: #071C35;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+}
+.sheet {
+    width: 760px;
+    height: 980px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.48);
+    transform-origin: center center;
+    border-left: 9px solid #C8A96A;
+    color: #172033;
+}
+.header {
+    height: 78px;
+    background: #F6F9FC;
+    padding: 22px 58px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-left strong {
+    display: block;
+    color: #0B4778;
+    font-size: 14px;
+}
+.header-left span {
+    display: block;
+    color: #7B8796;
+    font-size: 11px;
+    margin-top: 4px;
+}
+.logo {
+    text-align: right;
+    color: #C8A96A;
+    font-weight: 900;
+    font-size: 26px;
+}
+.logo span {
+    display: block;
+    color: #061A35;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+.content {
+    padding: 34px 60px;
+}
+.kicker {
+    color: #B18420;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+h1 {
+    margin: 8px 0 12px 0;
+    color: #172033;
+    font-size: 40px;
+    line-height: 1.05;
+}
+.lead {
+    color: #6B7280;
+    font-size: 20px;
+    line-height: 1.25;
+    margin-bottom: 22px;
+}
+.box-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.box {
+    border: 1px solid #E5E7EB;
+    border-left: 5px solid #C8A96A;
+    background: #FFFDF7;
+    padding: 14px;
+}
+.box.teal {
+    border-left-color: #0F766E;
+    background: #EAF7F4;
+}
+.box strong {
+    display: block;
+    font-size: 18px;
+    color: #172033;
+    margin-bottom: 8px;
+}
+.box span {
+    font-size: 15px;
+    color: #64748B;
+    line-height: 1.25;
+}
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #E5E7EB;
+    margin: 18px 0;
+}
+.metric {
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #E5E7EB;
+    background: #EEF7FC;
+}
+.metric:nth-child(2) { background: #EAF7F4; }
+.metric:nth-child(3) { background: #FFF8E8; }
+.metric:nth-child(4) { background: #FEECEC; border-right: none; }
+.metric strong {
+    display: block;
+    font-size: 34px;
+    color: #0B4778;
+}
+.metric:nth-child(2) strong { color: #0F766E; }
+.metric:nth-child(3) strong { color: #B18420; }
+.metric:nth-child(4) strong { color: #B94343; }
+.metric span {
+    color: #64748B;
+    font-size: 11px;
+    font-weight: 700;
+}
+.conclusion {
+    border: 1px solid #E5E7EB;
+    border-left: 5px solid #061A35;
+    padding: 14px 16px;
+    margin-top: 18px;
+}
+.conclusion strong {
+    display: block;
+    font-size: 18px;
+    color: #172033;
+    margin-bottom: 8px;
+}
+.conclusion p {
+    color: #64748B;
+    font-size: 16px;
+    line-height: 1.28;
+    margin: 0 0 10px 0;
+}
+.mini-pages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+.mini {
+    border: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    padding: 10px;
+    min-height: 126px;
+}
+.mini h3 {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    color: #172033;
+}
+.mini-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    border-top: 1px solid #EEF1F5;
+    padding: 5px 0;
+    font-size: 11px;
+    color: #4B5563;
+}
+.badge {
+    font-size: 10px;
+    font-weight: 900;
+    border-radius: 999px;
+    padding: 2px 6px;
+    background: #FFF8E8;
+    color: #8A6519;
+}
+.badge.green { background: #EAF7F4; color: #0F766E; }
+.badge.red { background: #FEECEC; color: #991B1B; }
+.footer {
+    position: absolute;
+    bottom: 26px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: #9AA4B2;
+    font-size: 10px;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 8px;
+}
+@media (max-width: 430px) {
+    .frame { height: 470px; }
+    .sheet { transform: translate(-50%, -50%) scale(0.43); }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+    <div class="stage">
+        <div class="sheet">
+            <div class="header">
+                <div class="header-left">
+                    <strong>Nexus Conformité | CQC Evidence Review</strong>
+                    <span>Redacted UK care provider · client report</span>
+                </div>
+                <div class="logo">NC<span>NEXUS CONFORMITÉ</span></div>
+            </div>
+
+            <div class="content">
+                <div class="kicker">Executive brief</div>
+                <h1>Executive Summary</h1>
+                <div class="lead">
+                    This report gives the provider a clear evidence position before relying on its documentation for CQC readiness, commissioner assurance or internal governance reporting.
+                </div>
+
+                <div class="box-row">
+                    <div class="box">
+                        <strong>Overall readiness</strong>
+                        <span><b>Amber - controlled cleanup required.</b><br>The evidence pack is usable, but not yet inspection-ready. The main weakness is inconsistent ownership, dating, version control and closure notes.</span>
+                    </div>
+                    <div class="box teal">
+                        <strong>Client outcome</strong>
+                        <span>The provider can now see what is strong, what is incomplete, and what must be corrected first. The action plan should be assigned to named owners and reviewed weekly.</span>
+                    </div>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric"><strong>149</strong><span>Evidence points applied</span></div>
+                    <div class="metric"><strong>87</strong><span>Acceptable / near-ready</span></div>
+                    <div class="metric"><strong>42</strong><span>Partial / weak</span></div>
+                    <div class="metric"><strong>20</strong><span>Missing / not supplied</span></div>
+                </div>
+
+                <div class="conclusion">
+                    <strong>Executive conclusion</strong>
+                    <p>The provider should not present the current file as a complete inspection evidence pack. The safer position is to use it as a working evidence base, complete the missing links, and create a short governance narrative showing how risks are identified, acted on, checked and closed.</p>
+                    <p>The first corrections should focus on governance minutes, risk review records, training assurance, complaints and improvement logs, and care plan audit closure evidence.</p>
+                </div>
+
+                <div class="mini-pages">
+                    <div class="mini">
+                        <h3>Priorities</h3>
+                        <div class="mini-row"><span>Governance oversight</span><span class="badge red">1</span></div>
+                        <div class="mini-row"><span>Risk review records</span><span class="badge">2</span></div>
+                        <div class="mini-row"><span>Training assurance</span><span class="badge">3</span></div>
+                    </div>
+                    <div class="mini">
+                        <h3>CQC lens</h3>
+                        <div class="mini-row"><span>Safe</span><span class="badge green">Used</span></div>
+                        <div class="mini-row"><span>Effective</span><span class="badge green">Used</span></div>
+                        <div class="mini-row"><span>Well-led</span><span class="badge red">Key</span></div>
+                    </div>
+                    <div class="mini">
+                        <h3>14-day plan</h3>
+                        <div class="mini-row"><span>Set control</span><span class="badge">D1-2</span></div>
+                        <div class="mini-row"><span>Fix governance</span><span class="badge">D3-5</span></div>
+                        <div class="mini-row"><span>Sign-off pack</span><span class="badge green">D12-14</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>Confidential · redacted client report</span>
+                <span>Sample preview</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+""", height=515, scrolling=False)
+
 def sample_frame(title, subtitle, rows):
     with st.container(border=True):
         st.markdown(f"**{title}**  \n*{subtitle}*")
@@ -806,28 +1098,9 @@ def review_card():
 
         else:
             st.markdown("**Sample-style output**")
-            st.subheader("Evidence review preview")
-            st.caption("Sample visual only. Final output depends on the documents received.")
-            sample_frame(
-                "Evidence Gap Summary.pdf",
-                "Review extract",
-                [
-                    ("Risk assessments", "Check"),
-                    ("Training matrix", "Weak"),
-                    ("Audit tracker", "Update"),
-                    ("Governance minutes", "Present"),
-                ],
-            )
-            sample_frame(
-                "Priority Action Direction.xlsx",
-                "Tracker view",
-                [
-                    ("Update audit tracker", "Priority"),
-                    ("Review complaints log", "Check"),
-                    ("Confirm GDPR evidence", "Gap"),
-                ],
-            )
-            st.info("The client receives a clear evidence position with practical next steps, not a generic document pack.")
+            st.subheader("Redacted report preview")
+            st.caption("Sample visual only. Final output depends on the evidence received.")
+            report_preview_component()
 
 def cleanup_card():
     with st.container(border=True):
@@ -869,42 +1142,10 @@ def cleanup_card():
             st.markdown("**Sample-style output**")
             st.subheader("Cleanup package preview")
             st.caption("Sample visual only. Final files depend on the agreed scope.")
-            sample_frame(
-                "Audit Tracker.xlsx",
-                "Updated tracker",
-                [
-                    ("Medication audit", "Closed"),
-                    ("Care plan audit", "Open"),
-                    ("Staff file audit", "Overdue"),
-                ],
-            )
-            sample_frame(
-                "Incident Log.xlsx",
-                "Cleaned log",
-                [
-                    ("Incident type", "Added"),
-                    ("Follow-up action", "Review"),
-                    ("Manager sign-off", "Missing"),
-                ],
-            )
-            sample_frame(
-                "Complaints Log.xlsx",
-                "Review status",
-                [
-                    ("Outcome recorded", "Partial"),
-                    ("Learning captured", "Gap"),
-                    ("Closed status", "Check"),
-                ],
-            )
-            sample_frame(
-                "Evidence Index.xlsx",
-                "Folder map",
-                [
-                    ("Policies", "Indexed"),
-                    ("Risk records", "Check"),
-                    ("Governance minutes", "Mapped"),
-                ],
-            )
+            sample_frame("Audit Tracker.xlsx", "Updated tracker", [("Medication audit", "Closed"), ("Care plan audit", "Open"), ("Staff file audit", "Overdue")])
+            sample_frame("Incident Log.xlsx", "Cleaned log", [("Incident type", "Added"), ("Follow-up action", "Review"), ("Manager sign-off", "Missing")])
+            sample_frame("Complaints Log.xlsx", "Review status", [("Outcome recorded", "Partial"), ("Learning captured", "Gap"), ("Closed status", "Check")])
+            sample_frame("Evidence Index.xlsx", "Folder map", [("Policies", "Indexed"), ("Risk records", "Check"), ("Governance minutes", "Mapped")])
 
 def retainer_card():
     with st.container(border=True):
@@ -946,33 +1187,9 @@ def retainer_card():
             st.markdown("**Sample-style output**")
             st.subheader("Monthly support preview")
             st.caption("Sample visual only. Monthly outputs are agreed after scope review.")
-            sample_frame(
-                "Monthly Evidence Dashboard.xlsx",
-                "Status view",
-                [
-                    ("Policies reviewed", "4"),
-                    ("Trackers updated", "3"),
-                    ("High priority items", "2"),
-                ],
-            )
-            sample_frame(
-                "Action Tracker Update.xlsx",
-                "Month-end",
-                [
-                    ("Owner assigned", "Yes"),
-                    ("Due dates added", "Yes"),
-                    ("Overdue items", "Review"),
-                ],
-            )
-            sample_frame(
-                "Governance Summary.docx",
-                "Monthly note",
-                [
-                    ("Management review", "Prepared"),
-                    ("Risk points", "2"),
-                    ("Next actions", "Listed"),
-                ],
-            )
+            sample_frame("Monthly Evidence Dashboard.xlsx", "Status view", [("Policies reviewed", "4"), ("Trackers updated", "3"), ("High priority items", "2")])
+            sample_frame("Action Tracker Update.xlsx", "Month-end", [("Owner assigned", "Yes"), ("Due dates added", "Yes"), ("Overdue items", "Review")])
+            sample_frame("Governance Summary.docx", "Monthly note", [("Management review", "Prepared"), ("Risk points", "2"), ("Next actions", "Listed")])
             st.info("The monthly retainer keeps the evidence position visible, current, and easier to review.")
 
 service_cols = st.columns(3)
