@@ -299,6 +299,20 @@ p, li {
     width: 100%;
 }
 
+.stLinkButton a {
+    background: #061A35 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #061A35 !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+}
+
+.stLinkButton a p,
+.stLinkButton a span,
+.stLinkButton a div {
+    color: #FFFFFF !important;
+}
+
 .section {
     margin: 34px 0;
 }
@@ -671,7 +685,7 @@ html("""
 """)
 
 # =========================================================
-# SERVICE CARDS
+# SERVICES
 # =========================================================
 html('<div id="services"></div>')
 
@@ -1416,7 +1430,7 @@ components.html(f"""
 
     </form>
 </div>
-""", height=2850, scrolling=True)
+""", height=2600, scrolling=True)
 
 # =========================================================
 # FAQS
@@ -1461,45 +1475,184 @@ with st.expander("Does Nexus provide legal advice?"):
     st.write("No. Nexus Conformité provides compliance organisation, evidence readiness, governance documentation, and operational support. It does not replace legal advice.")
 
 # =========================================================
-# CONTACT / FOOTER
+# PREMIUM FOOTER COMPONENT
 # =========================================================
 html('<div id="contact"></div>')
 
-st.markdown("---")
-st.markdown("## Nexus Conformité")
-st.markdown(
-    "Need a clearer evidence position before your next review, inspection, or internal check? "
-    "Start with the £149 Evidence File Review, request scoped support, or contact Nexus directly."
-)
+components.html(f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {{
+    box-sizing: border-box;
+}}
 
-footer_cols = st.columns(3)
+body {{
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+}}
 
-with footer_cols[0]:
-    st.link_button("Buy £149 Review", CQC_REVIEW_CHECKOUT_URL, use_container_width=True)
+.footer {{
+    width: 100%;
+    background:
+        radial-gradient(circle at top right, rgba(200,169,106,0.20), transparent 30%),
+        linear-gradient(135deg, #061A35 0%, #0B2545 58%, #0F766E 100%);
+    color: white;
+    border-radius: 28px;
+    padding: 38px 34px;
+    box-shadow: 0 22px 60px rgba(6,26,53,0.20);
+    overflow: hidden;
+}}
 
-with footer_cols[1]:
-    st.link_button("Contact / Request Support", "#request", use_container_width=True)
+.footer h3 {{
+    color: white;
+    font-size: 34px;
+    line-height: 1.08;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.04em;
+}}
 
-with footer_cols[2]:
-    st.link_button("Back to Top", "#top", use_container_width=True)
+.footer p {{
+    color: #DDE6F2;
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0 0 20px 0;
+}}
 
-st.markdown("### Contact Nexus")
+.footer-cta {{
+    max-width: 780px;
+    font-size: 20px !important;
+    color: #FFFFFF !important;
+}}
 
-contact_cols = st.columns(4)
+.footer-actions {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 22px 0;
+}}
 
-with contact_cols[0]:
-    st.link_button("Facebook", FACEBOOK_URL, use_container_width=True)
+.footer-actions a {{
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 15px;
+    text-align: center;
+}}
 
-with contact_cols[1]:
-    st.link_button("Email", f"mailto:{EMAIL}", use_container_width=True)
+.btn-primary {{
+    background: #C8A96A;
+    color: #061A35 !important;
+}}
 
-with contact_cols[2]:
-    st.link_button("Payhip", PAYHIP_URL, use_container_width=True)
+.btn-secondary {{
+    background: #FFFFFF;
+    color: #061A35 !important;
+}}
 
-with contact_cols[3]:
-    st.link_button("LinkedIn", LINKEDIN_URL, use_container_width=True)
+.btn-light {{
+    background: rgba(255,255,255,0.12);
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255,255,255,0.25);
+}}
 
-st.caption(
-    "Nexus Conformité provides compliance organisation, evidence readiness, policy structure, "
-    "and governance documentation support. Services do not replace legal advice or the provider’s own regulatory responsibilities."
-)
+.footer-icon-row {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 22px 0 22px 0;
+    align-items: center;
+}}
+
+.icon-link {{
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.10);
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.24);
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 17px;
+    line-height: 1;
+}}
+
+.icon-link:hover {{
+    background: #C8A96A;
+    color: #061A35 !important;
+    border-color: #C8A96A;
+}}
+
+.footer-small {{
+    color: #C9D4E5 !important;
+    font-size: 14px !important;
+    margin-top: 18px !important;
+}}
+
+@media (max-width: 700px) {{
+    .footer {{
+        padding: 32px 24px;
+        border-radius: 26px;
+    }}
+
+    .footer h3 {{
+        font-size: 31px;
+    }}
+
+    .footer p {{
+        font-size: 16px;
+    }}
+
+    .footer-cta {{
+        font-size: 18px !important;
+    }}
+
+    .footer-actions {{
+        display: block;
+    }}
+
+    .footer-actions a {{
+        display: block;
+        width: 100%;
+        margin-bottom: 12px;
+    }}
+}}
+</style>
+</head>
+<body>
+<div class="footer">
+    <h3>Nexus Conformité</h3>
+
+    <p class="footer-cta">
+        Need a clearer evidence position before your next review, inspection, or internal check?
+        Start with the £149 Evidence File Review, request scoped support, or contact Nexus directly.
+    </p>
+
+    <div class="footer-actions">
+        <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy £149 Review</a>
+        <a class="btn-secondary" href="#request" target="_parent">Contact / Request Support</a>
+        <a class="btn-light" href="#top" target="_parent">Back to Top</a>
+    </div>
+
+    <div class="footer-icon-row" aria-label="Nexus Conformité contact links">
+        <a class="icon-link" href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">f</a>
+        <a class="icon-link" href="mailto:{EMAIL}" aria-label="Email" title="Email">@</a>
+        <a class="icon-link" href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" aria-label="Payhip" title="Payhip">P</a>
+        <a class="icon-link" href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">in</a>
+    </div>
+
+    <p class="footer-small">
+        Nexus Conformité provides compliance organisation, evidence readiness, policy structure,
+        and governance documentation support. Services do not replace legal advice or the provider’s own regulatory responsibilities.
+    </p>
+</div>
+</body>
+</html>
+""", height=480, scrolling=False)
