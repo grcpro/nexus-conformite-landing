@@ -373,6 +373,61 @@ p, li {
     line-height: 1.18;
 }
 
+.review-cover-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 14px 38px rgba(15,23,42,0.05);
+}
+
+.review-cover-item {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--line);
+    box-sizing: border-box;
+}
+
+.review-cover-item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+}
+
+.review-cover-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    border: 1px solid rgba(200,169,106,0.55);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    font-weight: 900;
+    flex: 0 0 48px;
+}
+
+.review-cover-item p {
+    margin: 0;
+    color: var(--navy);
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.25;
+}
+
+.review-cover-note {
+    background: #FFFFFF;
+    border-left: 5px solid var(--gold);
+    padding: 18px 22px;
+    margin-top: 18px;
+    border-radius: 18px;
+    color: var(--navy);
+    font-size: 20px;
+}
+
 .notice {
     background: #FFF8E8;
     border: 1px solid #F0DB9B;
@@ -541,6 +596,22 @@ p, li {
         padding: 24px;
     }
 
+    .review-cover-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-cover-item:nth-child(odd) {
+        border-right: none;
+    }
+
+    .review-cover-item {
+        padding: 22px;
+    }
+
+    .review-cover-item p {
+        font-size: 20px;
+    }
+
     p, li {
         font-size: 17px;
     }
@@ -629,6 +700,57 @@ html("""
     <p>
     Nexus reviews the structure of your evidence and identifies the areas that need attention before they become a larger operational risk.
     </p>
+</div>
+""")
+
+# =========================================================
+# REVIEW COVERAGE SECTION
+# =========================================================
+html("""
+<div class="section">
+    <h2>What the £149 review covers.</h2>
+    <p class="section-intro">
+    A practical review of the core evidence areas care providers are expected to keep organised, current, and ready to explain.
+    </p>
+</div>
+
+<div class="review-cover-grid">
+    <div class="review-cover-item">
+        <div class="review-cover-icon">□</div>
+        <p>Policies and procedures</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">✓</div>
+        <p>Risk assessments</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">▤</div>
+        <p>Training matrix</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">!</div>
+        <p>Incidents and complaints logs</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">○</div>
+        <p>Safeguarding records</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">☑</div>
+        <p>Audit tracker</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">◉</div>
+        <p>Governance minutes</p>
+    </div>
+    <div class="review-cover-item">
+        <div class="review-cover-icon">⌂</div>
+        <p>GDPR and data handling</p>
+    </div>
+</div>
+
+<div class="review-cover-note">
+    The review identifies whether these records are structured, traceable, current, and suitable for management review.
 </div>
 """)
 
@@ -915,15 +1037,16 @@ components.html(f"""
             Tick the areas you can provide now. You do not need to upload everything at first contact.
         </p>
 
-        <label><input type="checkbox" name="Available Evidence Areas" value="Policies and SOPs"> Policies and SOPs</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Evidence folder index or screenshots"> Evidence folder index or screenshots</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Risk register"> Risk register</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Policies and procedures"> Policies and procedures</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Risk assessments"> Risk assessments</label><br>
         <label><input type="checkbox" name="Available Evidence Areas" value="Training matrix or training records"> Training matrix or training records</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Audit records"> Audit records</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Incident records or incident tracker"> Incident records or incident tracker</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Complaints records or complaints tracker"> Complaints records or complaints tracker</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Incidents and complaints logs"> Incidents and complaints logs</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Safeguarding records"> Safeguarding records</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Audit tracker or audit records"> Audit tracker or audit records</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Governance minutes or management review notes"> Governance minutes or management review notes</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="GDPR and data handling records"> GDPR and data handling records</label><br>
+        <label><input type="checkbox" name="Available Evidence Areas" value="Evidence folder index or screenshots"> Evidence folder index or screenshots</label><br>
         <label><input type="checkbox" name="Available Evidence Areas" value="Action tracker"> Action tracker</label><br>
-        <label><input type="checkbox" name="Available Evidence Areas" value="Management review notes"> Management review notes</label><br>
         <label><input type="checkbox" name="Available Evidence Areas" value="CQC correspondence or report"> CQC correspondence or report, if relevant</label><br>
 
         <br>
@@ -946,7 +1069,7 @@ components.html(f"""
         <h3 style="color:#061A35;">6. Main concern</h3>
 
         <label style="font-weight:700; color:#061A35;">Describe the issue *</label><br>
-        <textarea name="Main Concern" required rows="7" placeholder="Example: Our policies exist but the evidence folders are scattered. We need help organising audits, incidents, complaints, training records, action trackers, and management review notes." style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;"></textarea>
+        <textarea name="Main Concern" required rows="7" placeholder="Example: Our evidence folders need review before inspection. We need help checking policies, risk assessments, training records, audit trackers, safeguarding records, complaints logs, governance minutes, and GDPR evidence." style="width:100%; padding:14px; margin:8px 0 16px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;"></textarea>
 
         <label style="font-weight:700; color:#061A35;">Preferred next step</label><br>
         <select name="Preferred Next Step" style="width:100%; padding:14px; margin:8px 0 22px 0; border:1px solid #D1D5DB; border-radius:12px; font-size:16px; box-sizing:border-box;">
@@ -974,7 +1097,7 @@ components.html(f"""
 
     </form>
 </div>
-""", height=4300, scrolling=True)
+""", height=3700, scrolling=True)
 
 # =========================================================
 # FAQS
