@@ -378,15 +378,45 @@ p, li {
     margin: 30px 0;
 }
 
+/* Footer */
 .footer-container {
     width: 100%;
-    padding: 20px 10px;
-    background-color: #001f3f;
+    background: linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%);
     color: white;
+    border-radius: 24px;
+    padding: 45px;
+    box-shadow: 0 20px 50px rgba(5,22,46,0.15);
     overflow-wrap: break-word;
     word-wrap: break-word;
-    text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
+}
+
+.footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.footer-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.footer-socials a {
+    color: white !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,0.12);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 13px;
 }
 
 @media (max-width: 900px) {
@@ -436,6 +466,21 @@ p, li {
         padding: 34px 20px !important;
         text-align: center !important;
         border-radius: 18px !important;
+    }
+
+    .footer-actions {
+        flex-direction: column !important;
+    }
+
+    .footer-actions a {
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+    }
+
+    .footer-socials {
+        justify-content: center !important;
+        padding-bottom: 8px !important;
     }
 }
 </style>
@@ -651,7 +696,10 @@ with col2:
 - Fixing your training and complaints logs
 - Handing back a fully organized folder system
 """)
-            st.link_button("Request a Cleanup Quote", "#request", use_container_width=True)
+            st.markdown(
+                '<a class="btn-secondary" href="#request" style="display:block; text-align:center; margin-top:12px;">Request a Cleanup Quote</a>',
+                unsafe_allow_html=True
+            )
         elif v2 == "How We Check":
             st.caption("Perfect for providers who have fallen behind on paperwork and need to get ready for an inspection fast.")
         else:
@@ -672,7 +720,10 @@ with col3:
 - Continuous updates to policies
 - A monthly health-check report for owners
 """)
-            st.link_button("Apply for Ongoing Support", "#request", use_container_width=True)
+            st.markdown(
+                '<a class="btn-secondary" href="#request" style="display:block; text-align:center; margin-top:12px;">Apply for Ongoing Support</a>',
+                unsafe_allow_html=True
+            )
         elif v3 == "How We Check":
             st.caption("For busy care managers who want peace of mind knowing their paperwork won't drift out of date again.")
         else:
@@ -721,7 +772,7 @@ with p_col3:
 # =========================================================
 # INTAKE FORM
 # =========================================================
-html('<div id="request"></div>')
+html('<div id="request" style="scroll-margin-top: 24px;"></div>')
 html("""
 <div class="section">
     <h2>Secure Compliance Intake Form</h2>
@@ -963,99 +1014,24 @@ with st.expander("How quickly will I get my £149 Review results back?"):
 # FOOTER
 # =========================================================
 footer_html = f"""
-<style>
-    * {{
-        box-sizing: border-box;
-    }}
-
-    html, body {{
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }}
-
-    .footer-container {{
-        width: 100%;
-        background: linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%);
-        color: white;
-        border-radius: 24px;
-        padding: 45px;
-        box-shadow: 0 20px 50px rgba(5,22,46,0.15);
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-    }}
-
-    .btn-primary {{
-        background: #C8A96A;
-        color: #05162E !important;
-        font-weight: 800;
-        padding: 14px 28px;
-        border-radius: 999px;
-        text-decoration: none;
-        box-shadow: 0 4px 14px rgba(200,169,106,0.3);
-        display: inline-block;
-    }}
-
-    .btn-secondary {{
-        background: white;
-        color: #05162E !important;
-        font-weight: 700;
-        padding: 14px 28px;
-        border-radius: 999px;
-        text-decoration: none;
-        border: 1px solid #E2E8F0;
-        display: inline-block;
-    }}
-
-    .btn-light {{
-        background: rgba(255,255,255,0.1);
-        color: white !important;
-        font-weight: 700;
-        padding: 14px 28px;
-        border-radius: 999px;
-        text-decoration: none;
-        border: 1px solid rgba(255,255,255,0.2);
-        display: inline-block;
-    }}
-
-    @media (max-width: 768px) {{
-        .footer-container {{
-            padding: 34px 20px;
-            text-align: center;
-            border-radius: 18px;
-        }}
-
-        .footer-actions {{
-            flex-direction: column;
-        }}
-
-        .btn-primary,
-        .btn-secondary,
-        .btn-light {{
-            width: 100%;
-            text-align: center;
-        }}
-    }}
-</style>
-
 <div class="footer-container">
     <h3 style="color:white; font-size:32px; margin:0 0 10px 0;">Nexus Conformité</h3>
+
     <p style="color:#CBD5E1; font-size:18px; max-width:760px; line-height:1.5; margin-bottom:30px;">
     Don't enter an inspection window guessing if your paperwork is ready. We organize your documents so you can focus on delivering care.
     </p>
     
-    <div class="footer-actions" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px;">
+    <div class="footer-actions">
         <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Start £149 Review</a>
-        <a class="btn-secondary" href="#request" target="_parent">Request a Quote</a>
-        <a class="btn-light" href="#top" target="_parent">Back to Top</a>
+        <a class="btn-secondary" href="#request">Request a Quote</a>
+        <a class="btn-light" href="#top">Back to Top</a>
     </div>
 
-    <div style="display:flex; gap:12px; align-items:center; margin-bottom:24px;">
-        <a href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" style="color:white; text-decoration:none; background:rgba(255,255,255,0.1); width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:bold;">FB</a>
-        <a href="mailto:{EMAIL}" style="color:white; text-decoration:none; background:rgba(255,255,255,0.1); width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:bold;">@</a>
-        <a href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" style="color:white; text-decoration:none; background:rgba(255,255,255,0.1); width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:bold;">PH</a>
-        <a href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" style="color:white; text-decoration:none; background:rgba(255,255,255,0.1); width:40px; height:40px; border-radius:50%; display:grid; place-items:center; font-weight:bold;">LN</a>
+    <div class="footer-socials">
+        <a href="{FACEBOOK_URL}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+        <a href="mailto:{EMAIL}" aria-label="Email">@</a>
+        <a href="{PAYHIP_URL}" target="_blank" rel="noopener noreferrer" aria-label="Payhip">PH</a>
+        <a href="{LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LN</a>
     </div>
 
     <p style="color:#94A3B8; font-size:13px; margin:0; line-height:1.5;">
@@ -1063,4 +1039,4 @@ footer_html = f"""
     </p>
 </div>
 """
-components.html(footer_html, height=440, scrolling=False)
+html(footer_html)
