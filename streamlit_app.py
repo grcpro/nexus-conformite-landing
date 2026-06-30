@@ -121,6 +121,23 @@ html, body, .stApp {
     max-width: 100vw !important;
 }
 
+html, body, [data-testid="stAppViewContainer"] {
+    overflow-x: hidden !important;
+}
+
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+[data-testid="stTextInput"], 
+[data-testid="stSelectbox"],
+[data-testid="stTextArea"],
+[data-testid="stFileUploader"] {
+    width: 100% !important;
+}
+
 .stApp {
     background: var(--bg-gradient);
     color: var(--text);
@@ -361,11 +378,65 @@ p, li {
     margin: 30px 0;
 }
 
+.footer-container {
+    width: 100%;
+    padding: 20px 10px;
+    background-color: #001f3f;
+    color: white;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-align: center;
+    margin-top: 50px;
+}
+
 @media (max-width: 900px) {
     .review-cover-grid { grid-template-columns: repeat(2, 1fr); }
     .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
     .nav-pills { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); }
     .nav-pills a { text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .block-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .hero {
+        padding: 38px 24px !important;
+        border-radius: 18px !important;
+    }
+
+    .hero h1 {
+        font-size: 32px !important;
+        line-height: 1.12 !important;
+    }
+
+    .hero p {
+        font-size: 16px !important;
+    }
+
+    .cta-row {
+        flex-direction: column !important;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-light {
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+    }
+
+    .review-cover-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .footer-container {
+        padding: 34px 20px !important;
+        text-align: center !important;
+        border-radius: 18px !important;
+    }
 }
 </style>
 """)
@@ -472,7 +543,8 @@ def render_preview_1():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
+    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #C8A96A; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #EEE; padding-bottom:10px; }}
     .badge {{ background:#FEF3C7; color:#92400E; padding:4px 8px; font-size:11px; font-weight:bold; border-radius:4px; }}
@@ -498,7 +570,8 @@ def render_preview_2():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
+    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #0D9488; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #EEE; padding-bottom:10px; }}
     table {{ width:100%; border-collapse:collapse; margin-top:15px; font-size:12px; }}
@@ -520,7 +593,8 @@ def render_preview_3():
     logo = get_logo_html()
     src = f"""
     <!DOCTYPE html><html><head><style>
-    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; }}
+    body {{ margin:0; background:#071C35; font-family:sans-serif; padding:10px; overflow-x:hidden; }}
+    img {{ max-width:100% !important; height:auto !important; object-fit:contain !important; }}
     .sheet {{ width:100%; background:white; height:460px; border-left:8px solid #05162E; padding:20px; box-sizing:border-box; overflow:hidden; }}
     .hdr {{ display:flex; justify-content:space-between; align-items:center; background:#05162E; color:white; padding:15px; }}
     .kpi-row {{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:15px; }}
@@ -658,7 +732,120 @@ html("""
 """)
 
 form_html = f"""
-<div style="background:#ffffff; border:1px solid #E2E8F0; border-radius:16px; padding:30px; box-shadow:0 10px 35px rgba(0,0,0,0.02); font-family:sans-serif; color:#05162E;">
+<style>
+    * {{
+        box-sizing: border-box;
+    }}
+
+    html, body {{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }}
+
+    .intake-card {{
+        background: #ffffff;
+        border: 1px solid #E2E8F0;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.02);
+        color: #05162E;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }}
+
+    .form-grid-2 {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }}
+
+    .form-grid-3 {{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }}
+
+    label {{
+        font-weight: 700;
+        font-size: 13px;
+        color: #475569;
+        display: block;
+        margin-bottom: 6px;
+    }}
+
+    input,
+    select,
+    textarea {{
+        width: 100%;
+        max-width: 100%;
+        padding: 12px;
+        border: 1px solid #CBD5E1;
+        border-radius: 8px;
+        font-family: sans-serif;
+        font-size: 14px;
+        background: white;
+        color: #05162E;
+    }}
+
+    textarea {{
+        resize: vertical;
+    }}
+
+    .upload-primary {{
+        width: 100%;
+        padding: 15px;
+        border: 2px dashed #C8A96A;
+        background: #FFFDF7;
+        border-radius: 8px;
+    }}
+
+    .upload-secondary {{
+        width: 100%;
+        padding: 15px;
+        border: 1px dashed #CBD5E1;
+        margin-top: 8px;
+        border-radius: 8px;
+    }}
+
+    .submit-btn {{
+        width: 100%;
+        background: #C8A96A;
+        color: #05162E;
+        padding: 16px;
+        border: none;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(200,169,106,0.25);
+    }}
+
+    @media (max-width: 820px) {{
+        .intake-card {{
+            padding: 22px 16px;
+            border-radius: 14px;
+        }}
+
+        .form-grid-2,
+        .form-grid-3 {{
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }}
+
+        input,
+        select,
+        textarea {{
+            font-size: 16px;
+        }}
+    }}
+</style>
+
+<div class="intake-card">
     <form action="https://formsubmit.co/{EMAIL}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="New Client Intake Form Received">
         <input type="hidden" name="_template" value="table">
@@ -666,33 +853,33 @@ form_html = f"""
         <input type="text" name="_honey" style="display:none">
 
         <h3 style="margin-top:0; color:#05162E;">1. Your Details</h3>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
+        <div class="form-grid-2">
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Your Full Name *</label>
-                <input type="text" name="Name" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
+                <label>Your Full Name *</label>
+                <input type="text" name="Name" required>
             </div>
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Company Name *</label>
-                <input type="text" name="Company" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
+                <label>Company Name *</label>
+                <input type="text" name="Company" required>
             </div>
         </div>
         
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:24px;">
+        <div class="form-grid-2" style="margin-bottom:24px;">
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Email Address *</label>
-                <input type="email" name="email" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
+                <label>Email Address *</label>
+                <input type="email" name="email" required>
             </div>
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Order ID (If you already paid for the £149 Review)</label>
-                <input type="text" name="Order ID" placeholder="Leave blank if requesting a quote" style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px;">
+                <label>Order ID (If you already paid for the £149 Review)</label>
+                <input type="text" name="Order ID" placeholder="Leave blank if requesting a quote">
             </div>
         </div>
 
         <h3 style="color:#05162E;">2. Your Business Type</h3>
-        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin-bottom:24px;">
+        <div class="form-grid-3">
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Your Job Title *</label>
-                <select name="Job Title" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
+                <label>Your Job Title *</label>
+                <select name="Job Title" required>
                     <option value="">Select Role</option>
                     <option>Registered Manager</option>
                     <option>Care Manager</option>
@@ -703,8 +890,8 @@ form_html = f"""
                 </select>
             </div>
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Type of Care Service *</label>
-                <select name="Service Type" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
+                <label>Type of Care Service *</label>
+                <select name="Service Type" required>
                     <option value="">Select Service</option>
                     <option>Domiciliary Care (Home Care)</option>
                     <option>Supported Living</option>
@@ -714,8 +901,8 @@ form_html = f"""
                 </select>
             </div>
             <div>
-                <label style="font-weight:700; font-size:13px; color:#475569;">Service Requested *</label>
-                <select name="Requested Service" required style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; background:white;">
+                <label>Service Requested *</label>
+                <select name="Requested Service" required>
                     <option value="">Select Option</option>
                     <option>Submitting files for the £149 Review</option>
                     <option>Quote for 30-Day Cleanup Sprint</option>
@@ -726,23 +913,23 @@ form_html = f"""
 
         <h3 style="color:#05162E;">3. What do you need help with?</h3>
         <div style="margin-bottom:24px;">
-            <label style="font-weight:700; font-size:13px; color:#475569;">Tell us your main concerns or what you want us to focus on *</label>
-            <textarea name="Main Concerns" required rows="4" placeholder="Example: We have a CQC inspection coming up soon. We know our staff training spreadsheet is out of date and our incident logs are messy." style="width:100%; padding:12px; margin-top:6px; border:1px solid #CBD5E1; border-radius:8px; font-family:sans-serif;"></textarea>
+            <label>Tell us your main concerns or what you want us to focus on *</label>
+            <textarea name="Main Concerns" required rows="4" placeholder="Example: We have a CQC inspection coming up soon. We know our staff training spreadsheet is out of date and our incident logs are messy."></textarea>
         </div>
 
         <h3 style="color:#05162E;">4. Secure File Upload</h3>
         <p style="font-size:13px; color:#64748B; margin-top:-8px;">Upload your tracker sheets, spreadsheets, or audit logs here. (Max 20MB per file).</p>
         <div style="margin-bottom:24px;">
-            <input type="file" name="Document 1" required style="width:100%; padding:15px; border:2px dashed #C8A96A; background:#FFFDF7; border-radius:8px;">
-            <input type="file" name="Document 2" style="width:100%; padding:15px; border:1px dashed #CBD5E1; margin-top:8px; border-radius:8px;">
+            <input class="upload-primary" type="file" name="Document 1" required>
+            <input class="upload-secondary" type="file" name="Document 2">
         </div>
 
         <label style="display:block; font-size:13px; color:#334155; margin-bottom:24px; cursor:pointer;">
-            <input type="checkbox" name="Consent & Privacy" required value="Agreed" style="margin-right:8px;">
+            <input type="checkbox" name="Consent & Privacy" required value="Agreed" style="width:auto; margin-right:8px;">
             I confirm I have the authority to share these documents and have removed highly sensitive patient names where necessary.
         </label>
 
-        <button type="submit" style="width:100%; background:#C8A96A; color:#05162E; padding:16px; border:none; border-radius:999px; font-weight:800; font-size:16px; cursor:pointer; box-shadow:0 4px 12px rgba(200,169,106,0.25);">
+        <button type="submit" class="submit-btn">
             Send Details to the Nexus Team
         </button>
     </form>
@@ -776,13 +963,89 @@ with st.expander("How quickly will I get my £149 Review results back?"):
 # FOOTER
 # =========================================================
 footer_html = f"""
-<div class="footer" style="width:100%; background:linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%); color:white; border-radius:24px; padding:45px; box-shadow:0 20px 50px rgba(5,22,46,0.15);">
+<style>
+    * {{
+        box-sizing: border-box;
+    }}
+
+    html, body {{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }}
+
+    .footer-container {{
+        width: 100%;
+        background: linear-gradient(135deg, #05162E 0%, #0B2545 70%, #0D9488 100%);
+        color: white;
+        border-radius: 24px;
+        padding: 45px;
+        box-shadow: 0 20px 50px rgba(5,22,46,0.15);
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }}
+
+    .btn-primary {{
+        background: #C8A96A;
+        color: #05162E !important;
+        font-weight: 800;
+        padding: 14px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(200,169,106,0.3);
+        display: inline-block;
+    }}
+
+    .btn-secondary {{
+        background: white;
+        color: #05162E !important;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid #E2E8F0;
+        display: inline-block;
+    }}
+
+    .btn-light {{
+        background: rgba(255,255,255,0.1);
+        color: white !important;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid rgba(255,255,255,0.2);
+        display: inline-block;
+    }}
+
+    @media (max-width: 768px) {{
+        .footer-container {{
+            padding: 34px 20px;
+            text-align: center;
+            border-radius: 18px;
+        }}
+
+        .footer-actions {{
+            flex-direction: column;
+        }}
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-light {{
+            width: 100%;
+            text-align: center;
+        }}
+    }}
+</style>
+
+<div class="footer-container">
     <h3 style="color:white; font-size:32px; margin:0 0 10px 0;">Nexus Conformité</h3>
     <p style="color:#CBD5E1; font-size:18px; max-width:760px; line-height:1.5; margin-bottom:30px;">
     Don't enter an inspection window guessing if your paperwork is ready. We organize your documents so you can focus on delivering care.
     </p>
     
-    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px;">
+    <div class="footer-actions" style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px;">
         <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Start £149 Review</a>
         <a class="btn-secondary" href="#request" target="_parent">Request a Quote</a>
         <a class="btn-light" href="#top" target="_parent">Back to Top</a>
