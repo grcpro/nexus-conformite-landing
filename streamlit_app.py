@@ -65,10 +65,7 @@ components.html(META_PIXEL_CODE, height=1, scrolling=False)
 # =========================================================
 def html(source: str):
     clean_source = textwrap.dedent(source).strip()
-    if hasattr(st, "html"):
-        st.html(clean_source)
-    else:
-        st.markdown(clean_source, unsafe_allow_html=True)
+    st.markdown(clean_source, unsafe_allow_html=True)
 
 # =========================================================
 # LOGO FINDER
@@ -214,7 +211,7 @@ p, li {
 .hero p {
     color: #EAF0F7;
     font-size: clamp(18px, 2.2vw, 22px);
-    max-width: 850px;
+    max-width: 860px;
 }
 
 .eyebrow {
@@ -604,11 +601,11 @@ html(f"""
 html(f"""
 <div class="hero">
     <div class="eyebrow">UK care compliance support</div>
-    <h1>Before inspection pressure builds, know exactly where your CQC evidence is weak.</h1>
+    <h1>Get a clear view of your CQC evidence position before issues escalate.</h1>
     <p>
-    Nexus Conformité helps UK care managers and small providers turn scattered evidence,
-    policies, trackers, SOPs, and governance records into a clearer review-ready structure.
-    Start with the £149 review before spending hundreds on deeper cleanup.
+    Nexus Conformité supports UK care managers and small providers with structured evidence reviews,
+    documentation organisation, and compliance readiness support. The £149 Evidence File Review gives
+    you a practical first assessment before committing to deeper cleanup or ongoing support.
     </p>
     <div class="cta-row">
         <a class="btn-primary" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy £149 Review</a>
@@ -623,15 +620,14 @@ html(f"""
 # =========================================================
 html("""
 <div class="problem-strip">
-    <h2>You may already have documents. The real question is whether they prove control.</h2>
+    <h2>Documents alone do not prove control. Evidence does.</h2>
     <div class="gold-line"></div>
     <p>
-    Many providers have policies, training records, incident notes, audits, complaints logs, and risk documents.
-    The pressure starts when those records are scattered, outdated, duplicated, or difficult to explain.
+    Policies, trackers, audits, training records, incidents, complaints, and risk documents only support compliance when they are current,
+    organised, and easy to explain.
     </p>
     <p>
-    The £149 review gives managers a low-risk starting point: what exists, what is weak, what is missing,
-    and what needs to happen next.
+    Nexus reviews the structure of your evidence and identifies the areas that need attention before they become a larger operational risk.
     </p>
 </div>
 """)
@@ -643,10 +639,10 @@ html('<div id="services"></div>')
 
 html("""
 <div class="section">
-    <h2>Choose the support route that fits your current risk.</h2>
+    <h2>Select the level of support that matches your evidence position.</h2>
     <p class="section-intro">
-    Start with the fixed £149 checkout review. Larger services are scoped privately because each provider’s evidence,
-    documents, urgency, and final delivery package are different.
+    The £149 CQC Evidence File Review is a fixed first step. Larger services are scoped privately because the level of work depends on document volume,
+    urgency, evidence quality, and the final delivery package required.
     </p>
 </div>
 """)
@@ -654,15 +650,15 @@ html("""
 html(f"""
 <div class="grid-3">
     <div class="card">
-        <span class="badge-gold">Best first step</span>
+        <span class="badge-gold">Fixed first step</span>
         <h3>£149 CQC Evidence File Review</h3>
         <div class="price">£149</div>
-        <p>A focused evidence review for managers who need clarity before deciding whether a full cleanup is worth the investment.</p>
+        <p>A focused review for providers that need a clear evidence assessment before deciding whether deeper support is required.</p>
         <ul>
             <li>Evidence folder structure review</li>
-            <li>Gap notes on weak or missing records</li>
+            <li>Gap notes on weak, missing, or unclear records</li>
             <li>Action tracker direction</li>
-            <li>Summary of practical next steps</li>
+            <li>Written summary of practical next steps</li>
             <li>Delivered within 3–5 business days after payment and receipt of required intake documents</li>
         </ul>
         <a class="btn-dark" href="{CQC_REVIEW_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer">Buy Now</a>
@@ -671,11 +667,11 @@ html(f"""
         <span class="badge">Scoped private Payhip link</span>
         <h3>30-Day CQC Evidence Cleanup Sprint</h3>
         <div class="price">From £750</div>
-        <p>For providers whose evidence exists but is scattered, inconsistent, outdated, or not easy to present under pressure.</p>
+        <p>For providers that need structured cleanup of evidence folders, trackers, policies, and management review records.</p>
         <ul>
             <li>Scoped after intake review</li>
             <li>40% deposit paid through a private Payhip link before work starts</li>
-            <li>Evidence cleanup, policy structure, trackers, and management summary support</li>
+            <li>Evidence cleanup, policy structure, tracker organisation, and management summary support</li>
             <li>Preview or summary shown before final payment</li>
             <li>Final 60% paid through a private Payhip delivery link before files are released</li>
         </ul>
@@ -685,12 +681,12 @@ html(f"""
         <span class="badge">Scoped private Payhip link</span>
         <h3>Monthly Compliance Retainer</h3>
         <div class="price">Scoped</div>
-        <p>For providers that want evidence tracking, action tracker updates, policy support, and continuity after the first review or cleanup.</p>
+        <p>For providers that need continued support with evidence tracking, action follow-up, document control, and monthly review records.</p>
         <ul>
             <li>Monthly support priced after scope review</li>
             <li>40% deposit paid through a private Payhip link before the month starts</li>
-            <li>Ongoing evidence tracker and action tracker support</li>
-            <li>Preview or summary shown before final payment where applicable</li>
+            <li>Evidence tracker and action tracker support</li>
+            <li>Policy and documentation support where agreed</li>
             <li>Final files or package updates released after balance payment</li>
         </ul>
         <a class="btn-dark" href="#request">Request Retainer Scope</a>
@@ -700,19 +696,18 @@ html(f"""
 
 html("""
 <div class="notice">
-    <h3>How payment and delivery works</h3>
+    <h3>Payment and delivery</h3>
     <p>
-    The £149 CQC Evidence File Review is the only fixed public checkout service. It can be purchased directly through Payhip.
-    After payment, the client completes the intake form and uploads redacted supporting documents.
+    The £149 CQC Evidence File Review is the fixed public checkout service. After payment, the client completes the intake form and uploads
+    redacted supporting documents.
     </p>
     <p>
-    The 30-Day Cleanup Sprint and Monthly Compliance Retainer are custom services. After scope review, Nexus creates a private Payhip
-    deposit link for that client. The client pays 40% before work starts.
+    The 30-Day Cleanup Sprint and Monthly Compliance Retainer are custom services. After scope review, Nexus creates a private Payhip deposit
+    link for that client. Work begins after the 40% deposit is paid.
     </p>
     <p>
     When the package is ready, the client receives a preview or summary. The final 60% is then paid through a private Payhip delivery link.
-    Completed files are released only after final payment through Payhip. The private link is hidden from general customers and may be
-    closed or archived after successful purchase.
+    Completed files are released only after final payment through Payhip.
     </p>
 </div>
 """)
@@ -722,10 +717,9 @@ html("""
 # =========================================================
 html("""
 <div class="section">
-    <h2>Why this works for care managers.</h2>
+    <h2>Why care managers use Nexus.</h2>
     <p class="section-intro">
-    Nexus does not sell random paperwork. The focus is evidence: what exists, what is weak, what is missing,
-    and what needs action.
+    Nexus focuses on evidence quality, document control, management accountability, and practical next steps.
     </p>
 </div>
 """)
@@ -733,19 +727,19 @@ html("""
 html("""
 <div class="grid-2">
     <div class="card">
-        <h3>Evidence-first</h3>
-        <p>The review looks at whether records can show management control, monitoring, review, and improvement.</p>
+        <h3>Evidence-led review</h3>
+        <p>The review considers whether records support management control, monitoring, review, and improvement.</p>
     </div>
     <div class="card">
-        <h3>Manager-friendly</h3>
-        <p>The output is designed to help managers understand the evidence position without drowning in paperwork.</p>
+        <h3>Decision-ready output</h3>
+        <p>The summary helps managers understand the evidence position and decide whether further cleanup is required.</p>
     </div>
     <div class="card">
-        <h3>Action-focused</h3>
-        <p>Every review should lead to clear next steps, not vague advice or generic templates.</p>
+        <h3>Practical action points</h3>
+        <p>The focus is on clear next steps, not generic templates or broad commentary.</p>
     </div>
     <div class="card">
-        <h3>Secure staged delivery</h3>
+        <h3>Controlled delivery</h3>
         <p>Custom packages are handled through intake, private Payhip deposit links, preview or summary review, and final Payhip delivery links before file release.</p>
     </div>
 </div>
@@ -758,7 +752,7 @@ html('<div id="process"></div>')
 
 html("""
 <div class="section">
-    <h2>A simple process from first contact to clearer records.</h2>
+    <h2>How the process works.</h2>
 </div>
 """)
 
@@ -766,18 +760,18 @@ html("""
 <div class="grid-3">
     <div class="step">
         <div class="step-number">1</div>
-        <h3>Choose the right route</h3>
+        <h3>Choose the route</h3>
         <p>Buy the £149 review directly, or submit the intake form for scoped support such as the 30-Day Sprint or Monthly Retainer.</p>
     </div>
     <div class="step">
         <div class="step-number">2</div>
-        <h3>Submit intake and documents</h3>
+        <h3>Submit evidence</h3>
         <p>Upload redacted documents such as folder indexes, trackers, policies, audit summaries, risk registers, or training matrices.</p>
     </div>
     <div class="step">
         <div class="step-number">3</div>
-        <h3>Pay and receive securely</h3>
-        <p>Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview or summary, then final 60% Payhip delivery link before files are released.</p>
+        <h3>Receive the outcome</h3>
+        <p>Fixed reviews are delivered after payment and intake. Custom work uses a 40% Payhip deposit, preview or summary, then final Payhip balance before file release.</p>
     </div>
 </div>
 """)
@@ -790,7 +784,7 @@ html("""
         <li>Your role: registered manager, care manager, provider, owner, operations lead, or compliance lead</li>
         <li>Provider type: domiciliary care, home care, supported living, residential care, new provider, or small business</li>
         <li>The support you want: £149 review, 30-Day Sprint, monthly support, or not sure yet</li>
-        <li>Main concern: scattered evidence, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
+        <li>Main concern: evidence gaps, outdated policies, weak trackers, inspection pressure, or missing management review records</li>
         <li>Document condition and available evidence areas</li>
         <li>Redacted supporting documents where possible</li>
         <li>For paid orders, include the Payhip order email or reference if available</li>
@@ -807,9 +801,8 @@ html("""
 <div class="section">
     <h2>Request service support.</h2>
     <p class="section-intro">
-    Complete the intake form below so Nexus Conformité can understand your support need, evidence position, urgency,
-    and available documents. For the £149 review, complete this after payment. For custom services, Nexus reviews
-    your request and issues a private Payhip deposit link where suitable.
+    Complete the intake form below so Nexus Conformité can assess your support need, evidence position, urgency, and available documents.
+    For the £149 review, complete this after payment. For custom services, Nexus reviews your request and issues a private Payhip deposit link where suitable.
     </p>
 </div>
 """)
@@ -826,7 +819,7 @@ components.html(f"""
 
         <h2 style="color:#061A35; margin-top:0;">Service Request Intake</h2>
         <p style="color:#6B7280; font-size:15px; line-height:1.6;">
-            Provide enough detail for Nexus to recommend the right support route.
+            Provide enough detail for Nexus to assess the correct support route.
             Upload redacted documents only. Do not upload identifiable service-user records unless Nexus later requests them through a suitable secure method.
         </p>
 
@@ -996,7 +989,7 @@ html("""
 """)
 
 with st.expander("Is the £149 review a full compliance audit?"):
-    st.write("No. It is a focused evidence structure review. It helps identify obvious gaps, weak organisation, and practical next steps.")
+    st.write("No. It is a focused evidence structure review. It identifies obvious gaps, weak organisation, and practical next steps.")
 
 with st.expander("Does Nexus replace the provider’s CQC responsibility?"):
     st.write("No. Nexus supports evidence organisation, documentation structure, action trackers, and management review preparation. The provider remains responsible for meeting regulatory requirements.")
@@ -1017,7 +1010,7 @@ with st.expander("How are private Payhip delivery links used?"):
     st.write("For custom work, Nexus creates a private Payhip product or checkout link for that specific customer. The link is not displayed publicly. The customer pays through that private link, and completed files are released through Payhip after successful purchase.")
 
 with st.expander("Can I move from the £149 review to the 30-Day Sprint?"):
-    st.write("Yes. The £149 review is designed as the first step. If deeper cleanup is needed, the provider can move into the 30-Day Cleanup Sprint or monthly support.")
+    st.write("Yes. The £149 review can be used as the first step. If deeper cleanup is needed, the provider can move into the 30-Day Cleanup Sprint or monthly support.")
 
 with st.expander("Should I upload confidential service-user records?"):
     st.write("No. Upload redacted documents only. Nexus will advise the next suitable secure step if more sensitive records are required.")
@@ -1034,8 +1027,8 @@ html(f"""
 <div class="footer">
     <h3>Nexus Conformité</h3>
     <p class="footer-cta">
-        Ready to stop guessing what your evidence file says about your service?
-        Start with the review, request scoped support, or contact Nexus directly.
+        Need a clearer evidence position before your next review, inspection, or internal check?
+        Start with the £149 Evidence File Review, request scoped support, or contact Nexus directly.
     </p>
 
     <div class="footer-actions">
