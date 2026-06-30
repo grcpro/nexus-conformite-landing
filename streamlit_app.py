@@ -2,6 +2,8 @@ import streamlit as st
 import os
 import glob
 import textwrap
+import base64
+import mimetypes
 import streamlit.components.v1 as components
 
 # =========================================================
@@ -92,6 +94,21 @@ def find_logo():
     return None
 
 LOGO_PATH = find_logo()
+
+def image_to_data_uri(path):
+    if not path or not os.path.exists(path):
+        return ""
+
+    mime_type, _ = mimetypes.guess_type(path)
+    if not mime_type:
+        mime_type = "image/png"
+
+    with open(path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode("utf-8")
+
+    return f"data:{mime_type};base64,{encoded}"
+
+LOGO_DATA_URI = image_to_data_uri(LOGO_PATH)
 
 # =========================================================
 # CSS
@@ -752,8 +769,15 @@ html("""
 </div>
 """)
 
+def logo_block_html():
+    if LOGO_DATA_URI:
+        return f'<img src="{LOGO_DATA_URI}" alt="Nexus Conformité logo" class="report-logo">'
+    return '<div class="fallback-logo">NC<span>NEXUS CONFORMITÉ</span></div>'
+
 def report_preview_component():
-    components.html("""
+    logo_block = logo_block_html()
+
+    preview_html = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -797,7 +821,7 @@ body {
 .header {
     height: 78px;
     background: #F6F9FC;
-    padding: 22px 58px;
+    padding: 18px 58px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -813,13 +837,25 @@ body {
     font-size: 11px;
     margin-top: 4px;
 }
-.logo {
+.logo-wrap {
+    width: 170px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.report-logo {
+    max-width: 165px;
+    max-height: 54px;
+    object-fit: contain;
+    display: block;
+}
+.fallback-logo {
     text-align: right;
     color: #C8A96A;
     font-weight: 900;
     font-size: 26px;
 }
-.logo span {
+.fallback-logo span {
     display: block;
     color: #061A35;
     font-size: 10px;
@@ -983,7 +1019,9 @@ h1 {
                     <strong>Nexus Conformité | CQC Evidence Review</strong>
                     <span>Redacted UK care provider · client report</span>
                 </div>
-                <div class="logo">NC<span>NEXUS CONFORMITÉ</span></div>
+                <div class="logo-wrap">
+                    __LOGO_BLOCK__
+                </div>
             </div>
 
             <div class="content">
@@ -1048,7 +1086,342 @@ h1 {
 </div>
 </body>
 </html>
-""", height=515, scrolling=False)
+"""
+    preview_html = preview_html.replace("__LOGO_BLOCK__", logo_block)
+    components.html(preview_html, height=515, scrolling=False)
+
+def incident_complaints_preview_component():
+    logo_block = logo_block_html()
+
+    preview_html = """
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+}
+.frame {
+    width: 100%;
+    height: 500px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #071C35;
+    padding: 10px;
+    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+}
+.stage {
+    width: 100%;
+    height: 100%;
+    background: #071C35;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+}
+.sheet {
+    width: 760px;
+    height: 980px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.48);
+    transform-origin: center center;
+    border-left: 9px solid #C8A96A;
+    color: #172033;
+}
+.header {
+    height: 78px;
+    background: #F6F9FC;
+    padding: 18px 58px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-left strong {
+    display: block;
+    color: #0B4778;
+    font-size: 14px;
+}
+.header-left span {
+    display: block;
+    color: #7B8796;
+    font-size: 11px;
+    margin-top: 4px;
+}
+.logo-wrap {
+    width: 170px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.report-logo {
+    max-width: 165px;
+    max-height: 54px;
+    object-fit: contain;
+    display: block;
+}
+.fallback-logo {
+    text-align: right;
+    color: #C8A96A;
+    font-weight: 900;
+    font-size: 26px;
+}
+.fallback-logo span {
+    display: block;
+    color: #061A35;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+.content {
+    padding: 34px 58px;
+}
+.kicker {
+    color: #B18420;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+h1 {
+    margin: 8px 0 12px 0;
+    color: #172033;
+    font-size: 38px;
+    line-height: 1.05;
+}
+.lead {
+    color: #6B7280;
+    font-size: 19px;
+    line-height: 1.28;
+    margin-bottom: 20px;
+}
+.chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.chart-card {
+    border: 1px solid #E5E7EB;
+    border-left: 6px solid #0F766E;
+    background: #FFFFFF;
+    padding: 13px;
+    height: 150px;
+}
+.chart-card.gold {
+    border-left-color: #C8A96A;
+}
+.chart-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #172033;
+    margin-bottom: 8px;
+}
+.bars {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 7px;
+    align-items: end;
+    height: 82px;
+}
+.bar-wrap {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 4px;
+    text-align: center;
+    font-size: 9px;
+    color: #64748B;
+}
+.bar-track {
+    height: 70px;
+    border-radius: 8px;
+    background: #EEF2F7;
+    display: flex;
+    align-items: end;
+    overflow: hidden;
+}
+.bar {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    background: #0F766E;
+    color: white;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 4px;
+}
+.gold .bar {
+    background: #C8A96A;
+    color: #172033;
+}
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.main-table th {
+    background: #061A35;
+    color: white;
+    font-size: 12px;
+    text-align: left;
+    padding: 10px;
+}
+.main-table td {
+    border: 1px solid #E5E7EB;
+    color: #4B5563;
+    font-size: 12px;
+    padding: 10px;
+    vertical-align: top;
+}
+.main-table td:first-child {
+    color: #172033;
+    font-weight: 900;
+}
+.conclusion {
+    border: 1px solid #CDEBE4;
+    border-left: 6px solid #0F766E;
+    background: #EAF7F4;
+    padding: 15px 18px;
+    margin-top: 18px;
+}
+.conclusion strong {
+    display: block;
+    color: #172033;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+.conclusion p {
+    color: #64748B;
+    font-size: 17px;
+    line-height: 1.28;
+    margin: 0;
+}
+.footer {
+    position: absolute;
+    bottom: 26px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: #9AA4B2;
+    font-size: 10px;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 8px;
+}
+@media (max-width: 430px) {
+    .frame { height: 470px; }
+    .sheet { transform: translate(-50%, -50%) scale(0.43); }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+    <div class="stage">
+        <div class="sheet">
+            <div class="header">
+                <div class="header-left">
+                    <strong>Nexus Conformité | Incident & Complaints Log Review</strong>
+                    <span>Redacted UK care provider · client report</span>
+                </div>
+                <div class="logo-wrap">
+                    __LOGO_BLOCK__
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="kicker">Trend visibility</div>
+                <h1>Trend Review - January to June 2026</h1>
+                <div class="lead">
+                    The entries show enough activity to create a trend view, but the supplied logs do not present trends clearly. The provider should add a monthly trend dashboard and discuss it at governance review.
+                </div>
+
+                <div class="chart-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Incident entries by month</div>
+                        <div class="bars">
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Jan</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:38%;">2</div></div><span>Feb</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>Mar</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Apr</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:56%;">3</div></div><span>May</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:74%;">4</div></div><span>Jun</span></div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card gold">
+                        <div class="chart-title">Complaint entries by month</div>
+                        <div class="bars">
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Jan</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:8%;">0</div></div><span>Feb</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Mar</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>Apr</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:34%;">1</div></div><span>May</span></div>
+                            <div class="bar-wrap"><div class="bar-track"><div class="bar" style="height:62%;">2</div></div><span>Jun</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th>Theme</th>
+                            <th>Count</th>
+                            <th>Trend interpretation</th>
+                            <th>Governance action required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Medication and MAR-related incidents</td>
+                            <td>5</td>
+                            <td>Largest incident theme across the review period.</td>
+                            <td>Link to medication audit, staff competency checks and re-audit date.</td>
+                        </tr>
+                        <tr>
+                            <td>Late / missed calls</td>
+                            <td>7 combined</td>
+                            <td>Appears in both incident and complaint records, mainly Apr-Jun.</td>
+                            <td>Review rostering, call monitoring and communication with relatives.</td>
+                        </tr>
+                        <tr>
+                            <td>Falls / manual handling / near misses</td>
+                            <td>4</td>
+                            <td>Recorded as isolated entries, but no monthly learning note found.</td>
+                            <td>Add risk review and care plan update evidence where relevant.</td>
+                        </tr>
+                        <tr>
+                            <td>Communication complaints</td>
+                            <td>2</td>
+                            <td>Relatives raised concerns about response and updates.</td>
+                            <td>Add response standard, escalation route and close-out call record.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="conclusion">
+                    <strong>Trend conclusion</strong>
+                    <p>The data suggests the provider should focus first on medication governance, late or missed calls, communication with relatives and closure discipline. These themes should be visible in the next management meeting minutes and in the master action tracker.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <span>Confidential · redacted client report</span>
+                <span>Sample preview</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+"""
+    preview_html = preview_html.replace("__LOGO_BLOCK__", logo_block)
+    components.html(preview_html, height=515, scrolling=False)
 
 def sample_frame(title, subtitle, rows):
     with st.container(border=True):
@@ -1140,12 +1513,9 @@ def cleanup_card():
 
         else:
             st.markdown("**Sample-style output**")
-            st.subheader("Cleanup package preview")
+            st.subheader("Incident & complaints log review preview")
             st.caption("Sample visual only. Final files depend on the agreed scope.")
-            sample_frame("Audit Tracker.xlsx", "Updated tracker", [("Medication audit", "Closed"), ("Care plan audit", "Open"), ("Staff file audit", "Overdue")])
-            sample_frame("Incident Log.xlsx", "Cleaned log", [("Incident type", "Added"), ("Follow-up action", "Review"), ("Manager sign-off", "Missing")])
-            sample_frame("Complaints Log.xlsx", "Review status", [("Outcome recorded", "Partial"), ("Learning captured", "Gap"), ("Closed status", "Check")])
-            sample_frame("Evidence Index.xlsx", "Folder map", [("Policies", "Indexed"), ("Risk records", "Check"), ("Governance minutes", "Mapped")])
+            incident_complaints_preview_component()
 
 def retainer_card():
     with st.container(border=True):
